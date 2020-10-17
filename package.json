@@ -1,0 +1,36 @@
+{
+  "name": "2007-new-clear-reacto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FullstackAcademy/2007-new-clear-reacto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FullstackAcademy/2007-new-clear-reacto/issues"
+  },
+  "homepage": "https://github.com/FullstackAcademy/2007-new-clear-reacto#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+		"morgan": "^1.10.0",
+		"pg": "^8.3.3",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"sequelize": "^6.3.4"
+  },
+  "devDependencies": {
+		"nodemon": "^2.0.4",
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12",
+		"@babel/core": "^7.4.3",
+		"@babel/preset-react": "^7.0.0",
+		"babel-loader": "^8.0.5"
+	}
+}
