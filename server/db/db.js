@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize")
-//initialize your db, don't forget to include the possible heroku database URL
-const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/3035')
-//export your db
+//Don't forget to create a database named 'Grace-Shopper'
+const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/Grace-Shopper')
+
+module.exports = db
