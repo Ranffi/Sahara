@@ -41,8 +41,7 @@ const port = process.env.PORT || 3035;
 
 const init = async () => {
   try{
-      
-     await db.syncAndSeed(); // does not exist yet!
+     //await db.syncAndSeed(); // does not exist yet!
     app.listen(port, ()=> console.log(`listening on port ${port}`));
   }
   catch (err) {
