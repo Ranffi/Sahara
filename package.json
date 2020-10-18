@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "npm run build-watch & npm run start-server",
     "start-server": "nodemon server/index.js -e html,js,css --ignore public",
-    "build-watch": "webpack -w"
+    "build-watch": "webpack -w",
+    "seed": "node seed.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/FullstackAcademy/2007-new-clear-reacto#readme",
   "dependencies": {
+    "chalk": "^4.1.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "pg": "^8.3.3",

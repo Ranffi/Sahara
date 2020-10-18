@@ -8,7 +8,7 @@ const Book = db.define('book', {
         allowNull : false
     },
     price : {
-        type : Sequelize.INTEGER,
+        type : Sequelize.FLOAT,
     },
     description : {
         type : Sequelize.TEXT
