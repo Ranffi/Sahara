@@ -4,11 +4,16 @@ const router = require("express").Router()
 router.use('/books', require('./books'))
 //get '/' - all books
 //get '/:id' - single book by id
+//post '/' - add book (only admin will be doing this)
+    //req.body - needs all fields in Book DB schema, 
+    //except instead of authorId, 
+    //send authorFirstName and authorLastName (don't need to format them)
+//put as well
 
 router.use('/users', require('./users'))
 //get '/:userId' - user by id (includes user's books)
 //post '/:userId/books/:bookId' - add book to user's cart/order book
-    //req.body - just needs { bought: true/false }
+    //req.body - just needs { quantity: number }
 //put '/:userId/books/:bookId' - move book from cart to order history
     //req.body - just needs { bought: true/false }
 
