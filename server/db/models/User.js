@@ -12,8 +12,19 @@ const User = db.define('user' , {
         type : Sequelize.STRING,
         allowNull : false
     },
-
-    adminStatus : Sequelize.BOOLEAN
+    adminStatus : {
+        type : Sequelize.BOOLEAN,
+        defaultValue : false
+    },
+    email : {
+        type : Sequelize.STRING,
+        validate : {
+            isEmail : true
+        }
+    },
+    shippingAddress : {
+        type : Sequelize.TEXT
+    },
 })
 
 //define any class or instance methods

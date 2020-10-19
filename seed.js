@@ -1,5 +1,5 @@
 const { green, red } = require('chalk');
-const { db,Book,Author,Users,Gener } = require('./server/db/index');
+const { db, Book, Author, User, Genre, itemsPurchased, OrderHistory } = require('./server/db/index');
 
 const seedBooks = [
     {
@@ -324,7 +324,7 @@ const genres=[
 const seed = async () => {
   try {
     await db.sync({ force: true });
-    await Promise.all(genres.map((genre) => Gener.create({name:genre})));
+    await Promise.all(genres.map((genre) => Genre.create({name:genre})));
     await Promise.all(authors.map((author) => Author.create(author)));
     await Promise.all(seedBooks.map((book) => Book.create(book)));
 
