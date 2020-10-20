@@ -1,6 +1,24 @@
 const router = require('express').Router()
 const { User, Book, Genre, Author, Cart } = require('../db');
 
+router.get('/', async (req, res, next) => {
+    try {
+        res.send(await User.findAll(req.params.userId))
+    }
+    catch (err) {
+        next(err)
+    }
+})
+
+router.post('/', async (req, res, next) => {
+    try {
+        res.send(await User.create(req.body))
+    }
+    catch(err) {
+        next(err)
+    }
+})
+
 router.get('/:userId', async (req, res, next) => {
     try {
         res.send(await User.findByPk(req.params.userId, {
@@ -11,6 +29,29 @@ router.get('/:userId', async (req, res, next) => {
         next(err)
     }
 })
+
+router.put('/:userId', async (req, res, next) => {
+    try {
+        const user = await User.findByPk(req.params.userId)
+        await user.update(req.body)
+        res.send(user);
+    }
+    catch (err) {
+        next(err)
+    }
+})
+
+router.delete('/:userId', async (req, res, next) => {
+    try {
+        const user = await User.findByPk(req.params.userId)
+        await user.destroy();
+        res.sendStatus(204)
+    }
+    catch (err) {
+        next(err)
+    }
+})
+
 
 router.post('/:userId/books/:bookId', async (req, res, next) => {
     try {

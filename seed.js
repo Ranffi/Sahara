@@ -254,12 +254,12 @@ const seedBooks = [
 
 
 const authors=[
-    {firstName:"Rumaan ",lastName:"Alam"},
+    {firstName:"Rumaan",lastName:"Alam"},
     {firstName:"Peter", lastName:"Heller"},
     {firstName:"K-Ming",lastName:"Chang"},
     {firstName:"Bryan",lastName:"Washington"},
     {firstName:"Ocean",lastName:"Vuong"},
-    {firstName:"James",lastName:" Baldwin"},
+    {firstName:"James",lastName:"Baldwin"},
     {firstName:"John", lastName:"Williams"},
     {firstName:"James", lastName:"Baldwin"},
     {firstName:"Justin", lastName:"Torres"},
@@ -325,8 +325,19 @@ const seed = async () => {
   try {
     await db.sync({ force: true });
     await Promise.all(genres.map((genre) => Genre.create({name:genre})));
-    await Promise.all(authors.map((author) => Author.create(author)));
-    await Promise.all(seedBooks.map((book) => Book.create(book)));
+
+    const uniqueAuthors = authors.filter((obj, ind, arr) => {
+        const checkAuthor = arr.find((author) => author.firstName === obj.firstName && author.lastName === obj.lastName)
+        if (checkAuthor === obj) return obj
+    })
+
+    await Promise.all(uniqueAuthors.map((author) => Author.create(author)));
+
+    await Promise.all(seedBooks.map( async (book, ind) => { 
+        book.author = await Author.findOrCreateAuthor(authors[ind].firstName, authors[ind].lastName) 
+    }))
+
+    await Promise.all(seedBooks.map((book) => Book.create({...book, genreId: Math.ceil(Math.random() * genres.length), authorId: book.author.id})));
 
   } catch (err) {
     console.log(red(err));
