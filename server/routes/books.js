@@ -25,8 +25,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req,res,next) => {
     try {
-        const checkAuthor = await Author.findByNameCaseInsensitive(req.body.authorFirstName, req.body.authorLastName)
-        const newAuthor = await Author.findOrCreateAuthor(checkAuthor)
+        const newAuthor = await Author.findOrCreateAuthor(req.body.authorFirstName, req.body.authorLastName)
 
         delete req.body.authorFirstName;
         delete req.body.authorLastName;
@@ -50,8 +49,7 @@ router.put('/:bookId', async (req,res,next) => {
         let keys = Object.keys(req.body)
 
         if (keys.includes('authorFirstName') || keys.includes('authorLastName')) {
-            const checkAuthor = await Author.findByNameCaseInsensitive(req.body.authorFirstName, req.body.authorLastName)
-            const newAuthor = await Author.findOrCreateAuthor(checkAuthor)
+            const newAuthor = await Author.findOrCreateAuthor(req.body.authorFirstName, req.body.authorLastName)
     
             delete req.body.authorFirstName;
             delete req.body.authorLastName;

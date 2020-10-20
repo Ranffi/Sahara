@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize") //for things like Sequelize.STRING
+const Op = Sequelize.Op;
 const db = require("../db")
 
 const Author = db.define('author' , {
@@ -13,35 +14,36 @@ const Author = db.define('author' , {
 }, {
     hooks: {
       beforeCreate: (author, options) => {
-        author.firstName = author.firstName.split('').map( (elem,ind) => ind == 0 ? elem.toUpperCase() : elem.toLowerCase());
-        author.lastName = author.lastName.split('').map( (elem,ind) => ind == 0 ? elem.toUpperCase() : elem.toLowerCase());
+        author.firstName = author.firstName.split('').map( (elem,ind) => ind == 0 ? elem.toUpperCase() : elem.toLowerCase()).join('');
+        author.lastName = author.lastName.split('').map( (elem,ind) => ind == 0 ? elem.toUpperCase() : elem.toLowerCase()).join('');
       }
     }
   })
 
-Author.findByNameCaseInsensitive = async function(firstName, lastName) {
-    const checkAuthor = await Author.findAll({
+Author.findOrCreateAuthor = async function(authorFirstName, authorlastName) {
+
+    const checkAuthorArr = await Author.findAll({
         where: {
             firstName: {
-                [Op.iLike]: req.body.authorFirstName
+                [Op.iLike]: authorFirstName
             },
             lastName: {
-                [Op.iLike]: req.body.authorlastName
+                [Op.iLike]: authorlastName
             },
         }
     });
-    return checkAuthor;
-}
 
-Author.findOrCreateAuthor = async function (checkAuthorArr) {
-    if (!checkAuthorArr.length) {
-        const newAuthor = await Author.create({
-            firstName: req.body.authorFirstName,
-            lastName: req.body.authorlastName
+    let newAuthor;
+
+    if (checkAuthorArr.length === 0) {
+        newAuthor = await Author.create({
+            firstName: authorFirstName,
+            lastName: authorlastName
         })
     } else {
-        const newAuthor = checkAuthorArr[0]
+        newAuthor = checkAuthorArr[0]
     }
+
     return newAuthor
 }
 
