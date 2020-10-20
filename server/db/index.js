@@ -12,26 +12,29 @@ const CartItem = require('./models/CartItem')
 const OrderHistory = require('./models/OrderHistory')
 const itemsPurchased = require('./models/ItemsPurchased')
 
+
+//Product associations 
 Book.belongsTo(Author)
 Author.hasMany(Book)
-//product belongs to a user
-Book.belongsTo(User)
-//user has many products
-User.hasMany(Book)
-
-//product belongs to a category
 Book.belongsTo(Genre)
-//category has many products
 Genre.hasMany(Book)
 
+//Items in cart for a user 
 CartItem.belongsTo(User)
 User.hasMany(CartItem)
-
 CartItem.belongsTo(Book)
 Book.hasMany(CartItem)
 
+//Order history for user & details of that order with items purchased
 OrderHistory.belongsTo(User)
 User.hasMany(OrderHistory)
+
+itemsPurchased.belongsTo(OrderHistory)
+OrderHistory.hasMany(itemsPurchased)
+
+itemsPurchased.belongsTo(Book)
+Book.hasMany(itemsPurchased)
+
 
 module.exports = {
   db,
