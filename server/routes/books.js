@@ -44,7 +44,7 @@ router.post('/', async (req,res,next) => {
 
 router.put('/:bookId', async (req,res,next) => {
     try {
-        const book = Book.findByPk(req.params.bookId);
+        const book = await Book.findByPk(req.params.bookId);
 
         let keys = Object.keys(req.body)
 
@@ -54,18 +54,14 @@ router.put('/:bookId', async (req,res,next) => {
             delete req.body.authorFirstName;
             delete req.body.authorLastName;
 
-            const newBody = {
+            res.send(await book.update({
                 ...req.body,
                 authorId: newAuthor.id
-            }
+            }))
         }
         else {
-            const newBody = req.body
+            res.send( await book.update(req.body));
         }
-
-        const response = await book.update(newBody);
-
-        res.send(response);
     }
     catch(err) {
         next(err)
