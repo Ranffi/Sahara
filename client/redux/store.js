@@ -4,6 +4,7 @@ import axios from "axios"
 import thunk from "redux-thunk"
 
 const GET_BOOKS= "GET_BOOKS"
+const SINGLE_BOOK= "SINGLE_BOOK"
 
 export const _getBooks=(books)=>{
     return {
@@ -19,16 +20,33 @@ const getBooks=()=>{
 }
 
 
+export const _singleBook=(book)=>{
+    return {
+    type:SINGLE_BOOK,
+    book
+}}
+
+const singleBook=(id)=>{
+    return async(dispatch)=>{
+        console.log(id,"++___++++");
+        
+        const res= await axios.get(`/api/books/${id}`)
+        dispatch(_singleBook(res.data))
+    }
+}
 
 
 
-const reducer = ((state={books:[], users:[], authors:[]},action)=>{
+
+const reducer = ((state={books:[], book:{}, authors:[]},action)=>{
     switch(action.type){
         case GET_BOOKS: return { ...state, books:action.books}
+        case SINGLE_BOOK: return { ...state, book:action.book}
+
         default: return state
     }
 })
 
 const store= createStore(reducer, applyMiddleware(loggerMiddleware,thunk))
 export default  store
-export { getBooks }
+export { getBooks, singleBook}

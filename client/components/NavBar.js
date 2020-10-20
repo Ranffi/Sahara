@@ -7,13 +7,13 @@ class NavBar extends Component{
   constructor(){
     super();
     this.state={
-      name:''
+      name: false
     }
     this.addClass=  this.addClass.bind(this)
 }
 
   addClass(){
-    this.setState({name:"showCart"}) 
+    this.setState({name:!this.state.name})   
   }
   render(){
     return (
@@ -48,7 +48,7 @@ class NavBar extends Component{
                 <div className="cart-items">0</div>
           </div>
         </nav>
-        <Cart addClass={this.state.name}/>
+        <Cart hideClass={this.state.name} addClass={this.addClass}/>
       </div>
     )
   }

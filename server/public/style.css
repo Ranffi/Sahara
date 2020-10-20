@@ -4,6 +4,7 @@
 }
 
 body {
+  background:  rgb(226, 215, 210);;
   margin: 0;
   padding: 0;
 }
@@ -19,11 +20,14 @@ body {
 /* Navigation Bar Selectors */
 
 nav {
-  display: flex;
-  background-color:#483D8B;
-  height: 3rem;
-  justify-content: space-between;
+  z-index: 1;
+  position: fixed;
   align-items: center;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: rgb(199, 182, 126); 
 }
 
 .navLink {
@@ -67,7 +71,7 @@ nav {
   padding: 0 5px;
   margin-right: 1rem;
   border-radius: 30%;
-  color:var(--primaryColor);
+  color:white;
 }
 .nav-icon {
   font-size: 1.5rem;
@@ -85,7 +89,8 @@ nav {
   align-items: center;
 }
 .products-center {
-  padding-top: 3rem;
+  max-height: calc(100vh - 60px);
+  padding-top: 6rem;
   width: 90vw;
   margin: 0 auto;
   max-width: 1170px;
@@ -133,13 +138,13 @@ nav {
 .bookContainer h3 {
   text-transform: capitalize;
   font-size: 1.1rem;
-  margin-top: 1rem;
+  margin: 0.5rem;
   letter-spacing: var(--mainSpacing);
   text-align: center;
 }
 
 .bookContainer h4 {
-  margin-top: 0.7rem;
+  margin: 0.5rem;
   letter-spacing: var(--mainSpacing);
   color: var(--primaryColor);
   text-align: center;
@@ -239,3 +244,61 @@ nav {
 }
 
 /* --------------- End of Cart ---------------- */
+/* ----------------SingleBook------------------ */
+
+.singleBookContainer{
+  align-items: center;
+  width: 80%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+.singleBookMain{
+  display: grid;
+  align-items: center;
+  padding: 2rem;
+  /* min-height: calc(100vh - 60px); */
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+.singleBook-description > p{
+  width: 70%;
+  margin-left: 1rem;
+}
+.singleBook-description {
+  align-items: center;
+  width: 80%;
+  border: solid black 2px;
+}
+.bag-btn-sigleBook {
+  padding: 1rem;
+  margin-left: 2rem;
+  position: absolute;
+  background: var(--primaryColor);
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: var(--mainSpacing);
+  font-weight: bold;
+  cursor: pointer;
+}
+.bag-btn-sigleBook:hover {
+  color: white;
+}
+
+.singleBookContainer h3 {
+  text-transform: capitalize;
+  font-size: 1.1rem;
+  margin-left: 2rem;
+  letter-spacing: var(--mainSpacing);
+}
+
+.singleBookContainer h4 {
+  text-transform: capitalize;
+  margin-left: 2rem;
+  letter-spacing: var(--mainSpacing);
+  color: var(--primaryColor);
+}
+.singleBook-img{
+ width: 100%;
+}

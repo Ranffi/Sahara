@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux"
 import {getBooks} from "../redux/store"
+import {Link} from "react-router-dom"
 class Books extends Component{
 
   componentDidMount(){
@@ -15,7 +16,7 @@ class Books extends Component{
           return (
             <div className="bookContainer" key={book.id}>
               <div className="img-container">
-                  <img src={book.coverImageUrl} alt="product" className="book-img"/>
+              <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img"/></Link>
                   <button className="bag-btn"  data-id={book.id}>
                   <i className="fas fa-shopping-cart"></i>
                   add to cart
@@ -23,6 +24,7 @@ class Books extends Component{
               </div>
                 <h3>{book.title}</h3>
                 <h4>by: Author</h4>
+                <h3>${book.price}</h3>
             </div>
           )
         })
