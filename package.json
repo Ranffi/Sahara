@@ -23,6 +23,7 @@
   "homepage": "https://github.com/FullstackAcademy/2007-new-clear-reacto#readme",
   "dependencies": {
     "axios": "^0.20.0",
+    "bcrypt": "^5.0.0",
     "chalk": "^4.1.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
