@@ -46,14 +46,14 @@ findElement(ev){
             <Link className = 'navLink' to = '/'>About</Link>
           </div>
           <div id = 'navCenterContainer'> 
-            <select >
+            <select className='searchDropdown'>
               <option value="All">All</option>
               <option value="Books">Books</option>
               <option value="Author">Author</option>
               <option value="Genre">Genre</option>
             </select>
             <form onSubmit={this.findElement}>
-            <input type="text" placeholder="Search.." name="search" value={this.state.value} onChange={this.searchChenge}/>
+            <input type="text" placeholder="Search..." name="search" value={this.state.value} onChange={this.searchChenge}/>
             <button type="submit"><i className="fa fa-search"></i></button>      
             </form>
           </div>
