@@ -23,7 +23,7 @@ class Books extends Component{
                   </button> 
               </div>
                 <h3>{book.title}</h3>
-                <h4>by: Author</h4>
+                <h4>by: {book.author.firstName} {book.author.lastName}</h4>
                 <h3>${book.price}</h3>
             </div>
           )
