@@ -4,18 +4,57 @@
 }
 
 body {
+  background:  rgb(226, 215, 210);;
   margin: 0;
   padding: 0;
+}
+:root {
+  --primaryColor: #f09d51;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #ececec;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
 }
 /* ------------------------- */
 /* Navigation Bar Selectors */
 
 nav {
-  display: flex;
-  background-color:#483D8B;
-  height: 3rem;
-  justify-content: space-between;
+  top: 0;
+  z-index: 1;
+  position: fixed;
   align-items: center;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: rgb(199, 182, 126); 
+}
+
+#myUL {
+  z-index: 3;
+  top: 51px;
+  left: 32%;
+  height: 7rem;
+  width: 25rem;
+  position: fixed;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL >a>li {
+  text-decoration: none;
+  margin-top: -1px;
+  border: solid black 1px;
+  padding: 12px;
+  background-color: rgb(197, 196, 196);
+  color: black; 
+  display: block;
+}
+#myUL >a>li:hover {
+  background-color: rgb(100, 97, 97);
 }
 
 .navLink {
@@ -30,10 +69,267 @@ nav {
   justify-content: space-around;
 }
 
+
 #navRightContainer {
   width: 10rem;
   display: flex;
   justify-content: space-around;
 }
-
+#navCenterContainer > form {
+  width: 20rem;
+  display: flex;
+  justify-content: space-around;
+}
+#navCenterContainer > form > button{
+  background: rgb(200, 197, 197);
+  padding: 8px;
+}
+#navCenterContainer > form > input{
+  width: 90%;
+}
+#navCenterContainer{
+  width: 25rem;
+  height: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+.cart-items {
+  padding-right: 1rem;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background:  rgba(255, 136, 0, 0.835);
+  padding: 0 5px;
+  margin-right: 1rem;
+  border-radius: 30%;
+  color:white;
+}
+.nav-icon {
+  font-size: 1.5rem;
+}
+.cart-btn {
+  padding-right: 1rem;
+  position: relative;
+  cursor: pointer;
+}
 /* ------------------------- */
+/* Book Page Selectors */
+.bookContainer {
+  width: 17rem;
+  padding: 1rem;
+  align-items: center;
+}
+.products-center {
+  max-height: calc(100vh - 60px);
+  padding-top: 6rem;
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 1170px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 2rem;
+}
+.img-container {
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.bag-btn {
+  position: absolute;
+  top: 70%;
+  right: 0;
+  background: var(--primaryColor);
+  border: none;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  letter-spacing: var(--mainSpacing);
+  font-weight: bold;
+  transition: var(--mainTransition);
+  transform: translateX(101%);
+  cursor: pointer;
+}
+.bag-btn:hover {
+  color: var(--mainWhite);
+}
+.img-container:hover .book-img {
+  opacity: 0.5;
+}
+.book-img {
+  margin-left: 2rem ;
+  display: block;
+  height: 15rem;
+  width: 11rem;
+  min-height: 12rem;
+  transition: var(--mainTransition);
+}
+.img-container:hover .bag-btn {
+  transform: translateX(0);
+}
+.bookContainer h3 {
+  text-transform: capitalize;
+  font-size: 1.1rem;
+  margin: 0.5rem;
+  letter-spacing: var(--mainSpacing);
+  text-align: center;
+}
+
+.bookContainer h4 {
+  margin: 0.5rem;
+  letter-spacing: var(--mainSpacing);
+  color: var(--primaryColor);
+  text-align: center;
+}
+/* --------------------------------- */
+/* --------------- Cart ---------------- */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  transition: var(--mainTransition);
+  background: rgb(240, 157, 81, 0.5);
+  z-index: 2;
+  visibility: hidden;
+}
+.cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  z-index: 3;
+  background: rgb(231, 226, 221);
+  padding: 1.5rem;
+  transition: var(--mainTransition);
+  transform: translateX(100%);
+}
+.showCart {
+  transform: translateX(0);
+}
+.transparentBcg {
+  visibility: visible;
+}
+@media screen and (min-width: 768px) {
+  .cart {
+    width: 30vw;
+    min-width: 450px;
+  }
+}
+
+.close-cart {
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+.cart h2 {
+  text-transform: capitalize;
+  text-align: center;
+  letter-spacing: var(--mainSpacing);
+  margin-bottom: 2rem;
+}
+/*---------- Cart Item -------------------- */
+.cart-item {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr auto;
+  grid-column-gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+.cart-item img {
+  width: 75px;
+  height: 75px;
+}
+.cart-item h4 {
+  font-size: 0.85rem;
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+}
+.cart-item h5 {
+  margin: 0.5rem 0;
+  letter-spacing: var(--mainSpacing);
+}
+.item-amount {
+  text-align: center;
+}
+.remove-item {
+  color: grey;
+  cursor: pointer;
+}
+.fa-chevron-up,
+.fa-chevron-down {
+  color: var(--primaryColor);
+  cursor: pointer;
+}
+/*---------- End of Cart Item -------------------- */
+
+.cart-footer {
+  margin-top: 2rem;
+  letter-spacing: var(--mainSpacing);
+  text-align: center;
+}
+.cart-footer h3 {
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+
+/* --------------- End of Cart ---------------- */
+/* ----------------SingleBook------------------ */
+
+.singleBookContainer{
+  align-items: center;
+  width: 80%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+.singleBookMain{
+  display: grid;
+  align-items: center;
+  padding: 2rem;
+  /* min-height: calc(100vh - 60px); */
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+.singleBook-description > p{
+  width: 70%;
+  margin-left: 1rem;
+}
+.singleBook-description {
+  align-items: center;
+  width: 80%;
+  border: solid black 2px;
+}
+.bag-btn-sigleBook {
+  padding: 1rem;
+  margin-left: 2rem;
+  position: absolute;
+  background: var(--primaryColor);
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: var(--mainSpacing);
+  font-weight: bold;
+  cursor: pointer;
+}
+.bag-btn-sigleBook:hover {
+  color: white;
+}
+
+.singleBookContainer h3 {
+  text-transform: capitalize;
+  font-size: 1.1rem;
+  margin-left: 2rem;
+  letter-spacing: var(--mainSpacing);
+}
+
+.singleBookContainer h4 {
+  text-transform: capitalize;
+  margin-left: 2rem;
+  letter-spacing: var(--mainSpacing);
+  color: var(--primaryColor);
+}
+.singleBook-img{
+ width: 100%;
+}
