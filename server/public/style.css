@@ -20,6 +20,7 @@ body {
 /* Navigation Bar Selectors */
 
 nav {
+  top: 0;
   z-index: 1;
   position: fixed;
   align-items: center;
@@ -28,6 +29,32 @@ nav {
   display: flex;
   justify-content: space-around;
   background: rgb(199, 182, 126); 
+}
+
+#myUL {
+  z-index: 3;
+  top: 51px;
+  left: 32%;
+  height: 7rem;
+  width: 25rem;
+  position: fixed;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL >a>li {
+  text-decoration: none;
+  margin-top: -1px;
+  border: solid black 1px;
+  padding: 12px;
+  background-color: rgb(197, 196, 196);
+  color: black; 
+  display: block;
+}
+#myUL >a>li:hover {
+  background-color: rgb(100, 97, 97);
 }
 
 .navLink {
@@ -42,13 +69,14 @@ nav {
   justify-content: space-around;
 }
 
+
 #navRightContainer {
   width: 10rem;
   display: flex;
   justify-content: space-around;
 }
 #navCenterContainer > form {
-  width: 15rem;
+  width: 20rem;
   display: flex;
   justify-content: space-around;
 }
@@ -56,8 +84,11 @@ nav {
   background: rgb(200, 197, 197);
   padding: 8px;
 }
+#navCenterContainer > form > input{
+  width: 90%;
+}
 #navCenterContainer{
-  width: 15rem;
+  width: 25rem;
   height: 2rem;
   display: flex;
   justify-content: space-around;
