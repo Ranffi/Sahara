@@ -13,11 +13,13 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        const {userName, password} = req.body
+        const {userName, password, email, shippingAddress} = req.body
         const hashedPw = await bcrypt.hash(password, 10)
         await User.create({
             userName,
-            password : hashedPw
+            password : hashedPw,
+            email,
+            shippingAddress
         })
         res.redirect('/api/books')
     }
