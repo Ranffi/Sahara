@@ -31,7 +31,7 @@ findElement(ev){
 
 
   addClass(){
-    this.setState({name:!this.state.name})   
+    this.setState({name:!this.state.name})
   }
   render(){
     const filter= this.state.value.toLocaleUpperCase()
@@ -45,7 +45,7 @@ findElement(ev){
             <Link className = 'navLink' to = '/books'>Books</Link>
             <Link className = 'navLink' to = '/'>About</Link>
           </div>
-          <div id = 'navCenterContainer'> 
+          <div id = 'navCenterContainer'>
             <select >
               <option value="All">All</option>
               <option value="Books">Books</option>
@@ -54,12 +54,12 @@ findElement(ev){
             </select>
             <form onSubmit={this.findElement}>
             <input type="text" placeholder="Search.." name="search" value={this.state.value} onChange={this.searchChenge}/>
-            <button type="submit"><i className="fa fa-search"></i></button>      
+            <button type="submit"><i className="fa fa-search"></i></button>
             </form>
           </div>
           <div id = 'navRightContainer'>
             <Link className = 'navLink' to = '/'>Log In</Link>
-            <Link className = 'navLink' to = '/'>Sign Up</Link>
+            <Link className = 'navLink' to = '/signUp'>Sign Up</Link>
         </div>
         <div className="cart-btn" onClick={()=>this.addClass()}>
                 <span className="nav-icon" >

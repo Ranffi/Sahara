@@ -29,13 +29,23 @@ export const _singleBook=(book)=>{
 const singleBook=(id)=>{
     return async(dispatch)=>{
         console.log(id,"++___++++");
-        
+
         const res= await axios.get(`/api/books/${id}`)
         dispatch(_singleBook(res.data))
     }
 }
 
-
+export const createUser = (user) =>{
+    return async(dispatch) =>{
+        try {
+            const newUser = (await axios.post('/api/users', user)).data
+            dispatch(_createUser(newUser))
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+}
 
 
 const reducer = ((state={books:[], book:{}, authors:[]},action)=>{
