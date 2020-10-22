@@ -16,6 +16,14 @@ body {
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
 }
+
+button {
+  color: black;
+  border-radius: 4px;
+  border-width: 1px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: white;
+}
 /* ------------------------- */
 /* Navigation Bar Selectors */
 
@@ -63,6 +71,12 @@ nav {
 
 }
 
+.searchDropdown {
+  border-radius: 4px 0px 0px 4px;
+  padding-left: 4px;
+  padding-right: 8px;
+}
+
 #navLeftContainer {
   width: 15rem;
   display: flex;
@@ -81,8 +95,8 @@ nav {
   justify-content: space-around;
 }
 #navCenterContainer > form > button{
-  background: rgb(200, 197, 197);
   padding: 8px;
+  border-radius: 0px 4px 4px 0px;
 }
 #navCenterContainer > form > input{
   width: 90%;
@@ -228,39 +242,6 @@ nav {
   text-align: center;
   letter-spacing: var(--mainSpacing);
   margin-bottom: 2rem;
-}
-/*---------- Cart Item -------------------- */
-.cart-item {
-  display: grid;
-  align-items: center;
-  grid-template-columns: auto 1fr auto;
-  grid-column-gap: 1.5rem;
-  margin: 1.5rem 0;
-}
-.cart-item img {
-  width: 75px;
-  height: 75px;
-}
-.cart-item h4 {
-  font-size: 0.85rem;
-  text-transform: capitalize;
-  letter-spacing: var(--mainSpacing);
-}
-.cart-item h5 {
-  margin: 0.5rem 0;
-  letter-spacing: var(--mainSpacing);
-}
-.item-amount {
-  text-align: center;
-}
-.remove-item {
-  color: grey;
-  cursor: pointer;
-}
-.fa-chevron-up,
-.fa-chevron-down {
-  color: var(--primaryColor);
-  cursor: pointer;
 }
 /*---------- End of Cart Item -------------------- */
 
