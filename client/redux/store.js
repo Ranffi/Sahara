@@ -35,17 +35,6 @@ const singleBook=(id)=>{
     }
 }
 
-export const createUser = (user) =>{
-    return async(dispatch) =>{
-        try {
-            const newUser = (await axios.post('/api/users', user)).data
-            dispatch(_createUser(newUser))
-        }
-        catch(err){
-            console.log(err)
-        }
-    }
-}
 
 
 const reducer = ((state={books:[], book:{}, authors:[]},action)=>{
