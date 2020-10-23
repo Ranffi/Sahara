@@ -17,6 +17,9 @@ router.use('/users', require('./users'))
 //put '/:userId/books/:bookId' - move book from cart to order history
     //req.body - just needs { bought: true/false }
 
+
+router.use('/login', require('./login'))
+
 //Questions
     //what do we want to do about multiple cases in cart? I.e. someone adds the same book to cart again, or buys multiple of the same book
         //should there be multiple rows in db? Or just a quantity field?
