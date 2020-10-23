@@ -28,8 +28,6 @@ export const _singleBook=(book)=>{
 
 const singleBook=(id)=>{
     return async(dispatch)=>{
-        console.log(id,"++___++++");
-
         const res= await axios.get(`/api/books/${id}`)
         dispatch(_singleBook(res.data))
     }
