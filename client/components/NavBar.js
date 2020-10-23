@@ -73,6 +73,7 @@ findElement(ev){
                 {
                    books.map( book =>{
                     if (filter === ''){
+                      
                     }else if (book.title.toUpperCase().indexOf(filter) > -1) {
                       return (
                         <Link to={`/books/${book.id}`} key ={book.id} ><li>{book.title}</li></Link>
