@@ -5,7 +5,7 @@ const User = db.define('user' , {
     userName : {
         type : Sequelize.STRING,
         allowNull : false,
-        unique: true 
+        unique: true
     },
     //this is for now, we need to hash it and make it more secure
     password : {
@@ -21,10 +21,7 @@ const User = db.define('user' , {
         validate : {
             isEmail : true
         }
-    },
-    shippingAddress : {
-        type : Sequelize.TEXT
-    },
+    }
 })
 
 //define any class or instance methods
