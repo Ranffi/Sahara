@@ -28,8 +28,6 @@ export const _singleBook=(book)=>{
 
 const singleBook=(id)=>{
     return async(dispatch)=>{
-        console.log(id,"++___++++");
-        
         const res= await axios.get(`/api/books/${id}`)
         dispatch(_singleBook(res.data))
     }
@@ -42,7 +40,6 @@ const reducer = ((state={books:[], book:{}, authors:[]},action)=>{
     switch(action.type){
         case GET_BOOKS: return { ...state, books:action.books}
         case SINGLE_BOOK: return { ...state, book:action.book}
-
         default: return state
     }
 })
