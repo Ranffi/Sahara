@@ -35,7 +35,6 @@ const singleBook=(id)=>{
 
 
 
-
 const reducer = ((state={books:[], book:{}, authors:[]},action)=>{
     switch(action.type){
         case GET_BOOKS: return { ...state, books:action.books}
