@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const bcrypt = require('bcrypt')
 const { User, Book, Genre, Author, Cart } = require('../db');
 
 router.get('/', async (req, res, next) => {
@@ -12,7 +13,15 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        res.send(await User.create(req.body))
+        const {userName, password, email, shippingAddress} = req.body
+        const hashedPw = await bcrypt.hash(password, 10)
+        await User.create({
+            userName,
+            password : hashedPw,
+            email,
+            shippingAddress
+        })
+        res.redirect('/api/books')
     }
     catch(err) {
         next(err)
@@ -33,6 +42,7 @@ router.get('/:userId', async (req, res, next) => {
 router.put('/:userId', async (req, res, next) => {
     try {
         const user = await User.findByPk(req.params.userId)
+        //REMINDER : If we allow change of password with this route, we need to use bcrypt here as well
         await user.update(req.body)
         res.send(user);
     }
