@@ -36,7 +36,8 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^6.3.4"
+    "sequelize": "^6.3.4",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
