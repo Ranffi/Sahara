@@ -43,5 +43,6 @@ module.exports = {
   User,
   Genre,
   OrderHistory,
-  itemsPurchased
+  itemsPurchased,
+  CartItem
 }
