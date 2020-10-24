@@ -2,20 +2,20 @@ const Sequelize = require("sequelize") //for things like Sequelize.STRING
 const Op = Sequelize.Op;
 const db = require("../db")
 
-const Author = db.define('author' , {
-    firstName : {
-        type : Sequelize.STRING,
-        allowNull : false,
+const Author = db.define('author', {
+    firstName: {
+        type: Sequelize.STRING,
+        allowNull: false,
     },
-    lastName : {
-        type : Sequelize.STRING,
-        allowNull : false,
+    lastName: {
+        type: Sequelize.STRING,
+        allowNull: false,
     },
 }, {
     hooks: {
-      beforeCreate: (author, options) => {
-        author.firstName = author.firstName.split('').map( (elem,ind) => ind == 0 ? elem.toUpperCase() : elem.toLowerCase()).join('');
-        author.lastName = author.lastName.split('').map( (elem,ind) => ind == 0 ? elem.toUpperCase() : elem.toLowerCase()).join('');
+      beforeCreate: (author) => {
+        author.firstName = author.firstName.split('').map( (elem,ind) => ind === 0 ? elem.toUpperCase() : elem.toLowerCase()).join('');
+        author.lastName = author.lastName.split('').map( (elem,ind) => ind === 0 ? elem.toUpperCase() : elem.toLowerCase()).join('');
       }
     }
   })

@@ -21,10 +21,7 @@ const User = db.define('user', {
         validate: {
             isEmail: true
         }
-    },
-    shippingAddress: {
-        type: Sequelize.TEXT
-    },
+    }
 })
 
 //define any class or instance methods

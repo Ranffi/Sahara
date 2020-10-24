@@ -12,7 +12,7 @@ const CartItem = require('./models/CartItem')
 const OrderHistory = require('./models/OrderHistory')
 const itemsPurchased = require('./models/ItemsPurchased')
 const Session = require('./models/Session')
-
+const Address = require('./models/Address')
 
 //Product associations
 Book.belongsTo(Author)
@@ -40,6 +40,9 @@ Book.hasMany(itemsPurchased)
 Session.belongsTo(User);
 User.hasMany(Session);
 
+//Address associations to User
+Address.hasOne(User, {as: 'shippingAddress'})
+
 module.exports = {
   db,
   Book,
@@ -48,5 +51,7 @@ module.exports = {
   Genre,
   OrderHistory,
   itemsPurchased,
-  Session
+  Session,
+  CartItem,
+  Address
 }
