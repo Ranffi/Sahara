@@ -20,6 +20,10 @@ router.use('/users', require('./users'))
 
 router.use('/login', require('./login'))
 
+
+router.use('/cartItem', require('./cartItem'))
+
+
 //Questions
     //what do we want to do about multiple cases in cart? I.e. someone adds the same book to cart again, or buys multiple of the same book
         //should there be multiple rows in db? Or just a quantity field?

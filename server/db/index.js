@@ -46,5 +46,6 @@ module.exports = {
   Genre,
   OrderHistory,
   itemsPurchased,
+  CartItem,
   Address
 }
