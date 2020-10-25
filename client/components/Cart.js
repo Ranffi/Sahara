@@ -20,6 +20,7 @@ class Cart extends Component{
     }
 
     componentDidUpdate(){
+        /*
         if(this.state.totalPrice === 0){
             let sum=0
             const obj={}
@@ -30,6 +31,7 @@ class Cart extends Component{
             });
             this.setState({totalPrice: sum, quantity:obj })
         }
+        */
     }
 
     increasePrice(price){

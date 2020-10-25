@@ -4,7 +4,7 @@ const { CartItem, Book, User  } = require('../db');
 
 router.post('/', async (req,res,next) => {
     try{
-        const { bookId } = req.body;        
+        const { bookId } = req.body;
         const data = await CartItem.create({bookId})
         res.status(200).send(data)
     }catch(err){
