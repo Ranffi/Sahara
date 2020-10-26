@@ -11,6 +11,24 @@ router.post('/', async (req,res,next) => {
         next(err)
     }
 })
+router.delete('/:id', async (req,res,next) => {
+    try{
+        const { id } = req.params
+        await CartItem.destroy({where:{id}})
+        res.sendStatus(204);
+    }catch(err){
+        next(err)
+    }
+})
+router.put('/:id', async (req,res,next) => {
+    try{
+        const { id } = req.params
+        await CartItem.update({quantity:req.body.quantity},{where:{id}})
+        res.sendStatus(204);
+    }catch(err){
+        next(err)
+    }
+})
 
 router.get('/', async (req,res,next) => {
     try{

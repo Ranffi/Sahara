@@ -1,15 +1,14 @@
 
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import {getCartItems} from "../redux/store"
+import {getCartItems, deleteCartItem,updateCartItem} from "../redux/store"
 
 class Cart extends Component{
     constructor(){
         super();
         this.state={
             newClasName:false,
-            totalPrice:0,
-            quantity:{}
+            totalPrice:0
         }
         this.closeCart= this.closeCart.bind(this)
         this.increasePrice = this.increasePrice.bind(this)
@@ -18,28 +17,29 @@ class Cart extends Component{
     componentDidMount(){
         this.props.items()
     }
-
     componentDidUpdate(){
-        if(this.state.totalPrice === 0){
-            let sum=0
-            const obj={}
+        if( 0 === this.state.totalPrice && this.props.cartItems.length !==0){
+            let sum =0
             this.props.cartItems.forEach(element => {
-                sum += element.book.price
-                const id=element.id
-                obj[id]=1
-            });
-            this.setState({totalPrice: sum, quantity:obj })
+                sum+=element.book.price * element.quantity
+            })
+        this.setState({totalPrice:sum})   
         }
     }
 
-    increasePrice(price){
+    increasePrice(price,id,quantity){
+        quantity+=1
+        this.props.update(id,quantity)
         let sum= this.state.totalPrice + price
         this.setState({totalPrice:sum})
     }
-    decreasePrice(price){
-
-        let sum=this.state.totalPrice - price
-        this.setState({totalPrice:sum})
+    decreasePrice(price,id,quantity){
+        if (quantity > 1){
+            quantity-=1;
+            this.props.update(id,quantity)
+            let sum=this.state.totalPrice - price
+            this.setState({totalPrice:sum})
+        }
     }
 
 
@@ -52,7 +52,7 @@ class Cart extends Component{
     }
 
     render(){
-            const {quantity}=this.state
+
             const {cartItems}=this.props
         return (
             <div>
@@ -71,13 +71,13 @@ class Cart extends Component{
                                     <img src={item.book.coverImageUrl} alt="product"/>
                                     <div>
                                         <h4>{item.book.title}</h4>
-                                        <h5>{item.book.price}</h5>
-                                        <span className="remove-item" data-id={item.id}>remove</span>
+                                        <h5>{item.book.price * item.quantity}</h5>
+                                        <span className="remove-item" data-id={item.id} onClick={()=> this.props.deleteItem(item.id)}>remove</span>
                                     </div>
                                     <div>
-                                        <i className="fas fa-chevron-up" data-id={item.id} onClick={()=>this.increasePrice(item.book.price)}></i>
-                                        <p className="item-amount">{quantity[item.id]}</p>
-                                        <i className="fas fa-chevron-down" data-id={item.id} onClick={()=>this.decreasePrice(item.book.price)}></i>
+                                        <i className="fas fa-chevron-up" data-id={item.id} onClick={()=>this.increasePrice(item.book.price, item.id, item.quantity)}></i>
+                                        <p className="item-amount">{item.quantity}</p>
+                                        <i className="fas fa-chevron-down" data-id={item.id} id={item.quantity===1? "grayDownBtn":''} onClick={()=>this.decreasePrice(item.book.price, item.id, item.quantity)}></i>
                                     </div>`
                                 </div>
                                 )
@@ -102,7 +102,9 @@ export default connect(
     },
     (dispatch) => {
         return {
-            items: ()=> dispatch(getCartItems())
+            items: ()=> dispatch(getCartItems()),
+            deleteItem: (id)=>dispatch(deleteCartItem(id)),
+            update: (id,quantity)=>dispatch(updateCartItem(id,quantity))
         }
     }
 )(Cart)

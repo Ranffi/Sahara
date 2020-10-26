@@ -165,7 +165,24 @@ nav {
   transform: translateX(101%);
   cursor: pointer;
 }
+.in-bag-btn{
+  position: absolute;
+  top: 70%;
+  right: 0;
+  background:  #f1bd8b;
+  border: none;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  letter-spacing: var(--mainSpacing);
+  font-weight: bold;
+  transition: var(--mainTransition);
+  transform: translateX(101%);
+  cursor: pointer;
+}
 .bag-btn:hover {
+  color: var(--mainWhite);
+}
+.in-bag-btn:hover{
   color: var(--mainWhite);
 }
 .img-container:hover .book-img {
@@ -179,7 +196,10 @@ nav {
   min-height: 12rem;
   transition: var(--mainTransition);
 }
-.img-container:hover .bag-btn {
+.img-container:hover .bag-btn   {
+  transform: translateX(0);
+}
+.img-container:hover .in-bag-btn{
   transform: translateX(0);
 }
 .bookContainer h3 {
@@ -257,6 +277,9 @@ nav {
   width: 75px;
   height: 90px;
 }
+#grayDownBtn{
+  color: grey;
+}
 .cart-item h4 {
   font-size: 0.85rem;
   text-transform: capitalize;
@@ -304,8 +327,6 @@ nav {
   display: grid;
   align-items: center;
   padding: 2rem;
-  /* min-height: calc(100vh - 60px); */
-  /* display: flex; */
   align-items: center;
   justify-content: center;
 }

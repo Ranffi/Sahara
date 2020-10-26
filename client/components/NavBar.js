@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
-import {getBooks} from '../redux/store'
+import {getBooks,getCartItems} from '../redux/store'
 
 class NavBar extends Component{
   constructor(){
@@ -10,7 +10,7 @@ class NavBar extends Component{
     this.state = {
       name: false,
       value: '',
-      choice:'All'
+      choice:'Books'
     }
     this.addClass = this.addClass.bind(this)
     this.searchChenge = this.searchChenge.bind(this)
@@ -18,6 +18,7 @@ class NavBar extends Component{
 }
 componentDidMount(){
   this.props.getBook()
+  this.props.items()
 }
 
 searchChenge(ev){
@@ -35,8 +36,8 @@ findElement(ev){
   }
   render(){
     const filter = this.state.value.toLocaleUpperCase()
-    const {books} = this.props
-    const {value,choice}=this.state
+    const {books,cartItems} = this.props
+    const {value,choice,name}=this.state
 
     return (
       <div>
@@ -50,7 +51,6 @@ findElement(ev){
           <select className="searchDropdown" onChange={this.searchBy}  > 
               <option value="Books">Books</option>
               <option value="Author">Author</option>
-              <option value="Genre">Genre</option>
             </select>
             <form onSubmit={this.findElement}>
             <input type="text" placeholder="Search..." name="search" value={this.state.value} onChange={this.searchChenge} />
@@ -65,19 +65,27 @@ findElement(ev){
               <span className="nav-icon" >
                   <i className="fas fa-cart-plus" />
               </span>
-              <div className="cart-items">0</div>
+              <div className="cart-items">{cartItems.length}</div>
           </div>
         </nav>
-        <Cart hideClass={this.state.name} addClass={this.addClass}/>
-        <ul id="myUL" className={this.state.value !== '' ? '' : 'hidden'}>
+        <Cart hideClass={name} addClass={this.addClass}/>
+        <ul id="myUL" className={value !== '' ? '' : 'hidden'}>
           {
+            choice === "Books"?
             books.map( book => {
               if (book.title.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                   return (
-                    <Link to={`/books/${book.id}`} key ={book.id} onClick={ console.log("this.setState({value:''}") }>{book.title}</Link>
+                    <Link to={`/books/${book.id}`} key ={book.id}>{book.title}</Link>
                   )
                 }
-              })             
+              }): 
+              books.map( book => {
+                if (book.author.firstName.toUpperCase().indexOf(filter) > -1 ||book.author.lastName.toUpperCase().indexOf(filter) > -1 && filter !== '') {
+                    return (
+                      <Link to={`/books/${book.id}`} key ={book.id}>{book.author.firstName} {book.author.lastName}</Link>
+                    )
+                  }
+                })       
           }
         </ul>
       </div>
@@ -86,10 +94,12 @@ findElement(ev){
 }
 
 export default connect(
-({books}) => {return {
-  books
+({books,cartItems}) => {return {
+  books,
+  cartItems
 }
 },
 (dispatch) => {return {
-  getBook: () => dispatch(getBooks())
+  getBook: () => dispatch(getBooks()),
+  items: ()=> dispatch(getCartItems()),
 }})(NavBar)
