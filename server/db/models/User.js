@@ -1,5 +1,5 @@
-const Sequelize = require("sequelize") //for things like Sequelize.STRING
-const db = require("../db")
+const Sequelize = require('sequelize') //for things like Sequelize.STRING
+const db = require('../db')
 
 const User = db.define('user', {
     userName: {
@@ -21,6 +21,10 @@ const User = db.define('user', {
         validate: {
             isEmail: true
         }
+    },
+    guest: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
     }
 })
 

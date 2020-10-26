@@ -1,6 +1,6 @@
-const Sequelize = require("sequelize") //for things like Sequelize.STRING
+const Sequelize = require('sequelize') //for things like Sequelize.STRING
 const Op = Sequelize.Op;
-const db = require("../db")
+const db = require('../db')
 
 const Author = db.define('author', {
     firstName: {
