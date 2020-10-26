@@ -8,7 +8,8 @@ class SignUp extends Component{
     this.state = {
       userName: '',
       password: '',
-      email: ''
+      email: '',
+
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -54,28 +55,37 @@ class SignUp extends Component{
 
   render(){
     const {handleChange, handleSubmit} = this;
+    const usStates = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ]
     return (
       <>
         <h2>
           Create Your Account
         </h2>
         <form onSubmit = {handleSubmit}>
-          <label>User Name:</label>
+          <label for = "userName">User Name:</label>
           <input name = "userName" onChange = {handleChange} value = {this.state.userName} />
 
-          <label>Password:</label>
+          <label for = "password">Password:</label>
           <input name = "password" onChange = {handleChange} value = {this.state.password} />
 
-          <label>Email:</label>
+          <label htmlFor = "email">Email:</label>
           <input name = "email" onChange = {handleChange} value = {this.state.email} />
 
-          <label>Street Address:</label>
+          <label htmlFor = "streetAddress">Street Address:</label>
           <input name = "streetAddress" onChange = {handleChange} value = {this.state.streetAddress} />
 
-          <label>City:</label>
+          <label htmlFor = "city">City:</label>
           <input name = "city" onChange = {handleChange} value = {this.state.city} />
 
-          <label>Zip Code:</label>
+          <label htmlFor = "state">State:</label>
+          {
+            usStates.map(state => {
+              console.log(state)
+            })
+          }
+          <select name="cars" id="cars" />
+
+          <label htmlFor = "zipCode">Zip Code:</label>
           <input name = "zipCode" onChange = {handleChange} value = {this.state.zipCode} />
 
           <button type = "submit">Create Account</button>
