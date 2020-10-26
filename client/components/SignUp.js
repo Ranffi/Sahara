@@ -61,15 +61,24 @@ class SignUp extends Component{
         </h2>
         <form onSubmit = {handleSubmit}>
           <label>User Name:</label>
-          <input name = 'userName' onChange = {handleChange} value = {this.state.userName}/>
+          <input name = "userName" onChange = {handleChange} value = {this.state.userName} />
 
           <label>Password:</label>
-          <input name = 'password' onChange = {handleChange} value = {this.state.password}/>
+          <input name = "password" onChange = {handleChange} value = {this.state.password} />
 
           <label>Email:</label>
-          <input name = 'email' onChange = {handleChange} value = {this.state.email}/>
+          <input name = "email" onChange = {handleChange} value = {this.state.email} />
 
-          <button type = 'submit'>Create Account</button>
+          <label>Street Address:</label>
+          <input name = "streetAddress" onChange = {handleChange} value = {this.state.streetAddress} />
+
+          <label>City:</label>
+          <input name = "city" onChange = {handleChange} value = {this.state.city} />
+
+          <label>Zip Code:</label>
+          <input name = "zipCode" onChange = {handleChange} value = {this.state.zipCode} />
+
+          <button type = "submit">Create Account</button>
 
         </form>
       </>
