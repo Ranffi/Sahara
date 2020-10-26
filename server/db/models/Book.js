@@ -3,38 +3,38 @@ const db = require('../db')
 
 
 const Book = db.define('book', {
-    title : {
-        type : Sequelize.STRING,
-        allowNull : false
+    title: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
-    price : {
-        type : Sequelize.FLOAT,
+    price: {
+        type: Sequelize.FLOAT,
     },
-    description : {
-        type : Sequelize.TEXT
+    description: {
+        type: Sequelize.TEXT
     },
-    coverImageUrl : {
-        type : Sequelize.STRING
+    coverImageUrl: {
+        type: Sequelize.STRING
     },
-    quantityInStock : {
-        type : Sequelize.INTEGER
+    quantityInStock: {
+        type: Sequelize.INTEGER
     },
-    rating : {
-        type : Sequelize.INTEGER,
-        validate : {
-            min : 0,
-            max : 5
+    rating: {
+        type: Sequelize.INTEGER,
+        validate: {
+            min: 0,
+            max: 5
         },
-        defaultValue : 5
+        defaultValue: 5
     },
-    featured : {
-        type : Sequelize.BOOLEAN,
-        defaultValue : false
+    featured: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     },
 
-    onSale : {
-        type : Sequelize.BOOLEAN,
-        defaultValue : false
+    onSale: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     }
 })
 

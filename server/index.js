@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require('express')
 const app = express()
 app.use(require('express').json());
 const morgan = require('morgan')
@@ -38,9 +38,8 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3035;
 
 const init = async () => {
-  try{
-     //await db.syncAndSeed(); // does not exist yet!
-    app.listen(port, ()=> console.log(`listening on port ${port}`));
+  try {
+    app.listen(port, () => console.log(`listening on port ${port}`));
   }
   catch (err) {
     console.log(err);
