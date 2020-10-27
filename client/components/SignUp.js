@@ -9,6 +9,11 @@ class SignUp extends Component{
       userName: '',
       password: '',
       email: '',
+      streetAddress: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      isGuest: false
 
     }
     this.handleChange = this.handleChange.bind(this);
@@ -38,17 +43,23 @@ class SignUp extends Component{
       }
     }
     const validation = validate({from: this.state.email}, constraints)
-    if(validation !== undefined){alert('You did not enter a valid email')}
+    if (validation !== undefined){alert('You did not enter a valid email')}
     //validate that username is not already taken
     // else if(!this.verifyUserNameisUnique(this.state.userName)){
     //   alert('The username you entered is already taken.  Please try again')
     // }
-    else{
-      const newUser = await axios.post('/api/users', this.state)
+    else {
+      const {data} = await axios.post('/api/address', this.state)
+      await axios.post('/api/users', {...this.state, shippingAddressId: data.id})
+
       this.setState({
         userName: '',
         password: '',
-        email: ''
+        email: '',
+        streetAddress: '',
+        city: '',
+        state: '',
+        zipCode: ''
       })
     }
   }
@@ -61,34 +72,39 @@ class SignUp extends Component{
         <h2>
           Create Your Account
         </h2>
-        <form onSubmit = {handleSubmit}>
-          <label for = "userName">User Name:</label>
-          <input name = "userName" onChange = {handleChange} value = {this.state.userName} />
+        <form onSubmit = {handleSubmit} id = "signUpForm">
+          <div id = "signUpUserInfo">
+            <label htmlFor = "userName" className = "signUpLabel">User Name:</label>
+            <input name = "userName" className = "signUpInput" onChange = {handleChange} value = {this.state.userName} />
 
-          <label for = "password">Password:</label>
-          <input name = "password" onChange = {handleChange} value = {this.state.password} />
+            <label htmlFor = "password" className = "signUpLabel">Password:</label>
+            <input name = "password" className = "signUpInput" onChange = {handleChange} value = {this.state.password} />
 
-          <label htmlFor = "email">Email:</label>
-          <input name = "email" onChange = {handleChange} value = {this.state.email} />
+            <label htmlFor = "email" className = "signUpLabel">Email:</label>
+            <input name = "email" className = "signUpInput" onChange = {handleChange} value = {this.state.email} />
+          </div>
+          <div id = "signUpAddress">
+            <label htmlFor = "streetAddress" className = "signUpLabel">Street Address:</label>
+            <input name = "streetAddress" className = "signUpInput" onChange = {handleChange} value = {this.state.streetAddress} />
 
-          <label htmlFor = "streetAddress">Street Address:</label>
-          <input name = "streetAddress" onChange = {handleChange} value = {this.state.streetAddress} />
+            <label htmlFor = "city" className = "signUpLabel">City:</label>
+            <input name = "city" className = "signUpInput" onChange = {handleChange} value = {this.state.city} />
 
-          <label htmlFor = "city">City:</label>
-          <input name = "city" onChange = {handleChange} value = {this.state.city} />
+            <label htmlFor = "state" className = "signUpLabel">State:</label>
+            <select name="state" className = "signUpDrop" onChange = {handleChange}>
+            {
+              usStates.map(state => {
+                return (
+                  <option value = {state} key = {state}>{state}</option>
+                )
+              })
+            }
+            </select>
 
-          <label htmlFor = "state">State:</label>
-          {
-            usStates.map(state => {
-              console.log(state)
-            })
-          }
-          <select name="cars" id="cars" />
-
-          <label htmlFor = "zipCode">Zip Code:</label>
-          <input name = "zipCode" onChange = {handleChange} value = {this.state.zipCode} />
-
-          <button type = "submit">Create Account</button>
+            <label htmlFor = "zipCode" className = "signUpLabel">Zip Code:</label>
+            <input name = "zipCode" className = "signUpInput" onChange = {handleChange} value = {this.state.zipCode} />
+          </div>
+          <button type = "submit" id = "signUpSubmit">Create Account</button>
 
         </form>
       </>

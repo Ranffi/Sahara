@@ -12,28 +12,28 @@ const authentication = async (req, res, next) => {
     });
   }
   //session exists
-  else {
-    const {sid} = req.cookies;
-    const session = await Session.findByPk(
-      sid,
-      {
-        include: User
-      })
-    //if session already has a user
-    if (session.user){
-      console.log('user is logged in')
-      req.user = session.user
-    }
-    //if session does not have a user
-    else {
-      req.user = null;
-      console.log('user is a guest')
-    }
-  }
-  //   //find sessionid from session and if this is associated form user then remember login
-  //   //sid belongs to user
+  // else {
+  //   const {sid} = req.cookies;
+  //   const session = await Session.findByPk(
+  //     sid,
+  //     {
+  //       include: User
+  //     })
+  //   //if session already has a user
+  //   if (session.user){
+  //     console.log('user is logged in')
+  //     req.user = session.user
+  //   }
+  //   //if session does not have a user
+  //   else {
+  //     req.user = null;
+  //     console.log('user is a guest')
+  //   }
+  // }
+  // //   //find sessionid from session and if this is associated form user then remember login
+  // //   //sid belongs to user
 
-  // sid is a guest (does not belong to user)
+  // // sid is a guest (does not belong to user)
 
 
   next();

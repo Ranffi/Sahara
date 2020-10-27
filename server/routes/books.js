@@ -37,7 +37,7 @@ router.post('/', async (req,res,next) => {
 
         res.send(response);
     }
-    catch(err) {
+    catch (err) {
         next(err)
     }
 })
@@ -50,7 +50,7 @@ router.put('/:bookId', async (req,res,next) => {
 
         if (keys.includes('authorFirstName') || keys.includes('authorLastName')) {
             const newAuthor = await Author.findOrCreateAuthor(req.body.authorFirstName, req.body.authorLastName)
-    
+
             delete req.body.authorFirstName;
             delete req.body.authorLastName;
 

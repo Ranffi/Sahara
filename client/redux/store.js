@@ -14,9 +14,9 @@ export const _getCartItems = (items) => {
     items
 }}
 
-const getCartItems=()=>{
-    return async(dispatch)=>{
-        const res= await axios.get('/api/cartItem');
+const getCartItems = () => {
+    return async(dispatch) => {
+        const res = await axios.get('/api/cartItem');
         dispatch(_getCartItems(res.data))
     }
 }
@@ -67,7 +67,7 @@ const reducer = ((state={books:[], book:{}, authors:[], cartItems:[]},action)=>{
     switch(action.type){
         case GET_BOOKS: return { ...state, books:action.books}
         case SINGLE_BOOK: return { ...state, book:action.book}
-        case GET_CARTITMS: return { ...state, cartItems:action.items} 
+        case GET_CARTITMS: return { ...state, cartItems:action.items}
         case ADD_CARTITEM: return { ...state, cartItems:[...state.cartItems,action.item]}
         default: return state
     }

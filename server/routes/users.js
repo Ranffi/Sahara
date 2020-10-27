@@ -15,13 +15,13 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        const {userName, password, email, shippingAddress} = req.body
+        const {userName, password, email, shippingAddressId } = req.body
         const hashedPw = await bcrypt.hash(password, 10)
         const user = await User.create({
             userName,
             password: hashedPw,
             email,
-            shippingAddress
+            shippingAddressId
         })
         await Session.update({
             userId: user.id

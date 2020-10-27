@@ -22,7 +22,7 @@ const User = db.define('user', {
             isEmail: true
         }
     },
-    guest: {
+    isGuest: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
     }
