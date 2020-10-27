@@ -1,8 +1,15 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
-const { User, Book, Genre, Author, Cart } = require('../db');
-const chalk = require('chalk');
+const { User, Cart } = require('../db');
 const Session = require('../db/models/Session');
+
+router.get('/whoami', (req, res) => {
+    if (req.user) {
+        res.send(`Welcome back ${req.user.userName}`)
+    } else {
+        res.send('you are not logged in')
+    }
+})
 
 router.get('/', async (req, res, next) => {
     try {

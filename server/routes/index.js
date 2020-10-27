@@ -1,4 +1,4 @@
-const router = require("express").Router()
+const router = require('express').Router()
 //import models from /db
 
 router.use('/books', require('./books'))
@@ -18,6 +18,9 @@ router.use('/users', require('./users'))
     //req.body - just needs { bought: true/false }
 
 router.use('/login', require('./login'))
+router.use('/logout', require('./logout'))
+
+
 router.use('/cartItem', require('./cartItem'))
 router.use('/address', require('./address'))
 
