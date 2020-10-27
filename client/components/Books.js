@@ -1,7 +1,7 @@
-import React,{Component} from 'react';
-import {connect} from "react-redux"
-import {getBooks, addCartItem} from "../redux/store"
-import {Link} from "react-router-dom"
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import {getBooks, addCartItem} from '../redux/store'
+import {Link} from 'react-router-dom'
 class Books extends Component{
   constructor(){
     super();
@@ -20,19 +20,19 @@ class Books extends Component{
   }
 
   render(){
-    const {books}=this.props
+    const {books} = this.props
     return (
     <div className="products-center">
       {
-        books.map(book=>{
+        books.map(book => {
           return (
             <div className="bookContainer" key={book.id}>
               <div className="img-container">
-              <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img"/></Link>
-                  <button className="bag-btn"  data-id={book.id} onClick={()=>this.addToCart(book.id)}>
-                  <i className="fas fa-shopping-cart"></i>
+              <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img" /></Link>
+                  <button className="bag-btn"  data-id={book.id} onClick={() => this.addToCart(book.id)}>
+                  <i className="fas fa-shopping-cart" />
                   add to cart
-                  </button> 
+                  </button>
               </div>
                 <h3>{book.title}</h3>
                 <h4>by: {book.author.firstName} {book.author.lastName}</h4>
@@ -47,11 +47,11 @@ class Books extends Component{
 }
 
 export default connect(
-  ({books})=>({
+  ({books}) => ({
     books
   }),
-  (dispatch)=>({
-    Books: ()=>dispatch(getBooks()),
-    item: (bookId)=>dispatch(addCartItem(bookId))
+  (dispatch) => ({
+    Books: () => dispatch(getBooks()),
+    item: (bookId) => dispatch(addCartItem(bookId))
   })
 )(Books);

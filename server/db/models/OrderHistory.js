@@ -1,7 +1,7 @@
-const Sequelize = require("sequelize") 
-const db = require("../db")
+const Sequelize = require('sequelize')
+const db = require('../db')
 
-const OrderHistory = db.define('orderHistory' , {
+const OrderHistory = db.define('orderHistory', {
     shippingAddress: {
         type: Sequelize.TEXT
     },

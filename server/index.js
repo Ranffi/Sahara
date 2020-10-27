@@ -3,7 +3,6 @@ const app = express()
 app.use(require('express').json());
 const morgan = require('morgan')
 const path = require('path')
-const db = require('./db')
 const cookieParser = require('cookie-parser')
 const authentication = require('./middleware/authentication')
 
@@ -37,7 +36,7 @@ app.use((err, req, res, next) => {
 //listen on port
 const port = process.env.PORT || 3035;
 
-const init = async () => {
+const init = () => {
   try {
     app.listen(port, () => console.log(`listening on port ${port}`));
   }
