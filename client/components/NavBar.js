@@ -10,11 +10,11 @@ class NavBar extends Component{
     this.state = {
       name: false,
       value: '',
-      choice:'All'
+      choice: 'All'
     }
     this.addClass = this.addClass.bind(this)
     this.searchChenge = this.searchChenge.bind(this)
-    this.searchBy =this.searchBy.bind(this)
+    this.searchBy = this.searchBy.bind(this)
 }
 componentDidMount(){
   this.props.getBook()
@@ -29,15 +29,15 @@ findElement(ev){
 
 }
   searchBy(ev){
-    this.setState({choice:ev.target.value})
+    this.setState({choice: ev.target.value})
   }
   addClass(){
-    this.setState({name:!this.state.name})
+    this.setState({name: !this.state.name})
   }
   render(){
     const filter = this.state.value.toLocaleUpperCase()
     const {books} = this.props
-    const {value,choice}=this.state
+    const {value, choice} = this.state
 
     return (
       <div>
@@ -48,19 +48,20 @@ findElement(ev){
             <Link className = "navLink" to = "/">About</Link>
           </div>
           <div id = "navCenterContainer">
-          <select className="searchDropdown" onChange={this.searchBy}  > 
+          <select className="searchDropdown" onChange={this.searchBy}  >
               <option value="Books">Books</option>
               <option value="Author">Author</option>
               <option value="Genre">Genre</option>
-            </select>
-            <form onSubmit={this.findElement}>
+          </select>
+            {/* <form onSubmit={this.findElement}>
             <input type="text" placeholder="Search..." name="search" value={this.state.value} onChange={this.searchChenge} />
             <button type="submit"><i className="fa fa-search" /></button>
-            </form>
+            </form> */}
           </div>
           <div id ="navRightContainer">
             <Link className = "navLink" to = "/login">Log In</Link>
             <Link className = "navLink" to = "/signUp">Sign Up</Link>
+            <Link className = "navLink" to = "/logout">logout</Link>
           </div>
           <div className="cart-btn" onClick={ () => this.addClass()}>
               <span className="nav-icon" >
@@ -69,7 +70,7 @@ findElement(ev){
               <div className="cart-items">0</div>
           </div>
         </nav>
-        <Cart hideClass={this.state.name} addClass={this.addClass}/>
+        <Cart hideClass={this.state.name} addClass={this.addClass} />
         <ul id="myUL" className={this.state.value !== '' ? '' : 'hidden'}>
           {
             books.map( book => {
@@ -78,7 +79,7 @@ findElement(ev){
                     <Link to={`/books/${book.id}`} key ={book.id} onClick={ console.log("this.setState({value:''}") }>{book.title}</Link>
                   )
                 }
-              })             
+              })
           }
         </ul>
       </div>

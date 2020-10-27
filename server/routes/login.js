@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
-const { User } = require('../db');
+const { User, Session} = require('../db');
 
 router.post('/', async (req, res, next) => {
     const { userName, password } = req.body;
@@ -8,7 +8,9 @@ router.post('/', async (req, res, next) => {
     if (user) {
         const correctPassword = await bcrypt.compare(password, user.password)
         if (correctPassword) {
-            res.sendStatus(200)
+            const usersSession = await Session.findByPk(req.sid)
+            await usersSession.setUser(user)
+            res.redirect('/')
         }
         else {
             res.sendStatus(401);

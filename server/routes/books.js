@@ -23,7 +23,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
-router.post('/', async (req,res,next) => {
+router.post('/', async (req, res, next) => {
     try {
         const newAuthor = await Author.findOrCreateAuthor(req.body.authorFirstName, req.body.authorLastName)
 
@@ -37,12 +37,12 @@ router.post('/', async (req,res,next) => {
 
         res.send(response);
     }
-    catch(err) {
+    catch (err) {
         next(err)
     }
 })
 
-router.put('/:bookId', async (req,res,next) => {
+router.put('/:bookId', async (req, res, next) => {
     try {
         const book = await Book.findByPk(req.params.bookId);
 
@@ -50,7 +50,7 @@ router.put('/:bookId', async (req,res,next) => {
 
         if (keys.includes('authorFirstName') || keys.includes('authorLastName')) {
             const newAuthor = await Author.findOrCreateAuthor(req.body.authorFirstName, req.body.authorLastName)
-    
+
             delete req.body.authorFirstName;
             delete req.body.authorLastName;
 
@@ -63,22 +63,21 @@ router.put('/:bookId', async (req,res,next) => {
             res.send( await book.update(req.body));
         }
     }
-    catch(err) {
+    catch (err) {
         next(err)
     }
 })
 
-router.delete('/:bookId', async (req,res,next) => {
+router.delete('/:bookId', async (req, res, next) => {
     try {
         const findBook = await Book.findByPk(req.params.bookId);
         await findBook.destroy();
         res.sendStatus(204);
     }
-    catch(err) {
+    catch (err) {
         next(err);
     }
 })
-
 
 
 module.exports = router
