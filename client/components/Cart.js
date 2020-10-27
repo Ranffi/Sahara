@@ -19,9 +19,10 @@ class Cart extends Component{
     }
 
     componentDidUpdate(){
-        if (this.state.totalPrice === 0){
-            let sum = 0
-            const obj = {}
+        /*
+        if(this.state.totalPrice === 0){
+            let sum=0
+            const obj={}
             this.props.cartItems.forEach(element => {
                 sum += element.book.price
                 const id = element.id
@@ -29,6 +30,7 @@ class Cart extends Component{
             });
             // this.setState({totalPrice: sum, quantity:obj })
         }
+        */
     }
 
     increasePrice(price){

@@ -21,6 +21,10 @@ const User = db.define('user', {
         validate: {
             isEmail: true
         }
+    },
+    guest: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
     }
 })
 

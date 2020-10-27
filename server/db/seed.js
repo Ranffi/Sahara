@@ -1,5 +1,5 @@
 const { green, red } = require('chalk');
-const { db, Book, Author, Genre} = require('./server/db/index');
+const { db, Book, Author, Genre } = require('./index.js')
 
 const seedBooks = [
     {
@@ -324,7 +324,7 @@ const genres = [
 const seed = async () => {
   try {
     await db.sync({ force: true });
-    await Promise.all(genres.map((genre) => Genre.create({name: genre})));
+    await Promise.all(genres.map((genre) => Genre.create({ name: genre})));
 
     const uniqueAuthors = authors.filter((obj, ind, arr) => {
         const checkAuthor = arr.find((author) => author.firstName === obj.firstName && author.lastName === obj.lastName)
@@ -334,10 +334,11 @@ const seed = async () => {
     await Promise.all(uniqueAuthors.map((author) => Author.create(author)));
 
     await Promise.all(seedBooks.map( async (book, ind) => {
-        book.author = await Author.findOrCreateAuthor(authors[ind].firstName, authors[ind].lastName)
+        const bookAuthor = await Author.findOrCreateAuthor(authors[ind].firstName, authors[ind].lastName);
+        book.authorId = bookAuthor.id
     }))
 
-    await Promise.all(seedBooks.map((book) => Book.create({...book, genreId: Math.ceil(Math.random() * genres.length), authorId: book.author.id})));
+    await Promise.all(seedBooks.map((book) => Book.create({...book, genreId: Math.ceil(Math.random() * genres.length), authorId: book.authorId})));
 
   } catch (err) {
     console.log(red(err));
