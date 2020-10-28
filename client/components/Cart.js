@@ -10,7 +10,7 @@ class Cart extends Component{
             newClasName:false,
             totalPrice:0
         }
-        this.closeCart= this.closeCart.bind(this)
+        this.closeCart = this.closeCart.bind(this)
         this.increasePrice = this.increasePrice.bind(this)
         this.decreasePrice = this.decreasePrice.bind(this)
     }
@@ -18,8 +18,8 @@ class Cart extends Component{
         this.props.items()
     }
     componentDidUpdate(){
-        if( 0 === this.state.totalPrice && this.props.cartItems.length !==0){
-            let sum =0
+        if ( 0 === this.state.totalPrice && this.props.cartItems.length !==0){
+            let sum = 0
             this.props.cartItems.forEach(element => {
                 sum+=element.book.price * element.quantity
             })
@@ -43,32 +43,30 @@ class Cart extends Component{
     }
 
 
-    closeCart(){ 
+    closeCart(){
         const value = document.querySelector('.cart').classList.contains('showCart')
         if (value){
             document.querySelector('.cart').classList.remove('showCart');
             this.props.addClass()
-        }   
+        }
     }
 
     render(){
-
             const {cartItems}=this.props
         return (
             <div>
-                <div className="cart-overlay ">
-                </div>
-                <div className={`cart ${this.props.hideClass? "showCart": ''}`} >
-                    <span className="close-cart" onClick={()=>this.closeCart()}>
-                        <i className="fas fa-window-close"></i>
+                <div className="cart-overlay " />
+                <div className={`cart ${this.props.hideClass ? 'showCart' : ''}`} >
+                    <span className="close-cart" onClick={() => this.closeCart()}>
+                        <i className="fas fa-window-close" />
                     </span>
                     <h2>your cart</h2>
                     <div className="cart-content">
                         {
-                            cartItems.map(item =>{
-                                return(
-                                <div className='cart-item' key={item.id}>
-                                    <img src={item.book.coverImageUrl} alt="product"/>
+                            cartItems.map(item => {
+                                return (
+                                <div className="cart-item" key={item.id}>
+                                    <img src={item.book.coverImageUrl} alt="product" />
                                     <div>
                                         <h4>{item.book.title}</h4>
                                         <h5>{item.book.price * item.quantity}</h5>
@@ -95,7 +93,7 @@ class Cart extends Component{
 }
 
 export default connect(
-    ({cartItems})=>{
+    ({cartItems}) => {
         return {
             cartItems
         }

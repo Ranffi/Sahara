@@ -1,6 +1,15 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
-const { User, Book, Genre, Author, Cart } = require('../db');
+const { User, Cart } = require('../db');
+const Session = require('../db/models/Session');
+
+router.get('/whoami', (req, res) => {
+    if (req.user) {
+        res.send(`Welcome back ${req.user.userName}`)
+    } else {
+        res.send('you are not logged in')
+    }
+})
 
 router.get('/', async (req, res, next) => {
     try {
@@ -15,15 +24,21 @@ router.post('/', async (req, res, next) => {
     try {
         const {userName, password, email, shippingAddress} = req.body
         const hashedPw = await bcrypt.hash(password, 10)
-        await User.create({
+        const user = await User.create({
             userName,
-            password : hashedPw,
+            password: hashedPw,
             email,
             shippingAddress
         })
+        await Session.update({
+            userId: user.id
+        },
+        {
+            where: {id: req.cookies.sid}
+        })
         res.redirect('/api/books')
     }
-    catch(err) {
+    catch (err) {
         next(err)
     }
 })

@@ -1,19 +1,19 @@
-const Sequelize = require("sequelize") 
-const db = require("../db")
+const Sequelize = require('sequelize')
+const db = require('../db')
 
-const OrderHistory = db.define('orderHistory' , {
-    shippingAddress : {
-        type : Sequelize.TEXT
+const OrderHistory = db.define('orderHistory', {
+    shippingAddress: {
+        type: Sequelize.TEXT
     },
 
-    subTotal : {
-        type : Sequelize.FLOAT
+    subTotal: {
+        type: Sequelize.FLOAT
     },
-    quantity : {
-        type : Sequelize.INTEGER
+    quantity: {
+        type: Sequelize.INTEGER
     },
-    status : {
-        type : Sequelize.STRING
+    status: {
+        type: Sequelize.STRING
     }
 })
 

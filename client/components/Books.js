@@ -16,11 +16,11 @@ class Books extends Component{
     this.props.itemsOnCart()
   }
   componentDidUpdate(){
-    if(this.state.itemsArr.length !== this.props.cartItems.length){
-      const arr= this.props.cartItems.map(item=>{
+    if (this.state.itemsArr.length !== this.props.cartItems.length){
+      const arr = this.props.cartItems.map(item => {
         return item.book.id
       })
-      this.setState({itemsArr:arr})
+      this.setState({itemsArr : arr})
     }
   }
   addToCart(bookId){
@@ -28,19 +28,16 @@ class Books extends Component{
   }
 
   render(){
-    const { itemsArr }=this.state
-    const {books,cartItems}=this.props
-
-    
+    const { itemsArr } = this.state
+    const {books } = this.props
     return (
     <div className="products-center">
       {
-        books.map(book=>{
+        books.map(book => {
           return (
             <div className="bookContainer" key={book.id}>
               <div className="img-container">
-              <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img"/></Link>
-                   
+              <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img"/></Link> 
                   {
                     itemsArr.indexOf(book.id) === -1 ? 
                     <button className="bag-btn"  data-id={book.id} onClick={()=>this.addToCart(book.id)}>
@@ -70,8 +67,8 @@ export default connect(
     cartItems
   }),
   (dispatch)=>({
-    Books: ()=>dispatch(getBooks()),
-  itemsOnCart: ()=> dispatch(getCartItems()),
-  item: (bookId)=>dispatch(addCartItem(bookId))
+    Books: () => dispatch(getBooks()),
+  itemsOnCart: () => dispatch(getCartItems()),
+  item: (bookId) => dispatch(addCartItem(bookId))
   })
 )(Books);

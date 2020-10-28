@@ -1,20 +1,17 @@
-const express = require("express")
-//initialize app
+const express = require('express')
 const app = express()
 app.use(require('express').json());
-//require morgan, path packages
 const morgan = require('morgan')
 const path = require('path')
-//require db from /db
-const db = require('./db')
+const cookieParser = require('cookie-parser')
+const authentication = require('./middleware/authentication')
 
-//use morgan
 app.use(morgan('dev'))
-//use express.json()
-app.use(express.static(path.join(__dirname, './public')))
-//use express.static() MAKE SURE THE PATH TO YOUR PUBLIC FOLDER IS RIGHT!
 
-//require in your routes and use them on your api path
+app.use(cookieParser())
+app.use(authentication)
+app.use(express.static(path.join(__dirname, './public')))
+
 app.use('/api', require('./routes'))
 
 //404 handler
@@ -39,10 +36,9 @@ app.use((err, req, res, next) => {
 //listen on port
 const port = process.env.PORT || 3035;
 
-const init = async () => {
-  try{
-     //await db.syncAndSeed(); // does not exist yet!
-    app.listen(port, ()=> console.log(`listening on port ${port}`));
+const init = () => {
+  try {
+    app.listen(port, () => console.log(`listening on port ${port}`));
   }
   catch (err) {
     console.log(err);

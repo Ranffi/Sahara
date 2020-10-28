@@ -37,12 +37,12 @@ class SignUp extends Component{
       }
     }
     const validation = validate({from: this.state.email}, constraints)
-    if(validation !== undefined){alert('You did not enter a valid email')}
+    if (validation !== undefined){alert('You did not enter a valid email')}
     //validate that username is not already taken
     // else if(!this.verifyUserNameisUnique(this.state.userName)){
     //   alert('The username you entered is already taken.  Please try again')
     // }
-    else{
+    else {
       const newUser = await axios.post('/api/users', this.state)
       this.setState({
         userName: '',
@@ -61,15 +61,15 @@ class SignUp extends Component{
         </h2>
         <form onSubmit = {handleSubmit}>
           <label>User Name:</label>
-          <input name = 'userName' onChange = {handleChange} value = {this.state.userName}/>
+          <input name = "userName" onChange = {handleChange} value = {this.state.userName} />
 
           <label>Password:</label>
-          <input name = 'password' onChange = {handleChange} value = {this.state.password}/>
+          <input name = "password" onChange = {handleChange} value = {this.state.password} />
 
           <label>Email:</label>
-          <input name = 'email' onChange = {handleChange} value = {this.state.email}/>
+          <input name = "email" onChange = {handleChange} value = {this.state.email} />
 
-          <button type = 'submit'>Create Account</button>
+          <button type = "submit">Create Account</button>
 
         </form>
       </>
