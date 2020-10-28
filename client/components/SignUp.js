@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 import validate from 'validate.js'
+import {getUser} from '../redux/store'
+import { connect } from 'react-redux'
 
 class SignUp extends Component{
   constructor() {
@@ -61,6 +63,8 @@ class SignUp extends Component{
         state: '',
         zipCode: ''
       })
+
+      this.props.getUser();
     }
   }
 
@@ -114,4 +118,11 @@ class SignUp extends Component{
 
 }
 
-export default SignUp
+export default connect(
+  null,
+  (dispatch) => {
+    return {
+    getUser: () => dispatch(getUser())
+  }
+}
+)(SignUp)
