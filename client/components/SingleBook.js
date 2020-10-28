@@ -7,16 +7,16 @@ class SingleBook extends Component{
     constructor(){
         super();
         this.state = {
-          book:''
+          book: ''
         }
     }
 
     componentDidMount(){
-        this.props.getbook(this.props.match.params.id)  
+        this.props.getbook(this.props.match.params.id)
     }
     componentDidUpdate(){
-        if(this.state.book === ""){
-            this.setState({book:this.props.book})
+        if (this.state.book === ''){
+            this.setState({book: this.props.book})
             console.log('????', this.state.book.author);
         }
     }
@@ -33,7 +33,9 @@ class SingleBook extends Component{
                         <h3>{book.title}</h3>
                         <h4>by: </h4>
                         <h3>${book.price}</h3>
+                        {/* eslint-disable-next-line react/button-has-type */}
                         <button className="bag-btn-sigleBook"  data-id={book.id}>
+                         {/* eslint-disable-next-line react/jsx-child-element-spacing */}
                         <i className="fas fa-shopping-cart" />
                         add to cart
                         </button>

@@ -1,12 +1,12 @@
-import React,{Component} from 'react';
-import {connect} from "react-redux"
-import {getBooks, addCartItem,getCartItems} from "../redux/store"
-import {Link} from "react-router-dom"
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import {getBooks, addCartItem, getCartItems} from '../redux/store'
+import {Link} from 'react-router-dom'
 class Books extends Component{
   constructor(){
     super();
     this.state = {
-      itemsArr:[]
+      itemsArr: []
     }
     this.addToCart = this.addToCart.bind(this)
   }
@@ -20,7 +20,7 @@ class Books extends Component{
       const arr = this.props.cartItems.map(item => {
         return item.book.id
       })
-      this.setState({itemsArr : arr})
+      this.setState({itemsArr: arr})
     }
   }
   addToCart(bookId){
@@ -37,15 +37,20 @@ class Books extends Component{
           return (
             <div className="bookContainer" key={book.id}>
               <div className="img-container">
-              <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img"/></Link> 
+              <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img" /></Link>
                   {
-                    itemsArr.indexOf(book.id) === -1 ? 
-                    <button className="bag-btn"  data-id={book.id} onClick={()=>this.addToCart(book.id)}>
-                    <i className="fas fa-shopping-cart"></i>
+                    itemsArr.indexOf(book.id) === -1 ?
+                    // eslint-disable-next-line react/button-has-type
+                    <button className="bag-btn"  data-id={book.id} onClick={() => this.addToCart(book.id)}>
+                    {/* eslint-disable-next-line react/jsx-child-element-spacing */}
+                    <i className="fas fa-shopping-cart" />
                     add to cart
-                    </button>: <button className="in-bag-btn"  data-id={book.id} >
-                    <i className="fas fa-shopping-cart"></i>
-                    in cart
+                    </button> :
+                    // eslint-disable-next-line react/button-has-type
+                    <button className="in-bag-btn"  data-id={book.id} >
+                      {/* eslint-disable-next-line react/jsx-child-element-spacing */}
+                      <i className="fas fa-shopping-cart" />
+                      in cart
                     </button>
                   }
               </div>
@@ -62,11 +67,11 @@ class Books extends Component{
 }
 
 export default connect(
-  ({books,cartItems})=>({
+  ({books, cartItems}) => ({
     books,
     cartItems
   }),
-  (dispatch)=>({
+  (dispatch) => ({
     Books: () => dispatch(getBooks()),
   itemsOnCart: () => dispatch(getCartItems()),
   item: (bookId) => dispatch(addCartItem(bookId))

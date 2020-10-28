@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
-import {getBooks,getCartItems} from '../redux/store'
+import {getBooks, getCartItems} from '../redux/store'
 
 class NavBar extends Component{
   constructor(){
@@ -10,7 +10,7 @@ class NavBar extends Component{
     this.state = {
       name: false,
       value: '',
-      choice:'Books'
+      choice: 'Books'
     }
     this.addClass = this.addClass.bind(this)
     this.searchChenge = this.searchChenge.bind(this)
@@ -25,19 +25,20 @@ searchChenge(ev){
   this.setState({value: ev.target.value})
 }
 
-findElement(ev){
+findElement(){
 
 }
   searchBy(ev){
     this.setState({choice: ev.target.value})
   }
   addClass(){
+    // eslint-disable-next-line react/no-access-state-in-setstate
     this.setState({name: !this.state.name})
   }
   render(){
     const filter = this.state.value.toLocaleUpperCase()
-    const {books,cartItems} = this.props
-    const {value,choice,name}=this.state
+    const {books, cartItems} = this.props
+    const {value, choice, name} = this.state
 
     return (
       <div>
@@ -70,24 +71,24 @@ findElement(ev){
               <div className="cart-items">{cartItems.length}</div>
           </div>
         </nav>
-        <Cart hideClass={name} addClass={this.addClass}/>
+        <Cart hideClass={name} addClass={this.addClass} />
         <ul id="myUL" className={value !== '' ? '' : 'hidden'}>
           {
-            choice === "Books"?
+            choice === 'Books' ?
             books.map( book => {
               if (book.title.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                   return (
                     <Link to={`/books/${book.id}`} key ={book.id}>{book.title}</Link>
                   )
                 }
-              }): 
+              }) :
               books.map( book => {
-                if (book.author.firstName.toUpperCase().indexOf(filter) > -1 ||book.author.lastName.toUpperCase().indexOf(filter) > -1 && filter !== '') {
+                if (book.author.firstName.toUpperCase().indexOf(filter) > -1 || book.author.lastName.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                     return (
                       <Link to={`/books/${book.id}`} key ={book.id}>{book.author.firstName} {book.author.lastName}</Link>
                     )
                   }
-                })       
+                })
           }
         </ul>
       </div>
@@ -96,12 +97,13 @@ findElement(ev){
 }
 
 export default connect(
-({books,cartItems}) => {return {
+({books, cartItems}) => {return {
   books,
   cartItems
 }
 },
 (dispatch) => {return {
   getBook: () => dispatch(getBooks()),
-  items: ()=> dispatch(getCartItems()),
-}})(NavBar)
+  items: () => dispatch(getCartItems()),
+}}
+)(NavBar)
