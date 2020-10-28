@@ -1,15 +1,23 @@
+/* Color palette for app :
+  #222831 
+  #30475e 
+  #c1a57b
+  #ececec
+*/
+
+
 * {
   box-sizing: border-box;
   font-family: Courier, sans-serif;
 }
 
 body {
-  background:  rgb(226, 215, 210);;
+  background:  rgb(178, 183, 189);;
   margin: 0;
   padding: 0;
 }
 :root {
-  --primaryColor: #f09d51;
+  --primaryColor: #c1a57b;
   --mainWhite: #fff;
   --mainBlack: #222;
   --mainGrey: #ececec;
@@ -38,7 +46,10 @@ nav {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  background: rgb(199, 182, 126); 
+  background: #30475e; 
+}
+.fa-cart-plus{
+  color: white;
 }
 
 #myUL {
@@ -349,3 +360,22 @@ nav {
 .singleBook-img{
  width: 100%;
 }
+
+.home {
+  background-image: url('gantaro-9eTP3GF4liQ-unsplash.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  min-height: 100vh;
+}
+
+.picDiv {
+  text-align: center;
+  margin-top: 3rem;
+  min-height: 30vh;
+}
+
+.pic{
+  height: 350px;
+  width: 350px;
+}
+
