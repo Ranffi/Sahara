@@ -36,14 +36,14 @@ class LogIn extends Component{
         <h2>
           Log In Page
         </h2>
-        <form onSubmit = {handleSubmit}>
+        <form onSubmit = {handleSubmit} id = "logInForm">
           <label>User Name:</label>
-          <input name ="userName" onChange = {handleChange} value = {this.state.userName} />
+          <input name ="userName" className = "logInInput" onChange = {handleChange} value = {this.state.userName} />
 
           <label>Password:</label>
-          <input name ="password" onChange = {handleChange} value = {this.state.password} />
+          <input name ="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
 
-          <button type ="submit">Log In</button>
+          <button type ="submit" id = "logInButton" >Log In</button>
 
         </form>
       </>
