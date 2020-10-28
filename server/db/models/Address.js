@@ -6,9 +6,6 @@ const Address = db.define('address', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  unit: {
-    type: Sequelize.STRING
-  },
   city: {
     type: Sequelize.STRING,
     allowNull: false

@@ -8,6 +8,9 @@ body {
   margin: 0;
   padding: 0;
 }
+main{
+  margin-top: 60px;
+}
 :root {
   --primaryColor: #f09d51;
   --mainWhite: #fff;
@@ -38,7 +41,7 @@ nav {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  background: rgb(199, 182, 126); 
+  background: rgb(199, 182, 126);
 }
 
 #myUL {
@@ -60,7 +63,7 @@ nav {
   border: solid black 1px;
   padding: 12px;
   background-color: rgb(197, 196, 196);
-  color: black; 
+  color: black;
   display: block;
 }
 #myUL >a>li:hover {
@@ -349,3 +352,99 @@ nav {
 .singleBook-img{
  width: 100%;
 }
+/* ----------------End of Single Book------------------ */
+/* ----------------Sign Up------------------ */
+
+#signUpForm{
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  position: relative;
+  background: #FFFFFF;
+  max-width: 65%;
+  margin: 0 auto 100px;
+  padding: 45px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+}
+#signUpUserInfo{
+  display: flex;
+  flex-direction: column;
+}
+
+#signUpAddress{
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+}
+.signUpDrop {
+  outline: 0;
+  background: #f2f2f2;
+  width: 30%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.signUpInput {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+#signUpSubmit {
+  text-transform: uppercase;
+  outline: 0;
+  background: #9ab973;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ----------------End of Sign Up------------------ */
+/* ----------------Log In------------------ */
+
+.logInInput{
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  font-size: 14px;
+}
+
+#logInButton{
+  text-transform: uppercase;
+  background: #9ab973;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+#logInForm{
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  position: relative;
+  background: #FFFFFF;
+  max-width: 65%;
+  margin: 0 auto 100px;
+  padding: 45px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+}
+/* ----------------End of Log In------------------ */
