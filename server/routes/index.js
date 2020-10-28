@@ -17,19 +17,17 @@ router.use('/users', require('./users'))
 //put '/:userId/books/:bookId' - move book from cart to order history
     //req.body - just needs { bought: true/false }
 
-
 router.use('/login', require('./login'))
 router.use('/logout', require('./logout'))
 
 
 router.use('/cartItem', require('./cartItem'))
-
+router.use('/address', require('./address'))
 
 //Questions
     //what do we want to do about multiple cases in cart? I.e. someone adds the same book to cart again, or buys multiple of the same book
         //should there be multiple rows in db? Or just a quantity field?
         //if quantity field, then does it make sense to have 2 possible rows per product- 1 in cart, 1 in order history?
-
 
 router.use((req, res, next) => {
     const err = new Error('API route not found!')
