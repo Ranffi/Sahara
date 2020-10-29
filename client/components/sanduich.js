@@ -33,7 +33,7 @@ class Sanduich extends Component{
                 </div>
                 <div className={`user_menu ${this.state.showList}`}>
                     <ul>test</ul>
-                    <ul>test</ul>
+                    <ul></ul>
                     <ul>test</ul>
                     <ul>test</ul>
                 </div>
