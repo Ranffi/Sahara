@@ -14,7 +14,6 @@ router.post('/', async (req, res, next) => {
   const {streetAddress, city, state, zipCode } = req.body
   try {
     const newAddress = await Address.create({streetAddress, city, state, zipCode})
-    console.log(newAddress)
     res.send(newAddress);
   }
   catch (err) {

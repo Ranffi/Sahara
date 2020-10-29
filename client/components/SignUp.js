@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 import validate from 'validate.js'
+import {getUser} from '../redux/store'
+import { connect } from 'react-redux'
 
 class SignUp extends Component{
   constructor() {
@@ -20,13 +22,9 @@ class SignUp extends Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  // async verifyUserNameisUnique({userName}){
-  //   console.log('hello')
-  //   const user = await axios.get(`/api/users/${userName}`)
-  //   console.log(user)
-  //   if(user){return true}
-  //   return false;
-  // }
+  componentDidMount(){
+    this.props.getUser();
+  }
 
   handleChange(ev) {
     this.setState({
@@ -44,13 +42,9 @@ class SignUp extends Component{
     }
     const validation = validate({from: this.state.email}, constraints)
     if (validation !== undefined){alert('You did not enter a valid email')}
-    //validate that username is not already taken
-    // else if(!this.verifyUserNameisUnique(this.state.userName)){
-    //   alert('The username you entered is already taken.  Please try again')
-    // }
     else {
       const {data} = await axios.post('/api/address', this.state)
-      await axios.post('/api/users', {...this.state, shippingAddressId: data.id})
+      await axios.put(`/api/users/${this.props.id}`, {...this.state, shippingAddressId: data.id})
 
       this.setState({
         userName: '',
@@ -61,6 +55,8 @@ class SignUp extends Component{
         state: '',
         zipCode: '',
       })
+
+      this.props.history.push('/books')
     }
   }
 
@@ -114,4 +110,13 @@ class SignUp extends Component{
 
 }
 
-export default SignUp
+export default connect(
+  ({user}) => {
+    return user
+  },
+  (dispatch) => {
+    return {
+    getUser: () => dispatch(getUser())
+  }
+}
+)(SignUp)

@@ -11,11 +11,21 @@ router.get('/whoami', (req, res) => {
     }
 })
 
-router.post('/', async (req, res, next) => {
+router.get('/get-user', (req, res, next) => {
+    try {
+        res.send(req.user)
+    }
+    catch (err) {
+        next(err)
+    }
+})
+
+router.put('/:id', async (req, res, next) => {
     try {
         const {userName, password, email, shippingAddressId, isGuest } = req.body
         const hashedPw = await bcrypt.hash(password, 10)
-        const user = await User.create({
+        const user = await User.findByPk(req.params.id);
+        await user.update({
             userName,
             password: hashedPw,
             email,
@@ -28,7 +38,7 @@ router.post('/', async (req, res, next) => {
         {
             where: {id: req.cookies.sid}
         })
-        res.redirect('/api/books')
+        res.redirect('/books')
     }
     catch (err) {
         next(err)
@@ -40,18 +50,6 @@ router.get('/:userId', async (req, res, next) => {
         res.send(await User.findByPk(req.params.userId, {
             include: { all: true, nested: true }
         }));
-    }
-    catch (err) {
-        next(err)
-    }
-})
-
-router.put('/:userId', async (req, res, next) => {
-    try {
-        const user = await User.findByPk(req.params.userId)
-        //REMINDER : If we allow change of password with this route, we need to use bcrypt here as well
-        await user.update(req.body)
-        res.send(user);
     }
     catch (err) {
         next(err)

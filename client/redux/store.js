@@ -3,10 +3,19 @@ import loggerMiddleware from 'redux-logger'
 import axios from 'axios'
 import thunk from 'redux-thunk'
 
-const GET_BOOKS = 'GET_BOOKS'
-const SINGLE_BOOK = 'SINGLE_BOOK'
-const ADD_CARTITEM = 'ADD_CARTITEM'
-const GET_CARTITMS = 'GET_CARTITMS'
+const GET_BOOKS= "GET_BOOKS"
+const SINGLE_BOOK= "SINGLE_BOOK"
+const ADD_CARTITEM = "ADD_CARTITEM"
+const GET_CARTITMS = "GET_CARTITMS"
+const GET_USER = 'GET_USER'
+
+const initialState = {
+    books: [],
+    book: {},
+    authors: [],
+    cartItems: [],
+    user: {}
+}
 
 export const _getCartItems = (items) => {
     return {
@@ -61,17 +70,32 @@ const singleBook = (id) => {
     }
 }
 
+export const _getUser = (user) => {
+    return {
+    type: GET_USER,
+    user
+}}
 
-const reducer = ((state = {books: [], book: {}, authors: [], cartItems: []}, action) => {
-    switch (action.type){
-        case GET_BOOKS: return { ...state, books: action.books}
-        case SINGLE_BOOK: return { ...state, book: action.book}
-        case GET_CARTITMS: return { ...state, cartItems: action.items}
-        case ADD_CARTITEM: return { ...state, cartItems: [...state.cartItems, action.item]}
+const getUser = () => {
+    return async(dispatch) => {
+        const res = await axios.get('/api/users/get-user')
+        dispatch(_getUser(res.data))
+    }
+}
+
+
+const reducer = ((state = initialState, action) => {
+    switch (action.type) {
+        case GET_BOOKS: return { ...state, books:action.books}
+        case SINGLE_BOOK: return { ...state, book:action.book}
+        case GET_CARTITMS: return { ...state, cartItems:action.items}
+        case ADD_CARTITEM: return { ...state, cartItems:[...state.cartItems,action.item]}
+        case GET_USER: return {...state, user: action.user}
         default: return state
     }
 })
 
-const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk))
+// const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk))
+const store = createStore(reducer, applyMiddleware(thunk))
 export default  store
-export { getBooks, singleBook, addCartItem, getCartItems}
+export { getBooks, singleBook, addCartItem, getCartItems, getUser }
