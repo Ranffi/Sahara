@@ -59,7 +59,7 @@ class SignUp extends Component{
         streetAddress: '',
         city: '',
         state: '',
-        zipCode: ''
+        zipCode: '',
       })
     }
   }

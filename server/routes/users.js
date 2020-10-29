@@ -11,24 +11,16 @@ router.get('/whoami', (req, res) => {
     }
 })
 
-router.get('/', async (req, res, next) => {
-    try {
-        res.send(await User.findAll(req.params.userId))
-    }
-    catch (err) {
-        next(err)
-    }
-})
-
 router.post('/', async (req, res, next) => {
     try {
-        const {userName, password, email, shippingAddressId } = req.body
+        const {userName, password, email, shippingAddressId, isGuest } = req.body
         const hashedPw = await bcrypt.hash(password, 10)
         const user = await User.create({
             userName,
             password: hashedPw,
             email,
-            shippingAddressId
+            shippingAddressId,
+            isGuest
         })
         await Session.update({
             userId: user.id
