@@ -38,7 +38,7 @@ router.put('/:id', async (req, res, next) => {
         {
             where: {id: req.cookies.sid}
         })
-        res.redirect('/books')
+        res.send(user)
     }
     catch (err) {
         next(err)
