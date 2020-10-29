@@ -13,6 +13,7 @@ class Books extends Component{
 
   componentDidMount(){
     this.props.Books()
+    window.scrollTo(0, 0)
   }
 
   addToCart(bookId){
@@ -30,7 +31,7 @@ class Books extends Component{
               <div className="img-container">
               <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img" /></Link>
                   <button className="bag-btn"  data-id={book.id} onClick={() => this.addToCart(book.id)}>
-                  <i className="fas fa-shopping-cart" />
+                  <i className="fas fa-shopping-cart"/>
                   add to cart
                   </button>
               </div>

@@ -44,7 +44,7 @@ findElement(ev){
           <div id = "navLeftContainer">
             <Link className = "navLink" to = "/">Home</Link>
             <Link className = "navLink" to = "/books">Books</Link>
-            <Link className = "navLink" to = "/">About</Link>
+            <Link className = "navLink" to = "/about">About</Link>
           </div>
           <div id = "navCenterContainer">
           <select className="searchDropdown" onChange={this.searchBy}  >
