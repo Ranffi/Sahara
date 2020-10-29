@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
 import Sanduich from './sanduich'
-import {getBooks, getCartItems, getAuthors, getAuthorBooks, getGenre, getGenreBooks} from '../redux/store'
+import {getBooks, getCartItems, getAuthors, getAuthorBooks, getGenre, getGenreBooks, getUser} from '../redux/store'
+import { async } from 'validate.js'
 
 class NavBar extends Component{
   constructor(){
@@ -11,18 +12,24 @@ class NavBar extends Component{
     this.state = {
       name: false,
       value: '',
-      choice: 'Books'
+      choice: 'Books',
+      user:{
+        id:0
+      }
     }
     this.addClass = this.addClass.bind(this)
     this.searchChenge = this.searchChenge.bind(this)
     this.searchBy = this.searchBy.bind(this)
     this.emtyValue = this.emtyValue.bind(this)
 }
-componentDidMount(){
+ async componentDidMount(){
   this.props.getBook()
-  this.props.items()
   this.props.getAuthors()
   this.props.getGenre()
+  await this.props.getUser()
+  await this.props.items(this.props.user.id)
+  console.log(this.props.user.id);
+  
 }
 
 searchChenge(ev){
@@ -49,7 +56,7 @@ findElement(){
   }
   render(){
     const filter = this.state.value.toLocaleUpperCase()
-    const {books, cartItems, authors, genre} = this.props
+    const {books, cartItems, authors, genre, user} = this.props
     const {value, choice, name} = this.state
     return (
       <div>
@@ -129,10 +136,11 @@ export default connect(
 },
 (dispatch) => {return {
   getBook: () => dispatch(getBooks()),
-  items: () => dispatch(getCartItems()),
+  items: (id) => dispatch(getCartItems(id)),
   getAuthors: () => dispatch(getAuthors()),
   authorBooks: (id) => dispatch(getAuthorBooks(id)),
   getGenre: () => dispatch(getGenre()),
-  genreBooks: (id) => dispatch(getGenreBooks(id))
+  genreBooks: (id) => dispatch(getGenreBooks(id)),
+  getUser: () => dispatch(getUser())
 }}
 )(NavBar)

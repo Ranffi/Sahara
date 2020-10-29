@@ -5,7 +5,7 @@ const { CartItem, Book, User  } = require('../db');
 router.post('/', async (req, res, next) => {
     try {
         const { bookId, userId } = req.body;
-        const data = await CartItem.create({bookId, userId})
+        const data = await CartItem.create({userId, bookId})
         res.status(200).send(data)
     } catch (err){
         next(err)
@@ -30,9 +30,10 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-router.get('/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     try {
-        res.send(await CartItem.findAll({where: {userId: 3}, include: [ Book, User]}))
+      console.log("----->>>>>>",req.params.id);
+        res.send(await CartItem.findAll({where: {userId: req.params.id}, include: [ Book, User]}))
     } catch (err){
         next(err)
     }

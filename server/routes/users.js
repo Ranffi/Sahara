@@ -20,6 +20,15 @@ router.get('/', async (req, res, next) => {
     }
 })
 
+router.get('/get-user', (req, res, next) => {
+    try {        
+        res.send(req.user)
+    }
+    catch (err) {
+        next(err)
+    }
+})
+
 router.post('/', async (req, res, next) => {
     try {
         const {userName, password, email, shippingAddressId } = req.body

@@ -10,27 +10,23 @@ const GET_AUTHORS = 'GET_AUTHORS'
 const GET_AUTHOR_BOOKS = 'GET_AUTHOR_BOOKS'
 const GET_GENRE_BOOKS = 'GET_GENRE_BOOKS'
 const GET_GENRE = 'GET_GENRE'
-// const GET_USER = 'GET_USER'
+const GET_USER = 'GET_USER'
 
-// export const _getUser = (user) => {
-//     return {
-//     type: GET_USER,
-//     user
-// }}
-
-// const getUser = () => {
-//     return async(dispatch) => {
-//         const res = await axios.post('/api/users');
-//         dispatch(_getUser(res.data))
-//     }
-// }
+const initialState = {
+    books: [],
+    book: {},
+    authors: [],
+    cartItems: [],
+    user: {},
+    genre: []
+}
 export const _getGenre = (genre) => {
     return {
     type: GET_GENRE,
     genre
 }}
 
-const getGenre = () => {
+ const getGenre = () => {
     return async(dispatch) => {
         const res = await axios.get('/api/genre');
         dispatch(_getGenre(res.data))
@@ -42,7 +38,7 @@ export const _getGenreBooks = (genreBooks) => {
     genreBooks
 }}
 
-const getGenreBooks = (id) => {
+ const getGenreBooks = (id) => {
     return async(dispatch) => {
         const res = await axios.get(`/api/books/genre/${id}`);
         dispatch(_getGenreBooks(res.data))
@@ -55,7 +51,7 @@ export const _getAuthorBooks = (authorBooks) => {
     authorBooks
 }}
 
-const getAuthorBooks = (id) => {
+ const getAuthorBooks = (id) => {
     return async(dispatch) => {
         const res = await axios.get(`/api/books/author/${id}`);
         dispatch(_getAuthorBooks(res.data))
@@ -68,9 +64,10 @@ export const _getCartItems = (items) => {
     items
 }}
 
-const getCartItems = () => {
+ const getCartItems = (id) => {
     return async(dispatch) => {
-        const res = await axios.get('/api/cartItem');
+      console.log("----->>>>>>",id);
+        const res = await axios.get(`/api/cartItem/${id}`);
         dispatch(_getCartItems(res.data))
     }
 }
@@ -81,31 +78,31 @@ export const _getAuthors = (authors) => {
     authors
 }}
 
-const getAuthors = () => {
+ const getAuthors = () => {
     return async(dispatch) => {
         const res = await axios.get('/api/author');
         dispatch(_getAuthors(res.data))
     }
 }
 
-const addCartItem = (bookId, userId) => {
+ const addCartItem = (bookId, userId) => {
     return async(dispatch) => {
         await axios.post('/api/cartItem', {bookId, userId});
-        const res = await axios.get('/api/cartItem');
+        const res = await axios.get(`/api/cartItem/${userId}`);
         dispatch(_getCartItems(res.data))
     }
 }
-const deleteCartItem = (id) => {
+ const deleteCartItem = (id,userId) => {
     return async(dispatch) => {
         await axios.delete(`/api/cartItem/${id}`);
-        const res = await axios.get('/api/cartItem');
+        const res = await axios.get(`/api/cartItem/${userId}`);
         dispatch(_getCartItems(res.data))
     }
 }
-const updateCartItem = (id, quantity) => {
+ const updateCartItem = (id, quantity,userId) => {
     return async(dispatch) => {
         await axios.put(`/api/cartItem/${id}`, {quantity});
-        const res = await axios.get('/api/cartItem');
+        const res = await axios.get(`/api/cartItem/${userId}`);
         dispatch(_getCartItems(res.data))
     }
 }
@@ -136,15 +133,30 @@ const singleBook = (id) => {
     }
 }
 
+export const _getUser = (user) => {
+    return {
+    type: GET_USER,
+    user
+}}
 
-const reducer = ((state = {books: [], book: {}, authors: [], cartItems: [], genre: [], user: []}, action) => {
-    switch (action.type){
-        case GET_BOOKS: return { ...state, books: action.books}
+const getUser = () => {
+    return async(dispatch) => {
+        const res = await axios.get('/api/users/get-user')
+        dispatch(_getUser(res.data))
+    }
+}
+
+
+
+const reducer = ((state = initialState, action) => {
+    switch (action.type) {
+        case GET_AUTHORS: return { ...state, authors: action.authors}
+        case GET_BOOKS: return { ...state, books:action.books}
+        case SINGLE_BOOK: return { ...state, book:action.book}
+        case GET_CARTITMS: return { ...state, cartItems: action.items}
+        case GET_USER: return {...state, user: action.user}
         case GET_AUTHOR_BOOKS: return { ...state, books: action.authorBooks}
         case GET_GENRE_BOOKS: return { ...state, books: action.genreBooks}
-        case SINGLE_BOOK: return { ...state, book: action.book}
-        case GET_CARTITMS: return { ...state, cartItems: action.items}
-        case GET_AUTHORS: return { ...state, authors: action.authors}
         case GET_GENRE: return {...state, genre: action.genre}
         default: return state
     }
@@ -153,4 +165,4 @@ const reducer = ((state = {books: [], book: {}, authors: [], cartItems: [], genr
 const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk))
 export default  store
 export { getBooks, singleBook, addCartItem, getCartItems, deleteCartItem,
-    updateCartItem, getAuthors, getAuthorBooks, getGenreBooks, getGenre}
+    updateCartItem, getAuthors, getAuthorBooks, getGenreBooks, getGenre, getUser}

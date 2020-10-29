@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {Component} from 'react';
+import {getUser, getCartItems} from '../redux/store'
 import { connect } from 'react-redux'
-import { getUser } from '../redux/store'
 
 class LogIn extends Component{
   constructor() {
@@ -22,14 +22,13 @@ class LogIn extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-
-    const newUser = await axios.post('/api/login', this.state)
-    console.log('=====>', newUser);
-    this.props.getUser(newUser)
+    await axios.post('/api/login', this.state)
     this.setState({
     userName: '',
     password: ''
     })
+    await this.props.getUser();
+    await this.props.items(this.props.user.id)
   }
 
   render(){
@@ -56,13 +55,15 @@ class LogIn extends Component{
 
 }
 
-// export default LogIn
 export default connect(
-  ({ user }) => {return {
-    user
-  }
+  ({user}) => {return {
+      user
+    }
   },
-  (dispatch) => {return {
-    getUser: (user) => dispatch(getUser(user))
-  }}
-  )(LogIn)
+  (dispatch) => {
+    return {
+    getUser: () => dispatch(getUser()),
+    items: (id) => dispatch(getCartItems(id))
+  }
+}
+)(LogIn)

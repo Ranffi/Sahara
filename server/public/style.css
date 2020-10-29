@@ -1,10 +1,18 @@
+/* Color palette for app :
+  #222831 
+  #30475e 
+  #c1a57b
+  #ececec
+*/
+
+
 * {
   box-sizing: border-box;
   font-family: Courier, sans-serif;
 }
 
 body {
-  background:  rgb(226, 215, 210);;
+  background:  rgb(178, 183, 189);;
   margin: 0;
   padding: 0;
 }
@@ -12,7 +20,7 @@ main{
   margin-top: 60px;
 }
 :root {
-  --primaryColor: #f09d51;
+  --primaryColor: #c1a57b;
   --mainWhite: #fff;
   --mainBlack: #222;
   --mainGrey: #ececec;
@@ -41,7 +49,10 @@ nav {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  background: rgb(199, 182, 126);
+  background: #30475e; 
+}
+.fa-cart-plus{
+  color: white;
 }
 
 #myUL {
@@ -141,6 +152,7 @@ nav {
 .products-center {
   max-height: calc(100vh - 60px);
   padding-top: 6rem;
+  top: 60px;
   width: 90vw;
   margin: 0 auto;
   max-width: 1170px;
@@ -216,7 +228,7 @@ nav {
 .bookContainer h4 {
   margin: 0.5rem;
   letter-spacing: var(--mainSpacing);
-  color: var(--primaryColor);
+  color: blue;
   text-align: center;
 }
 /* --------------------------------- */
@@ -290,7 +302,14 @@ nav {
 }
 .fa-chevron-up,
 .fa-chevron-down {
-  color: var(--primaryColor);
+  color: orange;
+  cursor: pointer;
+}
+.checkout{
+  width: 7rem;
+  height: 2rem;
+  background: orange;
+  color: black;
   cursor: pointer;
 }
 /*---------- End of Cart Item -------------------- */
@@ -362,7 +381,27 @@ nav {
 .singleBook-img{
  width: 100%;
 }
-/* ----------------End of Single Book------------------ */
+/* ---------------- End of Single Book------------------ */
+/* ---------------- Home Page ------------------ */
+.home {
+  background-image: url('gantaro-9eTP3GF4liQ-unsplash.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  min-height: 100vh;
+}
+
+.picDiv {
+  text-align: center;
+  margin-top: 3rem;
+  min-height: 30vh;
+}
+
+.pic{
+  height: 350px;
+  width: 350px;
+}
+
+/* ---------------- End of Home Page------------------ */
 /* ----------------Sign Up------------------ */
 
 #signUpForm{
@@ -461,14 +500,14 @@ nav {
 /* ------------------Sanduich Btn----------------- */
 .navbar__btn{
   /* align-self: center; */
-  border:  2px solid green;
+  border:  2px solid white;
   cursor: pointer;
 }
 .bar1,.bar2,.bar3{
   width: 15px;
   height: 2px;
   margin: 3px;
-  background: green;
+  background: white;
   transition: all 2s ease;
 }
 .change .bar1{
@@ -481,15 +520,16 @@ nav {
  transform: rotate(45deg) translate(-3px, -4px);
 }
 .user_menu {
+  transition: all 2s ease;
   position: fixed;
   top: 60px;
   width: 30%;
   overflow: scroll;
   z-index: 3;
   background: rgb(231, 226, 221);
-  transition: all 0.3s linear;
-  transform: translateX(-100%)
+  overflow: hidden;
 }
 .show_user_menu {
-  transform: translateX(0);
+  transition: all 5s ease;
+  height: 0;
 }

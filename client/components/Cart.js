@@ -7,40 +7,39 @@ class Cart extends Component{
     constructor(){
         super();
         this.state = {
-            // eslint-disable-next-line react/no-unused-state
-            newClasName: false,
-            totalPrice: 0
+            totalPrice: 0,
+            cartItems: []
         }
         this.closeCart = this.closeCart.bind(this)
         this.increasePrice = this.increasePrice.bind(this)
         this.decreasePrice = this.decreasePrice.bind(this)
     }
-    componentDidMount(){
-        this.props.items()
-    }
     componentDidUpdate(){
-        if ( 0 === this.state.totalPrice && this.props.cartItems.length !== 0){
+        if (  this.state.cartItems.length !== this.props.cartItems.length){
             let sum = 0
             this.props.cartItems.forEach(element => {
                 sum += element.book.price * element.quantity
             })
-        this.setState({totalPrice: sum})
+            sum = sum.toFixed(2) * 1
+        this.setState({totalPrice: sum, cartItems: this.props.cartItems})
         }
     }
 
-    increasePrice(price, id, quantity){
+    async increasePrice(price, id, quantity, userId){
         quantity += 1
-        this.props.update(id, quantity)
+        await this.props.update(id, quantity, userId)
         // eslint-disable-next-line react/no-access-state-in-setstate
         let sum = this.state.totalPrice + price
+        sum = sum.toFixed(2) * 1;
         this.setState({totalPrice: sum})
     }
-    decreasePrice(price, id, quantity){
+   async  decreasePrice(price, id, quantity, userId){
         if (quantity > 1){
             quantity -= 1;
-            this.props.update(id, quantity)
+           await this.props.update(id, quantity, userId)
             // eslint-disable-next-line react/no-access-state-in-setstate
             let sum = this.state.totalPrice - price
+            sum = sum.toFixed(2) * 1;
             this.setState({totalPrice: sum})
         }
     }
@@ -55,9 +54,10 @@ class Cart extends Component{
     }
 
     render(){
-            const {cartItems} = this.props
+            const {cartItems, user} = this.props
         return (
             <div>
+                <div className="cart-overlay " />
                 <div className={`cart ${this.props.hideClass ? 'showCart' : ''}`} >
                     <span className="close-cart" onClick={() => this.closeCart()}>
                         <i className="fas fa-window-close" />
@@ -65,19 +65,19 @@ class Cart extends Component{
                     <h2>your cart</h2>
                     <div className="cart-content">
                         {
-                            cartItems.map(item => {
+                            cartItems.sort((a, b) => a.id - b.id).map(item => {
                                 return (
                                 <div className="cart-item" key={item.id}>
                                     <img src={item.book.coverImageUrl} alt="product" />
                                     <div>
                                         <h4>{item.book.title}</h4>
-                                        <h5>{item.book.price * item.quantity}</h5>
-                                        <span className="remove-item" data-id={item.id} onClick={() => this.props.deleteItem(item.id)}>remove</span>
+                                        <h5>{(item.book.price * item.quantity).toFixed(2) * 1}</h5>
+                                        <span className="remove-item" data-id={item.id} onClick={() => this.props.deleteItem(item.id, user.id)}>remove</span>
                                     </div>
                                     <div>
-                                        <i className="fas fa-chevron-up" data-id={item.id} onClick={() => this.increasePrice(item.book.price, item.id, item.quantity)} />
+                                        <i className="fas fa-chevron-up" data-id={item.id} onClick={() => this.increasePrice(item.book.price, item.id, item.quantity, user.id)} />
                                         <p className="item-amount">{item.quantity}</p>
-                                        <i className="fas fa-chevron-down" data-id={item.id} id={item.quantity === 1 ? 'grayDownBtn' : ''} onClick={() => this.decreasePrice(item.book.price, item.id, item.quantity)} />
+                                        <i className="fas fa-chevron-down" data-id={item.id} id={item.quantity === 1 ? 'grayDownBtn' : ''} onClick={() => this.decreasePrice(item.book.price, item.id, item.quantity, user.id)} />
                                     </div>`
                                 </div>
                                 )
@@ -86,8 +86,7 @@ class Cart extends Component{
                     </div>
                     <div className="cart-footer">
                         <h3> your total: $ <samp className="cart-total">{this.state.totalPrice}</samp></h3>
-                        {/* eslint-disable-next-line react/button-has-type */}
-                        <button className="clear-cart banner-btn">clear cart</button>
+                        <button className="checkout">Checkout</button>
                     </div>
                 </div>
             </div>
@@ -96,16 +95,17 @@ class Cart extends Component{
 }
 
 export default connect(
-    ({cartItems}) => {
+    ({cartItems, user}) => {
         return {
-            cartItems
+            cartItems,
+            user
         }
     },
     (dispatch) => {
         return {
             items: () => dispatch(getCartItems()),
-            deleteItem: (id) => dispatch(deleteCartItem(id)),
-            update: (id, quantity) => dispatch(updateCartItem(id, quantity))
+            deleteItem: (id, userId) => dispatch(deleteCartItem(id, userId)),
+            update: (id, quantity, userId) => dispatch(updateCartItem(id, quantity, userId))
         }
     }
 )(Cart)

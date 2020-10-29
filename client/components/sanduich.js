@@ -8,17 +8,17 @@ class Sanduich extends Component{
         super();
         this.state = {
             class: '',
-            showList: ''
+            showList: 'show_user_menu'
         }
         this.addClass = this.addClass.bind(this)
     }
     addClass(){
         if (this.state.class !== 'change'){
             this.setState({class: 'change'})
-            this.setState({showList: 'show_user_menu'})
+            this.setState({showList: ''})
         } else {
             this.setState({class: ''})
-            this.setState({showList: ''})
+            this.setState({showList: 'show_user_menu'})
         }
     }
 
@@ -33,7 +33,7 @@ class Sanduich extends Component{
                 </div>
                 <div className={`user_menu ${this.state.showList}`}>
                     <ul>test</ul>
-                    <ul></ul>
+                    <ul>test</ul>
                     <ul>test</ul>
                     <ul>test</ul>
                 </div>

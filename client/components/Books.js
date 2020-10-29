@@ -1,31 +1,35 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {getBooks, addCartItem, getCartItems} from '../redux/store'
+import {getBooks, addCartItem, getCartItems, getUser} from '../redux/store'
 import {Link} from 'react-router-dom'
 class Books extends Component{
   constructor(){
     super();
     this.state = {
-      itemsArr: []
+      itemsArr: [],
+      user:{}
     }
   }
 
   componentDidMount(){
     this.props.Books()
-    this.props.itemsOnCart()
+    // this.props.itemsOnCart(3)
   }
   componentDidUpdate(){
     if (this.state.itemsArr.length !== this.props.cartItems.length){
       const arr = this.props.cartItems.map(item => {
         return item.book.id
       })
+      this.props.getUser()
       this.setState({itemsArr: arr})
+     
     }
   }
 
   render(){
     const { itemsArr } = this.state
-    const {books } = this.props
+    const {books, user} = this.props
+
     return (
     <div className="products-center">
       {
@@ -37,7 +41,7 @@ class Books extends Component{
                   {
                     itemsArr.indexOf(book.id) === -1 ?
                     // eslint-disable-next-line react/button-has-type
-                    <button className="bag-btn"  data-id={book.id} onClick={() => this.props.item( book.id, 3)}>
+                    <button className="bag-btn"  data-id={book.id} onClick={() => this.props.item( book.id, user.id)}>
                     {/* eslint-disable-next-line react/jsx-child-element-spacing */}
                     <i className="fas fa-shopping-cart" />
                     add to cart
@@ -63,13 +67,15 @@ class Books extends Component{
 }
 
 export default connect(
-  ({books, cartItems}) => ({
+  ({books, cartItems, user}) => ({
     books,
-    cartItems
+    cartItems,
+    user
   }),
   (dispatch) => ({
     Books: () => dispatch(getBooks()),
-    itemsOnCart: () => dispatch(getCartItems()),
+    itemsOnCart: (id) => dispatch(getCartItems(id)),
+    getUser: () => dispatch(getUser()),
     item: (bookId, userId) => dispatch(addCartItem(bookId, userId))
   })
 )(Books);
