@@ -1,12 +1,22 @@
 const {Session, User} = require('../db')
+var generator = require('generate-password');
+const bcrypt = require('bcrypt')
+
+let guestCount = 0;
 
 const authentication = async (req, res, next) => {
   const A_WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
 
-  //session opened page for the first time.  Cookie created
-  if (!req.cookies.sid) {
+  //making this a function because it gets called twice
+  const createGuestAndAssignCookie = async () => {
+    guestCount++;
     const createdSession = await Session.create();
-    const newUser = await User.create();
+    const password = generator.generate({
+      length: 10,
+      numbers: true
+    })
+    const hashedPw = await bcrypt.hash(password, 10)
+    const newUser = await User.create({userName: `guest${guestCount}`, password: hashedPw})
     await createdSession.setUser(newUser)
     res.cookie('sid', createdSession.id, {
       maxAge: new Date(Date.now() + A_WEEK_IN_SECONDS),
@@ -14,6 +24,11 @@ const authentication = async (req, res, next) => {
     });
     req.sid = createdSession.id;
     req.user = newUser
+  }
+
+  //session opened page for the first time.  Cookie created
+  if (!req.cookies.sid) {
+    await createGuestAndAssignCookie();
   }
   //session exists
   else {
@@ -39,15 +54,7 @@ const authentication = async (req, res, next) => {
       res.clearCookie('sid', req.sid, {
         path: '/'
       })
-      const createdSession = await Session.create();
-      const newUser = await User.create();
-      await createdSession.setUser(newUser)
-      res.cookie('sid', createdSession.id, {
-        maxAge: new Date(Date.now() + A_WEEK_IN_SECONDS),
-        path: '/',
-      });
-      req.sid = createdSession.id;
-      req.user = newUser
+      await createGuestAndAssignCookie();
     }
   }
   next();
