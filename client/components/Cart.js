@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {getCartItems, deleteCartItem, updateCartItem} from '../redux/store'
+import {deleteCartItem, updateCartItem} from '../redux/store'
 
 class Cart extends Component{
     constructor(){
@@ -103,7 +103,6 @@ export default connect(
     },
     (dispatch) => {
         return {
-            items: () => dispatch(getCartItems()),
             deleteItem: (id, userId) => dispatch(deleteCartItem(id, userId)),
             update: (id, quantity, userId) => dispatch(updateCartItem(id, quantity, userId))
         }

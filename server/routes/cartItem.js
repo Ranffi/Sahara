@@ -32,7 +32,6 @@ router.put('/:id', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-      console.log("----->>>>>>",req.params.id);
         res.send(await CartItem.findAll({where: {userId: req.params.id}, include: [ Book, User]}))
     } catch (err){
         next(err)

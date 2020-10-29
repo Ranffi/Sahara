@@ -21,7 +21,6 @@ class Logout extends Component{
     const {handleSubmit} = this;
     return (
       <div>
-        <h2>Log out!</h2>
         <form onSubmit = {handleSubmit}>
           <button type ="submit">Log out</button>
         </form>

@@ -6,14 +6,12 @@ class Books extends Component{
   constructor(){
     super();
     this.state = {
-      itemsArr: [],
-      user:{}
+      itemsArr: []
     }
   }
 
   componentDidMount(){
     this.props.Books()
-    // this.props.itemsOnCart(3)
   }
   componentDidUpdate(){
     if (this.state.itemsArr.length !== this.props.cartItems.length){
@@ -22,7 +20,6 @@ class Books extends Component{
       })
       this.props.getUser()
       this.setState({itemsArr: arr})
-     
     }
   }
 

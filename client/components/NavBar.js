@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
+import Logout from './Logout'
 import Sanduich from './sanduich'
 import {getBooks, getCartItems, getAuthors, getAuthorBooks, getGenre, getGenreBooks, getUser} from '../redux/store'
-import { async } from 'validate.js'
 
 class NavBar extends Component{
   constructor(){
@@ -12,10 +12,7 @@ class NavBar extends Component{
     this.state = {
       name: false,
       value: '',
-      choice: 'Books',
-      user:{
-        id:0
-      }
+      choice: 'Books'
     }
     this.addClass = this.addClass.bind(this)
     this.searchChenge = this.searchChenge.bind(this)
@@ -28,15 +25,14 @@ class NavBar extends Component{
   this.props.getGenre()
   await this.props.getUser()
   await this.props.items(this.props.user.id)
-  console.log(this.props.user.id);
-  
 }
 
 searchChenge(ev){
   this.setState({value: ev.target.value})
 }
 
-findElement(){
+handleSubmit(ev){
+  ev.preventDefault()
 
 }
   searchBy(ev){
@@ -62,7 +58,11 @@ findElement(){
       <div>
         <nav>
           <div>
-            <Sanduich />
+            {
+              !user.isGuest ?
+              <Sanduich />
+              : ''
+            }
           </div>
           <div id = "navLeftContainer">
             <Link className = "navLink" to = "/">Home</Link>
@@ -75,15 +75,25 @@ findElement(){
               <option value="Author">Author</option>
               <option value="Genre">Genre</option>
           </select>
-            <form onSubmit={this.findElement}>
+            <form onSubmit={this.handleSubmit}>
             <input type="text" placeholder="Search..." name="search" value={this.state.value} onChange={this.searchChenge} />
             <button type="submit"><i className="fa fa-search" /></button>
             </form>
           </div>
           <div id ="navRightContainer">
-            <Link className = "navLink" to = "/login">Log In</Link>
-            <Link className = "navLink" to = "/signUp">Sign Up</Link>
-            <Link className = "navLink" to = "/logout">logout</Link>
+            {
+              user.isGuest ?
+              <div>
+                <Link className = "navLink" to = "/login">Log In</Link>
+                <Link className = "navLink" to = "/signUp">Sign Up</Link>
+              </div>
+              :
+              <div>
+                <h4>Weclome {user.userName} </h4>
+                {/* <Link className = "navLink" to = "/logout">logout</Link> */}
+                <Logout />
+              </div>
+            }
           </div>
           <div className="cart-btn" onClick={ () => this.addClass()}>
               <span className="nav-icon" >

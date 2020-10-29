@@ -66,7 +66,6 @@ export const _getCartItems = (items) => {
 
  const getCartItems = (id) => {
     return async(dispatch) => {
-      console.log("----->>>>>>",id);
         const res = await axios.get(`/api/cartItem/${id}`);
         dispatch(_getCartItems(res.data))
     }
@@ -92,14 +91,14 @@ export const _getAuthors = (authors) => {
         dispatch(_getCartItems(res.data))
     }
 }
- const deleteCartItem = (id,userId) => {
+ const deleteCartItem = (id, userId) => {
     return async(dispatch) => {
         await axios.delete(`/api/cartItem/${id}`);
         const res = await axios.get(`/api/cartItem/${userId}`);
         dispatch(_getCartItems(res.data))
     }
 }
- const updateCartItem = (id, quantity,userId) => {
+ const updateCartItem = (id, quantity, userId) => {
     return async(dispatch) => {
         await axios.put(`/api/cartItem/${id}`, {quantity});
         const res = await axios.get(`/api/cartItem/${userId}`);
@@ -147,12 +146,11 @@ const getUser = () => {
 }
 
 
-
 const reducer = ((state = initialState, action) => {
     switch (action.type) {
         case GET_AUTHORS: return { ...state, authors: action.authors}
-        case GET_BOOKS: return { ...state, books:action.books}
-        case SINGLE_BOOK: return { ...state, book:action.book}
+        case GET_BOOKS: return { ...state, books: action.books}
+        case SINGLE_BOOK: return { ...state, book: action.book}
         case GET_CARTITMS: return { ...state, cartItems: action.items}
         case GET_USER: return {...state, user: action.user}
         case GET_AUTHOR_BOOKS: return { ...state, books: action.authorBooks}
@@ -161,7 +159,6 @@ const reducer = ((state = initialState, action) => {
         default: return state
     }
 })
-
 const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk))
 export default  store
 export { getBooks, singleBook, addCartItem, getCartItems, deleteCartItem,
