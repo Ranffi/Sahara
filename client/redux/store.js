@@ -88,13 +88,14 @@ const reducer = ((state = initialState, action) => {
     switch (action.type) {
         case GET_BOOKS: return { ...state, books:action.books}
         case SINGLE_BOOK: return { ...state, book:action.book}
-        case GET_CARTITMS: return { ...state, cartItems:action.items} 
+        case GET_CARTITMS: return { ...state, cartItems:action.items}
         case ADD_CARTITEM: return { ...state, cartItems:[...state.cartItems,action.item]}
         case GET_USER: return {...state, user: action.user}
         default: return state
     }
 })
 
-const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk))
+// const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk))
+const store = createStore(reducer, applyMiddleware(thunk))
 export default  store
 export { getBooks, singleBook, addCartItem, getCartItems, getUser }

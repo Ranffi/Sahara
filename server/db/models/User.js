@@ -14,7 +14,7 @@ const User = db.define('user', {
     },
     adminStatus: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true
+        defaultValue: false
     },
     email: {
         type: Sequelize.STRING,

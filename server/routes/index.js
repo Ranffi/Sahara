@@ -19,8 +19,6 @@ router.use('/users', require('./users'))
 
 router.use('/login', require('./login'))
 router.use('/logout', require('./logout'))
-
-
 router.use('/cartItem', require('./cartItem'))
 router.use('/address', require('./address'))
 

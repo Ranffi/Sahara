@@ -11,18 +11,8 @@ router.get('/whoami', (req, res) => {
     }
 })
 
-router.get('/', async (req, res, next) => {
-    try {
-        res.send(await User.findAll(req.params.userId))
-    }
-    catch (err) {
-        next(err)
-    }
-})
-
 router.get('/get-user', (req, res, next) => {
     try {
-        console.log('in the get', req)
         res.send(req.user)
     }
     catch (err) {
@@ -30,15 +20,17 @@ router.get('/get-user', (req, res, next) => {
     }
 })
 
-router.post('/', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
     try {
-        const {userName, password, email, shippingAddressId } = req.body
+        const {userName, password, email, shippingAddressId, isGuest } = req.body
         const hashedPw = await bcrypt.hash(password, 10)
-        const user = await User.create({
+        const user = await User.findByPk(req.params.id);
+        await user.update({
             userName,
             password: hashedPw,
             email,
-            shippingAddressId
+            shippingAddressId,
+            isGuest
         })
         await Session.update({
             userId: user.id
@@ -46,7 +38,7 @@ router.post('/', async (req, res, next) => {
         {
             where: {id: req.cookies.sid}
         })
-        res.redirect('/api/books')
+        res.send(user)
     }
     catch (err) {
         next(err)
@@ -58,18 +50,6 @@ router.get('/:userId', async (req, res, next) => {
         res.send(await User.findByPk(req.params.userId, {
             include: { all: true, nested: true }
         }));
-    }
-    catch (err) {
-        next(err)
-    }
-})
-
-router.put('/:userId', async (req, res, next) => {
-    try {
-        const user = await User.findByPk(req.params.userId)
-        //REMINDER : If we allow change of password with this route, we need to use bcrypt here as well
-        await user.update(req.body)
-        res.send(user);
     }
     catch (err) {
         next(err)
