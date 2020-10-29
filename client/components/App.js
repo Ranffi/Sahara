@@ -9,6 +9,7 @@ import SignUp from './SignUp'
 import LogIn from './LogIn'
 import Admin from './Admin'
 import Logout from './Logout'
+import Account from './Account'
 
 const App = () => {
     return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path = "/login" exact component = { LogIn } />
           <Route path = "/admin" exact component = { Admin } />
           <Route path = "/logout" exact component = { Logout } />
+          <Route path = "/account" exact component = { Account } />
         </main>
       </Router>
   )
