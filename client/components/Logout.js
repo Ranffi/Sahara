@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {Component} from 'react';
-import {getUser} from '../redux/store'
+import {getUser,getCartItems} from '../redux/store'
 import { connect } from 'react-redux'
 
 class Logout extends Component{
@@ -11,19 +11,18 @@ class Logout extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    const newUser = await axios.post('/api/logout')
+    await axios.post('/api/logout')
     this.props.getUser()
-    console.log('xxxxxxxxxxxxxxxx', newUser);
+    await this.props.getUser();
+    await this.props.items(this.props.user.id)
   }
 
   render(){
     const {handleSubmit} = this;
     return (
       <div>
-        <h2>Log out!</h2>
         <form onSubmit = {handleSubmit}>
           <button type ="submit">Log out</button>
-
         </form>
       </div>
 
@@ -33,10 +32,14 @@ class Logout extends Component{
 }
 
 export default connect(
-  null,
+  ({user}) => {return {
+    user
+    }
+  },
   (dispatch) => {
     return {
-    getUser: () => dispatch(getUser())
+    getUser: () => dispatch(getUser()),
+    items: (id) => dispatch(getCartItems(id))
   }
 }
 )(Logout)
