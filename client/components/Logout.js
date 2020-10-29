@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, {Component} from 'react';
+import {getUser} from '../redux/store'
+import { connect } from 'react-redux'
 
 class Logout extends Component{
   constructor() {
@@ -10,6 +12,7 @@ class Logout extends Component{
   async handleSubmit(ev){
     ev.preventDefault()
     const newUser = await axios.post('/api/logout')
+    this.props.getUser()
     console.log('xxxxxxxxxxxxxxxx', newUser);
   }
 
@@ -29,4 +32,11 @@ class Logout extends Component{
 
 }
 
-export default Logout
+export default connect(
+  null,
+  (dispatch) => {
+    return {
+    getUser: () => dispatch(getUser())
+  }
+}
+)(Logout)

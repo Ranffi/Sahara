@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
-import {getBooks} from '../redux/store'
+import {getBooks, getUser} from '../redux/store'
 
 class NavBar extends Component{
   constructor(){
@@ -18,6 +18,7 @@ class NavBar extends Component{
 }
 componentDidMount(){
   this.props.getBook()
+  this.props.getUser()
 }
 
 searchChenge(ev){
@@ -92,6 +93,6 @@ export default connect(
 }
 },
 (dispatch) => {return {
-  getBook: () => dispatch(getBooks())
-}}
-)(NavBar)
+  getBook: () => dispatch(getBooks()),
+  getUser: () => dispatch(getUser())
+}})(NavBar)
