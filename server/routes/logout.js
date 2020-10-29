@@ -3,7 +3,6 @@ const {Session } = require('../db');
 
 router.post('/', async (req, res, next) => {
     try {
-    console.log('did we make it here')
     const session = await Session.findOne({
         where: {
             id: req.sid
