@@ -55,7 +55,7 @@ class SignUp extends Component{
         state: '',
         zipCode: '',
       })
-
+      this.props.getUser();
       this.props.history.push('/books')
     }
   }
