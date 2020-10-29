@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, {Component} from 'react';
+import { connect } from 'react-redux'
+import { getUser } from '../redux/store'
 
 class LogIn extends Component{
   constructor() {
@@ -22,7 +24,8 @@ class LogIn extends Component{
     ev.preventDefault()
 
     const newUser = await axios.post('/api/login', this.state)
-    console.log(newUser);
+    console.log('=====>', newUser);
+    this.props.getUser(newUser)
     this.setState({
     userName: '',
     password: ''
@@ -53,4 +56,13 @@ class LogIn extends Component{
 
 }
 
-export default LogIn
+// export default LogIn
+export default connect(
+  ({ user }) => {return {
+    user
+  }
+  },
+  (dispatch) => {return {
+    getUser: (user) => dispatch(getUser(user))
+  }}
+  )(LogIn)

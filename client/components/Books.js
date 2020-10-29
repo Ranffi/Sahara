@@ -8,7 +8,6 @@ class Books extends Component{
     this.state = {
       itemsArr: []
     }
-    this.addToCart = this.addToCart.bind(this)
   }
 
   componentDidMount(){
@@ -22,9 +21,6 @@ class Books extends Component{
       })
       this.setState({itemsArr: arr})
     }
-  }
-  addToCart(bookId){
-    this.props.item(bookId)
   }
 
   render(){
@@ -41,7 +37,7 @@ class Books extends Component{
                   {
                     itemsArr.indexOf(book.id) === -1 ?
                     // eslint-disable-next-line react/button-has-type
-                    <button className="bag-btn"  data-id={book.id} onClick={() => this.addToCart(book.id)}>
+                    <button className="bag-btn"  data-id={book.id} onClick={() => this.props.item( book.id, 3)}>
                     {/* eslint-disable-next-line react/jsx-child-element-spacing */}
                     <i className="fas fa-shopping-cart" />
                     add to cart
@@ -73,7 +69,7 @@ export default connect(
   }),
   (dispatch) => ({
     Books: () => dispatch(getBooks()),
-  itemsOnCart: () => dispatch(getCartItems()),
-  item: (bookId) => dispatch(addCartItem(bookId))
+    itemsOnCart: () => dispatch(getCartItems()),
+    item: (bookId, userId) => dispatch(addCartItem(bookId, userId))
   })
 )(Books);

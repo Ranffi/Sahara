@@ -10,7 +10,9 @@ router.post('/', async (req, res, next) => {
         if (correctPassword) {
             const usersSession = await Session.findByPk(req.sid)
             await usersSession.setUser(user)
-            res.redirect('/')
+            console.log('====>>>', user);
+
+            res.redirect('/').send(user)
         }
         else {
             res.sendStatus(401);

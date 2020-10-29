@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
-import {getBooks, getCartItems} from '../redux/store'
+import Sanduich from './sanduich'
+import {getBooks, getCartItems, getAuthors, getAuthorBooks, getGenre, getGenreBooks} from '../redux/store'
 
 class NavBar extends Component{
   constructor(){
@@ -15,10 +16,13 @@ class NavBar extends Component{
     this.addClass = this.addClass.bind(this)
     this.searchChenge = this.searchChenge.bind(this)
     this.searchBy = this.searchBy.bind(this)
+    this.emtyValue = this.emtyValue.bind(this)
 }
 componentDidMount(){
   this.props.getBook()
   this.props.items()
+  this.props.getAuthors()
+  this.props.getGenre()
 }
 
 searchChenge(ev){
@@ -31,21 +35,31 @@ findElement(){
   searchBy(ev){
     this.setState({choice: ev.target.value})
   }
+  emtyValue(id, value){
+    this.setState({value: ''})
+    if (value === 'Author' ){
+      this.props.authorBooks(id)
+    } else if (value === 'Genre' ){
+      this.props.genreBooks(id)
+    }
+  }
   addClass(){
     // eslint-disable-next-line react/no-access-state-in-setstate
     this.setState({name: !this.state.name})
   }
   render(){
     const filter = this.state.value.toLocaleUpperCase()
-    const {books, cartItems} = this.props
+    const {books, cartItems, authors, genre} = this.props
     const {value, choice, name} = this.state
-
     return (
       <div>
         <nav>
+          <div>
+            <Sanduich />
+          </div>
           <div id = "navLeftContainer">
             <Link className = "navLink" to = "/">Home</Link>
-            <Link className = "navLink" to = "/books">Books</Link>
+            <Link className = "navLink" to = "/books" onClick={() => this.props.getBook()}>Books</Link>
             <Link className = "navLink" to = "/">About</Link>
           </div>
           <div id = "navCenterContainer">
@@ -78,17 +92,25 @@ findElement(){
             books.map( book => {
               if (book.title.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                   return (
-                    <Link to={`/books/${book.id}`} key ={book.id}>{book.title}</Link>
+                    <Link to={`/books/${book.id}`} key ={book.id} onClick={() => this.emtyValue()} >{book.title}</Link>
                   )
                 }
               }) :
-              books.map( book => {
-                if (book.author.firstName.toUpperCase().indexOf(filter) > -1 || book.author.lastName.toUpperCase().indexOf(filter) > -1 && filter !== '') {
+              choice === 'Author' ?
+              authors.map( author => {
+                if (author.firstName.toUpperCase().indexOf(filter) > -1 || author.lastName.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                     return (
-                      <Link to={`/books/${book.id}`} key ={book.id}>{book.author.firstName} {book.author.lastName}</Link>
+                      <a key ={author.id} onClick={() => this.emtyValue(author.id, choice)} >{author.firstName} {author.lastName}</a>
                     )
                   }
-                })
+                }) :
+                genre.map( element => {
+                  if (element.name.toUpperCase().indexOf(filter) > -1 && filter !== '') {
+                      return (
+                        <a key ={element.id} onClick={() => this.emtyValue(element.id, choice)} >{element.name}</a>
+                      )
+                    }
+                  })
           }
         </ul>
       </div>
@@ -97,13 +119,20 @@ findElement(){
 }
 
 export default connect(
-({books, cartItems}) => {return {
+({books, cartItems, authors, genre, user}) => {return {
   books,
-  cartItems
+  cartItems,
+  authors,
+  genre,
+  user
 }
 },
 (dispatch) => {return {
   getBook: () => dispatch(getBooks()),
   items: () => dispatch(getCartItems()),
+  getAuthors: () => dispatch(getAuthors()),
+  authorBooks: (id) => dispatch(getAuthorBooks(id)),
+  getGenre: () => dispatch(getGenre()),
+  genreBooks: (id) => dispatch(getGenreBooks(id))
 }}
 )(NavBar)
