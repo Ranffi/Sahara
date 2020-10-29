@@ -7,6 +7,7 @@ import Books from './Books'
 import SingleBook from './SingleBook'
 import SignUp from './SignUp'
 import LogIn from './LogIn'
+import Admin from './Admin'
 import Logout from './Logout'
 import About from './AboutPage'
 
@@ -21,6 +22,7 @@ const App = () => {
           <Route path = "/books/:id" exact component = { SingleBook } />
           <Route path = "/signUp" exact component = { SignUp } />
           <Route path = "/login" exact component = { LogIn } />
+          <Route path = "/admin" exact component = { Admin } />
           <Route path = "/logout" exact component = { Logout } />
         </main>
       </Router>
