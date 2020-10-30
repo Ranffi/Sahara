@@ -66,8 +66,8 @@ handleSubmit(ev){
           </div>
           <div id = "navLeftContainer">
             <Link className = "navLink" to = "/">Home</Link>
+            <Link className = "navLink" to = "/about">About</Link>
             <Link className = "navLink" to = "/books" onClick={() => this.props.getBook()}>Books</Link>
-            <Link className = "navLink" to = "/">About</Link>
           </div>
           <div id = "navCenterContainer">
           <select className="searchDropdown" onChange={this.searchBy}  >
@@ -84,8 +84,8 @@ handleSubmit(ev){
             {
               user.isGuest ?
               <div>
-                <Link className = "navLink" to = "/login">Log In</Link>
-                <Link className = "navLink" to = "/signUp">Sign Up</Link>
+                <Link className = "navLink" to = "/login">Log In </Link>
+                <Link className = "navLink" to = "/signUp"> Sign Up</Link>
               </div>
               :
               <div>

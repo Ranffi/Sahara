@@ -9,13 +9,15 @@ import SignUp from './SignUp'
 import LogIn from './LogIn'
 import Admin from './Admin'
 import Logout from './Logout'
+import About from './AboutPage'
 
 const App = () => {
     return (
       <Router>
         <main>
-          <Route path = "/" component = { NavBar } />
+          <NavBar />
           <Route path = "/" exact component = { HomePage } />
+          <Route path = "/about" exact component = { About } />
           <Route path = "/books" exact component = { Books } />
           <Route path = "/books/:id" exact component = { SingleBook } />
           <Route path = "/signUp" exact component = { SignUp } />
