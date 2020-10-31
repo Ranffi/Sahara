@@ -30,9 +30,9 @@ const Footer = () => {
     <section className="footer-item">
       <h3 className = "footer_h3"> Follow</h3>
         <ul className = "footer_ul">
-          <li className = "footer_li"><a href="https://www.instagram.com/" target = "_blank">Instagram</a></li>
-          <li className = "footer_li"><a href="https://www.facebook.com/" target = "_blank">Twitter</a></li>
-          <li className = "footer_li"><a href="https://www.LinkedIn.com/" target = "_blank">LinkedIn</a></li>
+          <li className = "footer_li"><a className = "footer_a" href="https://www.instagram.com/" target = "_blank">Instagram</a></li>
+          <li className = "footer_li"><a className = "footer_a" href="https://www.facebook.com/" target = "_blank">Twitter</a></li>
+          <li className = "footer_li"><a className = "footer_a" href="https://www.LinkedIn.com/" target = "_blank">LinkedIn</a></li>
         </ul>
     </section>
 

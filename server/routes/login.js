@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt')
 const { User, Session} = require('../db');
 
 router.post('/', async (req, res, next) => {
+    try{
+
+   
     const { userName, password } = req.body;
     const user = await User.findOne({where: { userName }})
     if (user) {
@@ -21,6 +24,10 @@ router.post('/', async (req, res, next) => {
     else {
         res.sendStatus(401);
     }
+}
+catch (err) {
+    next(err)
+}
 })
 
 module.exports = router;

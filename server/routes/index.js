@@ -23,6 +23,7 @@ router.use('/cartItem', require('./cartItem'))
 router.use('/author', require('./author'))
 router.use('/address', require('./address'))
 router.use('/genre', require('./genre'))
+router.use('/checkout', require('./checkout'))
 
 
 //Questions
