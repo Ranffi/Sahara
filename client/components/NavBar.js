@@ -83,12 +83,12 @@ handleSubmit(ev){
           <div id ="navRightContainer">
             {
               user.isGuest ?
-              <div>
+              <div className="loginContainer">
                 <Link className = "navLink" to = "/login">Log In</Link>
                 <Link className = "navLink" to = "/signUp">Sign Up</Link>
               </div>
               :
-              <div>
+              <div className="logoutContainer">
                 <h4>Weclome {user.userName} </h4>
                 {/* <Link className = "navLink" to = "/logout">logout</Link> */}
                 <Logout />
