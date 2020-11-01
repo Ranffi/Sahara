@@ -1,10 +1,14 @@
 import React from 'react'
 import axios from 'axios'
+// import Toast from 'react-bootstrap/Toast'
+// import ToastHeader from 'react-bootstrap/ToastHeader'
+// import ToastBody from 'react-bootstrap/ToastBody'
+import { toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { connect } from 'react-redux'
 import {deleteCartItem, updateCartItem, getUser} from '../redux/store'
 import StripeCheckout from 'react-stripe-checkout'
-
-
+toast.configure()
 class Checkout extends React.Component {
     constructor(props) {
         super(props)
@@ -35,20 +39,28 @@ class Checkout extends React.Component {
    async handleToken(token) {
        token.totalPrice = this.state.totalPrice
        token.cartItems = this.state.cart
-        await axios.post('api/checkout', {token})
+        const res = await axios.post('api/checkout', {token})
+        console.log('we made it here!!!!!!!!!!!!!!!!!!!!!')
+        // const { status } = res.data;
+        console.log('Response:', res.data);
+        if (res.data === 'success') {
+            console.log('we made it here!!!!!!!!!!!!!!!!!!!!!')
+          toast.success('Success! Check email for details');
+        } else {
+          toast.error('Something went wrong');
+        }
     }
 
     render() {
-       
-        return(
+        return (
             <div>
             <h1>CheckoutPage</h1>
             <h2>Total price : {this.state.totalPrice}</h2>
             <ul>
             {this.state.cart
             .map(item => {
-                return(
-                    <li>${item.book.price}</li>
+                return (
+                    <li>{item.book.title} cost ${item.book.price}</li>
                 )
             })
             }
