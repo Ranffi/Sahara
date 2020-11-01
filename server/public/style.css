@@ -536,6 +536,72 @@ nav {
 
 }
 /* ----------------End of Log In---------*/
+/* -------- Admin Page ------- */
+.input-icon {
+  position: relative;
+}
+
+.input-icon > i {
+  position: absolute;
+  display: block;
+  transform: translate(0, -50%);
+  top: 50%;
+  pointer-events: none;
+  width: 25px;
+  text-align: center;
+  font-style: normal;
+}
+
+.input-icon > input {
+  padding-left: 25px;
+  padding-right: 0;
+}
+
+.adminCloseEnded {
+  display: flex;
+  flex-direction: row;
+}
+
+.adminChecks > label {
+  width: 90%;
+}
+
+.adminChecks > input {
+  width: 10%
+}
+
+.adminNums > label {
+  width: 60%;
+}
+
+.adminNums > input {
+  width: 40%;
+  
+}
+
+.adminNums > #inStock {
+  margin-right: 1rem;
+}
+
+.adminLink {
+  color: #c1a57b;
+  text-decoration: none;
+}
+
+.adminNavBar {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.selectedAdmin {
+  text-decoration: underline;
+}
+
+.adminNavElement {
+  cursor: pointer;
+}
+
+/* ----------------End of Admin Page---------*/
 /* -------- Footer ------- */
 
 footer {
@@ -711,6 +777,15 @@ a:hover {
   cursor: pointer;
   border-top: 1px solid black;
   transition: all 1s ease;
+}
+.user_menu > ul > a {
+  text-decoration: none;
+  color: black;
+}
+.user_menu > h4 {
+  padding-left: 1rem;
+  text-decoration: none;
+  color: black;
 }
 .user_menu > ul:hover {
   transition: all 1s ease;
