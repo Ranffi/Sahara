@@ -75,7 +75,7 @@ handleSubmit(ev){
               <option value="Genre">Genre</option>
           </select>
             <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Search..." name="search" value={this.state.value} onChange={this.searchChenge} />
+            <input type="text" placeholder="Search..." name="search" value={this.state.value} onChange={this.searchChenge} autoComplete="off" />
             <button type="submit"><i className="fa fa-search" /></button>
             </form>
           </div>
@@ -89,7 +89,6 @@ handleSubmit(ev){
               :
               <div className="logoutContainer">
                 <h4>Weclome {user.firstName} </h4>
-                {/* <Link className = "navLink" to = "/logout">logout</Link> */}
               </div>
             }
           </div>
@@ -115,14 +114,14 @@ handleSubmit(ev){
               authors.map( author => {
                 if (author.firstName.toUpperCase().indexOf(filter) > -1 || author.lastName.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                     return (
-                      <a key ={author.id} onClick={() => this.emtyValue(author.id, choice)} >{author.firstName} {author.lastName}</a>
+                      <Link to ="/books" key ={author.id} onClick={() => this.emtyValue(author.id, choice)} >{author.firstName} {author.lastName}</Link>
                     )
                   }
                 }) :
                 genre.map( element => {
                   if (element.name.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                       return (
-                        <a key ={element.id} onClick={() => this.emtyValue(element.id, choice)} >{element.name}</a>
+                        <Link to="/books" key ={element.id} onClick={() => this.emtyValue(element.id, choice)} >{element.name}</Link>
                       )
                     }
                   })

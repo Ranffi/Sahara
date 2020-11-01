@@ -93,10 +93,10 @@ class ProfileSettings extends Component{
             <input name = "userName" className = "signUpInput" onChange = {handleChange} value = {this.state.userName} />
 
             <label htmlFor = "password" className = "signUpLabel">Password:</label>
-            <input name = "password" className = "signUpInput" onChange = {handleChange} value = {this.state.password} />
+            <input name = "password" type="password" className = "signUpInput" onChange = {handleChange} value = {this.state.password} />
 
             <label htmlFor = "email" className = "signUpLabel">Email:</label>
-            <input name = "email" className = "signUpInput" onChange = {handleChange} value = {this.state.email} />
+            <input name = "email" type="email" className = "signUpInput" onChange = {handleChange} value = {this.state.email} />
           </div>
           <div id = "signUpAddress">
             <label htmlFor = "streetAddress" className = "signUpLabel">Street Address:</label>
