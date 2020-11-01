@@ -519,6 +519,54 @@ nav {
 
 }
 /* ----------------End of Log In---------*/
+/* -------- Admin Page ------- */
+.input-icon {
+  position: relative;
+}
+
+.input-icon > i {
+  position: absolute;
+  display: block;
+  transform: translate(0, -50%);
+  top: 50%;
+  pointer-events: none;
+  width: 25px;
+  text-align: center;
+  font-style: normal;
+}
+
+.input-icon > input {
+  padding-left: 25px;
+  padding-right: 0;
+}
+
+.adminCloseEnded {
+  display: flex;
+  flex-direction: row;
+}
+
+.adminChecks > label {
+  width: 90%;
+}
+
+.adminChecks > input {
+  width: 10%
+}
+
+.adminNums > label {
+  width: 60%;
+}
+
+.adminNums > input {
+  width: 40%;
+  
+}
+
+.adminNums > #inStock {
+  margin-right: 1rem;
+}
+
+/* ----------------End of Admin Page---------*/
 /* -------- Footer ------- */
 
 footer {
