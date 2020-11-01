@@ -22,8 +22,9 @@ class Admin extends Component{
   }
 
   handleChange(ev) {
+    const value = ev.target.type === 'checkbox' ? ev.target.checked : ev.target.value;
     this.setState({
-      [ev.target.name]: ev.target.value
+      [ev.target.name]: value
     })
   }
 
@@ -85,10 +86,10 @@ class Admin extends Component{
               <input name = "rating" type="number" min="1" max="5" step="1" className = "signUpInput" onChange = {handleChange} value = {rating} />
             </div>
             <div className="adminCloseEnded adminChecks">
-              <input name = "featured" type="checkbox" className = "signUpInput" onChange = {handleChange} value = {featured} />
+              <input name = "featured" type="checkbox" className = "signUpInput" onChange = {handleChange} checked={featured} />
               <label htmlFor = "featured" className = "signUpLabel">Featured</label>
 
-              <input name = "onSale" type="checkbox" className = "signUpInput" onChange = {handleChange} value = {onSale} />
+              <input name = "onSale" type="checkbox" className = "signUpInput" onChange = {handleChange} checked={onSale} />
               <label htmlFor = "onSale" className = "signUpLabel">On Sale</label>
 
             </div>
