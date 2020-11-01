@@ -4,65 +4,57 @@ import validate from 'validate.js'
 import {getUser} from '../redux/store'
 import { connect } from 'react-redux'
 
-class SignUp extends Component{
-  constructor() {
-    super()
-    this.state = {
-      userName: '',
-      password: '',
-      email: '',
-      streetAddress: '',
-      city: '',
-      state: '',
-      zipCode: '',
-      firstName: '',
-      lastName: ''
-
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentDidMount(){
-    this.props.getUser();
-  }
-
-  handleChange(ev) {
-    this.setState({
-      [ev.target.name]: ev.target.value
-    })
-  }
-
-  async handleSubmit(ev){
-    ev.preventDefault()
-    //Validate if email is an email address
-    const constraints = {
-      from: {
-        email: true
+class ProfileSettings extends Component{
+    constructor() {
+        super()
+        this.state = {
+          userName: '',
+          password: '',
+          email: '',
+          streetAddress: '',
+          city: '',
+          state: '',
+          zipCode: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
       }
-    }
-    const validation = validate({from: this.state.email}, constraints)
-    if (validation !== undefined){ alert('You did not enter a valid email') }
-    else {
-      const {data} = await axios.post('/api/address', this.state)
-      await axios.put(`/api/users/${this.props.id}`, {...this.state, shippingAddressId: data.id})
-
-      this.setState({
-        userName: '',
-        password: '',
-        email: '',
-        streetAddress: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        firstName: '',
-        lastName: '',
-        isGuest: false
-      })
-      this.props.getUser();
-      this.props.history.push('/books')
-    }
-  }
+      componentDidMount(){
+        this.props.getUser();
+      }
+      handleChange(ev) {
+        this.setState({
+          [ev.target.name]: ev.target.value
+        })
+      }
+      async handleSubmit(ev){
+        ev.preventDefault()
+        //Validate if email is an email address
+        const constraints = {
+          from: {
+            email: true
+          }
+        }
+        const validation = validate({from: this.state.email}, constraints)
+        if (validation !== undefined){alert('You did not enter a valid email')}
+        else {
+        //   const {data} = await axios.post('/api/address', this.state)
+        //   await axios.put(`/api/users/${this.props.id}`, {...this.state, shippingAddressId: data.id})
+          this.setState({
+            userName: '',
+            password: '',
+            email: '',
+            streetAddress: '',
+            city: '',
+            state: '',
+            zipCode: '',
+            firstName: '',
+            lastName: ''
+          })
+        //   this.props.getUser();
+        //   this.props.history.push('/books')
+        }
+      }
 
   render(){
     const {handleChange, handleSubmit} = this;
@@ -70,15 +62,15 @@ class SignUp extends Component{
     return (
       <>
         <h2>
-          Create Your Account
+          Profile Settings
         </h2>
         <form onSubmit = {handleSubmit} id = "signUpForm">
           <div id = "signUpUserInfo">
-          <label htmlFor = "firstName" className = "signUpLabel">First Name:</label>
+            <label htmlFor = "firstName" className = "signUpLabel">First Name:</label>
             <input name = "firstName" className = "signUpInput" onChange = {handleChange} value = {this.state.firstName} />
 
             <label htmlFor = "lastName" className = "signUpLabel">Last Name:</label>
-            <input name = "lastName" className = "signUpInput" onChange = {handleChange} value = {this.state.lastName} />
+            <input name = "lastName" className = "signUpInput" onChange = {handleChange} value = {this.state.userName} />
 
             <label htmlFor = "userName" className = "signUpLabel">User Name:</label>
             <input name = "userName" className = "signUpInput" onChange = {handleChange} value = {this.state.userName} />
@@ -110,7 +102,7 @@ class SignUp extends Component{
             <label htmlFor = "zipCode" className = "signUpLabel">Zip Code:</label>
             <input name = "zipCode" className = "signUpInput" onChange = {handleChange} value = {this.state.zipCode} />
           </div>
-          <button type = "submit" id = "signUpSubmit">Create Account</button>
+          <button type = "submit" id = "signUpSubmit">Save</button>
 
         </form>
       </>
@@ -129,4 +121,4 @@ export default connect(
     getUser: () => dispatch(getUser())
   }
 }
-)(SignUp)
+)(ProfileSettings)

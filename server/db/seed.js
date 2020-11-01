@@ -4,11 +4,11 @@ const { db, Book, Author, Genre } = require('./index.js')
 const seedBooks = [
     {
         //id:1,
-        title: 'Leave the World Behind (Barnes & Noble Book Club Edition)',
+        title: 'Leave the World Behind',
         price: 27.99,
         description: "Atmospheric and provocative, Leave the World Behind starts off with Amanda and Clay's family vacation drama and soon devolves into a cinematic catastrophe. A vacation story on the surface, this unsettling novel rises above a thrilling narrative to take aim at the inherent bias we have for our fellow humans, the brotherhood in our shared fears, and the catastrophic fallout of threats both prosaic and otherworldly. Vibrant, tense and thrilling, this is an absolute must-read.",
         coverImageUrl: 'http://prodimage.images-bn.com/pimages/9780063076877_p0_v3_s550x406.jpg',
-        //genre:"Novel"
+        onSale: true
     },
     {
         //id:2,
@@ -24,7 +24,7 @@ const seedBooks = [
         price: 22.99,
         description: "K-Ming Chang brings her poet's voice to this visceral, bold and crackling debut. Tackling the tradition of myths and oral history, Bestiary follows the perspectives of three generations of women, with their changes in perspective as the star of the show. It successfully illustrates the evolving nature of storytelling and how it can influence our character and who we become. Ultimately a novel of family, Bestiary is full of strangely beautiful prose and is a powerfully transformative read.",
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780593132586_p0_v8_s550x406.jpg',
-        //genre:"Novel"
+        onSale: true
     },
     {
         //id:4,
@@ -32,7 +32,7 @@ const seedBooks = [
         price: 22.99,
         description: "This book, in what feels like a new vision for the 21st century novel, made me happy. —Ocean Vuong, author of On Earth We’re Briefly GorgeousThis book made me think about the nature of love, and family, and anger, and grief, and love again.  —Jasmine Guillory, author of The Wedding Date and The ProposalA funny and profound story about family in all its strange forms, joyful and hard-won vulnerability, becoming who you're supposed to be, and the limits of love.",
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780593087275_p0_v2_s550x406.jpg',
-        //genre:"Novel"
+        onSale: true
     },
     {
        // id:5,
@@ -40,7 +40,7 @@ const seedBooks = [
         price: 23.50,
         description: 'An instant New York Times Bestseller! Longlisted for the 2019 National Book Award for Fiction, the Carnegie Medal in Fiction, the 2019 Aspen Words Literacy Prize, and the PEN/Hemingway Debut Novel Award. Shortlisted for the 2019 Center for Fiction First Novel Prize. Winner of the 2019 New England Book Award for Fiction! Named one of the most anticipated books of 2019 by Vulture, Entertainment Weekly, Buzzfeed, Los Angeles Times, Boston Globe, Oprah.com, Huffington Post, The A.V. Club, Nylon, The Week, The Rumpus, The Millions, The Guardian, Publishers Weekly, and more.',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780525562023_p0_v2_s550x406.jpg',
-        //genre:"Novel"
+        onSale: true
     },
     {
         //id:6,
@@ -56,7 +56,6 @@ const seedBooks = [
         price: 14.95,
         description: 'Discover an American masterpiece. This unassuming story about the life of a quiet English professor has earned the admiration of readers all over the globe.William Stoner is born at the end of the nineteenth century into a dirt-poor Missouri farming family. Sent to the state university to study agronomy, he instead falls in love with English literature and embraces a scholar’s life, so different from the hardscrabble existence he has known. And yet as the years pass, Stoner encounters a succession of disappointments: marriage into a “proper” family estranges him from his parents; his career is stymied; his wife and daughter turn coldly away from him; a transforming experience of new love ends under threat of scandal. Driven ever deeper within himself, Stoner rediscovers the stoic silence of his forebears and confronts an essential solitude.',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9781590171998_p0_v2_s550x406.jpg',
-        //genre:"Novel"
     },
     {
         //id:8,
@@ -72,7 +71,7 @@ const seedBooks = [
         price: 12.49,
         description: 'In this groundbreaking debut, Justin Torres plunges us into the chaotic heart of one family, the intense bonds of three brothers, and the mythic effects of this fierce love on the people we must become. We the Animals is a dark jewel of a book. It’s heartbreaking. It’s beautiful. It resembles no other book I’ve read.”—Michael Cunningham. A miracle in concentrated pages, you are going to read it again and again. —Dorothy Allison. Rumbles with lyric dynamite . . . Torres is a savage new talent.—Benjamin Percy, Esquire',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780547844190_p0_v2_s550x406.jpg',
-        //genre:"Novel"
+        featured: true
     },
     {
         //id:10,
@@ -80,7 +79,7 @@ const seedBooks = [
         price: 17.99,
         description: "Unexpectedly suspenseful, but written with all the fluency and dark humor of Tom Perrotta's The Wishbones and Joe College, Little Children exposes the adult dramas unfolding amidst the swingsets and slides of an ordinary American playground.Tom Perrotta's thirty-ish parents of young children are a varied and surprising bunch. There's Todd, the handsome stay-at-home dad dubbed The Prom King by the moms of the playground; Sarah, a lapsed feminist with a bisexual past, who seems to have stumbled into a traditional marriage; Richard, Sarah's husband, who has found himself more and more involved with a fantasy life on the internet than with the flesh and blood in his own house; and Mary Ann, who thinks she has it all figured out, down to scheduling a weekly roll in the hay with her husband, every Tuesday at 9pm.",
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780312315733_p0_v6_s550x406.jpg',
-        //genre:"Novel"
+        onSale: true
     },
     {
         //id:11,
@@ -88,7 +87,7 @@ const seedBooks = [
         price: 15.00,
         description: "A New York Times Bestseller. Peter and Rebecca Harris, midforties, are prosperous denizens of Manhattan. He's an art dealer, she's an editor. They live well. They have their troubles—their ebbing passions, their wayward daughter, and certain doubts about their careers—but they feel as though they're happy. Happy enough. Until Rebecca's much younger, look-alike brother, Ethan (known in the family as Mizzy, short for the Mistake), comes to visit. And after he arrives, nothing will ever be the same again.",
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780312610432_p0_v2_s550x406.jpg',
-        //genre:"Novel"
+        onSale: true
     },
     {
         //id:12,
@@ -112,7 +111,7 @@ const seedBooks = [
         price: 14.99,
         description: "A U.S. Marine's brush with death leads him to the love of his life in this New York Times bestseller of destiny, luck, and the redemptive power of romance.After U.S. Marine Logan Thibault finds a photograph of a smiling young woman buried in the dirt during his tour of duty in Iraq, he experiences a sudden streak of luck — winning poker games and even surviving deadly combat. Only his best friend, Victor, seems to have an explanation for his good fortune: the photograph — his lucky charm.",
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9781455508969_p0_v1_s550x406.jpg',
-        //genre:"Novel"
+        featured: true
     },
     {
         //id:15,
@@ -120,7 +119,7 @@ const seedBooks = [
         price: 15.50,
         description: '1987. There’s only one person who has ever truly understood fourteen-year-old June Elbus, and that’s her uncle, the renowned painter Finn Weiss. Shy at school and distant from her older sister, June can only be herself in Finn’s company; he is her godfather, confidant, and best friend. So when he dies, far too young, of a mysterious illness her mother can barely speak about, June’s world is turned upside down. But Finn’s death brings a surprise acquaintance into June’s life—someone who will help her to heal, and to question what she thinks she knows about Finn, her family, and even her own heart.',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780812982855_p0_v3_s550x406.jpg',
-        //genre:"Novel"
+        featured: true
     },
     {
         //id:16,
@@ -128,7 +127,7 @@ const seedBooks = [
         price: 16.95,
         description: 'Stoneybridge is a small town on the west coast of Ireland where all the families know each other. When Chicky Starr decides to take an old, decaying mansion set high on the cliffs overlooking the windswept Atlantic Ocean and turn it into a restful place for a holiday by the sea, everyone thinks she is crazy. Helped by Rigger (a bad boy turned good who is handy around the house) and Orla, her niece (a whiz at business), Stone House is finally ready to welcome its first guests to the big warm kitchen, log fires, and understated elegant bedrooms. Laugh and cry with this unlikely group as they share their secrets and—maybe—even see some of their dreams come true. Full of Maeve’s trademark warmth and humor, once again, she embraces us with her grand storytelling.',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780307475503_p0_v1_s550x406.jpg',
-        //genre:"Novel"
+        featured: true
     },
     {
         //id:17,
@@ -136,7 +135,7 @@ const seedBooks = [
         price: 14.99,
         description: ' The new Abby Abernathy is a good girl. She doesn’t drink or swear, and she has the appropriate number of cardigans in her wardrobe. Abby believes she has enough distance from the darkness of her past, but when she arrives at college with her best friend, her path to a new beginning is quickly challenged by Eastern University’s Walking One-Night Stand. ',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9781476712048_p0_v3_s550x406.jpg',
-        //genre:"Novel"
+        featured: true
     },
     {
         //id:18,
@@ -144,7 +143,7 @@ const seedBooks = [
         price: 12.95,
         description: 'A. J. Fikry’s life is not at all what he expected it to be. He lives alone, his bookstore is experiencing the worst sales in its history, and now his prized possession, a rare collection of Poe poems, has been stolen. But when a mysterious package appears at the bookstore, its unexpected arrival gives Fikry the chance to make his life over--and see everything anew.   ',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9781616204518_p0_v10_s550x406.jpg',
-        //genre:"Novel"
+        featured: true
     },
     {
         //id:19,
@@ -152,7 +151,7 @@ const seedBooks = [
         price: 14.50,
         description: 'During the Nazis’ brutal siege of Leningrad, Lev Beniov is arrested for looting and thrown into the same cell as a handsome deserter named Kolya. Instead of being executed, Lev and Kolya are given a shot at saving their own lives by complying with an outrageous directive: secure a dozen eggs for a powerful Soviet colonel to use in his daughter’s wedding cake. In a city cut off from all supplies and suffering unbelievable deprivation, Lev and Kolya embark on a hunt through the dire lawlessness of Leningrad and behind enemy lines to find the impossible.',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780452295292_p0_v3_s550x406.jpg',
-        //genre:"Novel"
+        featured: true
     },
     {
         //id:20,
@@ -160,7 +159,7 @@ const seedBooks = [
         price: 15.99,
         description: 'Barcelona, 1945: A city slowly heals in the aftermath of the Spanish Civil War, and Daniel, an antiquarian book dealer’s son who mourns the loss of his mother, finds solace in a mysterious book entitled The Shadow of the Wind, by one Julián Carax. But when he sets out to find the author’s other works, he makes a shocking discovery: someone has been systematically destroying every copy of every book Carax has written. In fact, Daniel may have the last of Carax’s books in existence. Soon Daniel’s seemingly innocent quest opens a door into one of Barcelona’s darkest secrets—an epic story of murder, madness, and doomed love.',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780143034902_p0_v4_s550x406.jpg',
-        //genre:"Novel"
+        featured: true
     },
     {
         //id:21,
@@ -184,7 +183,7 @@ const seedBooks = [
         price: 15.99,
         description: 'One of the most cherished stories of all time, To Kill a Mockingbird has been translated into more than forty languages, sold more than forty million copies worldwide, served as the basis for an enormously popular motion picture, and was voted one of the best novels of the twentieth century by librarians across the country. A gripping, heart-wrenching, and wholly remarkable tale of coming-of-age in a South poisoned by virulent prejudice, it views a world of great beauty and savage inequities through the eyes of a young girl, as her father—a crusading local lawyer—risks everything to defend a black man unjustly accused of a terrible crime.',
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780061120084_p0_v4_s550x406.jpg',
-        //genre:"Novel"
+        onSale: true
     },
     {
         //id:24,
@@ -248,7 +247,7 @@ const seedBooks = [
         price: 23.00,
         description: "Winner of the 1973 National Book Award, Gravity's Rainbow is a postmodern epic, a work as exhaustively significant to the second half of the twentieth century as Joyce's Ulysses was to the first. Its sprawling, encyclopedic narrative and penetrating analysis of the impact of technology on society make it an intellectual tour de force. This Penguin Classics deluxe edition features a specially designed cover by Frank Miller along with french claps and deckle-edged paper.",
         coverImageUrl: 'https://prodimage.images-bn.com/pimages/9780143039945_p0_v2_s550x406.jpg',
-        //genre:"Novel"
+        onSale: true
     }
 ]
 

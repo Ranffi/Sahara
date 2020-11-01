@@ -22,13 +22,15 @@ router.get('/get-user', (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     try {
-        const {userName, password, email, shippingAddressId, isGuest } = req.body
+        const {userName, password, firstName, lastName,  email, shippingAddressId, isGuest } = req.body
         const hashedPw = await bcrypt.hash(password, 10)
         const user = await User.findByPk(req.params.id);
         await user.update({
             userName,
             password: hashedPw,
             email,
+            firstName,
+            lastName,
             shippingAddressId,
             isGuest
         })

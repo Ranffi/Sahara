@@ -12,6 +12,7 @@ class Books extends Component{
 
   componentDidMount(){
     this.props.Books()
+    window.scrollTo(0, 0)
   }
   componentDidUpdate(){
     if (this.state.itemsArr.length !== this.props.cartItems.length){

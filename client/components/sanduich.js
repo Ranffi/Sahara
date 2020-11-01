@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {} from '../redux/store'
+// import ProfileSettings from './ProfileSettings'
+import { Link } from 'react-router-dom';
 
 class Sanduich extends Component{
     constructor(){
@@ -33,7 +35,7 @@ class Sanduich extends Component{
                 </div>
                 <div className={`user_menu ${this.state.showList}`}>
                     <ul>test</ul>
-                    <ul>test</ul>
+                    {/* <Link to="/settings">Settings</Link> */}
                     <ul>test</ul>
                     <ul>test</ul>
                 </div>

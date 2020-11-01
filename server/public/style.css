@@ -12,7 +12,7 @@
 }
 
 body {
-  background:  rgb(178, 183, 189);;
+  background:  white;
   margin: 0;
   padding: 0;
 }
@@ -245,7 +245,7 @@ nav {
 .bookContainer h4 {
   margin: 0.5rem;
   letter-spacing: var(--mainSpacing);
-  color: blue;
+  color: #c1a57b;
   text-align: center;
 }
 /* --------------------------------- */
@@ -404,7 +404,6 @@ nav {
   background-image: url('gantaro-9eTP3GF4liQ-unsplash.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  min-height: 100vh;
 }
 
 .picDiv {
@@ -418,9 +417,32 @@ nav {
   width: 350px;
 }
 
+.bestSeller {
+  text-align: center;
+  color: #222831 ;
+}
+.bestSellerH2 {
+  text-align: center;
+  text-shadow: 2px 1px #c1a57b
+}
+.onSale {
+  color: red;
+  text-decoration: line-through;
+}
+
+  .homePageCon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 /* ---------------- End of Home Page------------------ */
 /* ----------------Sign Up------------------ */
 
+.borderTop{
+  border-style: inset;
+  margin: 2rem;
+}
 #signUpForm{
   display: flex;
   flex-direction: column;
@@ -513,7 +535,145 @@ nav {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
-/* ----------------End of Log In------------------ */
+/* ----------------End of Log In---------*/
+/* -------- Footer ------- */
+
+footer {
+    background-color: #222831;
+    font-family: "Lato", sans-serif;
+    padding: 85px 0 285px 0;
+}
+
+.footer-inner {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 120px;
+    max-width: 1170px;
+    position: relative;
+}
+
+.footer-item {
+    float: left;
+    margin: 0 7.2% 0 0;
+}
+
+
+.footer-item:nth-of-type(7) {
+    float: right;
+    margin-right: 0;
+}
+
+.footer-button {
+    color: white;
+    position: relative;
+    font-weight: 400;
+    font-size: 16px;
+    transition: 1s;
+    transition-delay: .2s;
+    padding: 14px;
+}
+  
+.footer-button:after {
+    position: absolute;
+    top: 45px;
+    right: 13px;
+    background-color: white;
+    height: 1px;
+    width: 86px;
+    transition: .6s;
+}
+  
+.footer-button:hover {
+    color: black;
+    background-color: white;
+}
+  
+.footer-button:hover:after {
+    width: 112px;
+    right: 0px;
+}
+
+.footer_h1 {
+    font-weight: 900;
+    color: white;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin: 0;
+    padding-bottom: 10px;
+}
+  
+.footer_h2 {
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 13px;
+    color: #d1d1d1;
+    letter-spacing: 0.03em;
+    padding: 15px 0 0 0;
+}
+  
+.color {
+    color: white;
+    font-weight: 400;
+}
+  
+.footer_h3 {
+    font-weight: 400;
+    font-size: 13px;
+    color: white;
+    margin: 0;
+    padding-bottom: 9px;
+    letter-spacing: 0.03em;
+}
+
+
+  
+.footer_ul {
+    line-height: 1.8;
+    list-style-type: none;
+    padding: 0;
+}
+  
+.footer_li {
+    font-weight: 300;
+    font-size: 13px;
+    color: #d1d1d1;
+    letter-spacing: 0.03em;
+}
+  
+.footer_p {
+    font-weight: 300;
+    font-size: 13px;
+    padding: 0;
+    line-height: 1.8;
+    letter-spacing: 0.03em;
+}
+  
+.footer_a {
+
+    color: #d1d1d1;
+}
+  
+a:hover {
+    color: white;
+}
+  
+
+.footer-inner:after {
+    content: "© 2020 Sahara. All Rights Reserved.";
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    font-size: 13px;
+    color: #d1d1d1;
+    position: absolute;
+    top: 260px;
+    clear: both;
+    display: block;
+}
+
+
+
+/* ----------------End of Footer------------------ */
 /* ------------------Sanduich Btn----------------- */
 .navbar__btn{
   /* align-self: center; */
