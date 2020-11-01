@@ -11,6 +11,7 @@ const GET_AUTHOR_BOOKS = 'GET_AUTHOR_BOOKS'
 const GET_GENRE_BOOKS = 'GET_GENRE_BOOKS'
 const GET_GENRE = 'GET_GENRE'
 const GET_USER = 'GET_USER'
+const GET_ORDERS = 'GET_ORDERS'
 
 
 const initialState = {
@@ -146,6 +147,18 @@ const getUser = () => {
     }
 }
 
+export const _getOrders = (orderHistory) => {
+    return {
+    type: GET_ORDERS,
+    orderHistory
+}}
+
+const getOrderHistory = (userId) => {
+    return async(dispatch) => {
+        const res = await axios.get(`/api/orderHistory/${userId}`)
+        dispatch(_getOrders(res.data))
+    }
+}
 
 const reducer = ((state = initialState, action) => {
     switch (action.type) {
@@ -157,10 +170,11 @@ const reducer = ((state = initialState, action) => {
         case GET_AUTHOR_BOOKS: return { ...state, books: action.authorBooks}
         case GET_GENRE_BOOKS: return { ...state, books: action.genreBooks}
         case GET_GENRE: return {...state, genre: action.genre}
+        case GET_ORDERS: return {...state, orderHistory: action.orderHistory }
         default: return state
     }
 })
-const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk))
+const store = createStore(reducer, applyMiddleware(thunk))
 export default  store
 export { getBooks, singleBook, addCartItem, getCartItems, deleteCartItem,
-    updateCartItem, getAuthors, getAuthorBooks, getGenreBooks, getGenre, getUser}
+    updateCartItem, getAuthors, getAuthorBooks, getGenreBooks, getGenre, getUser, getOrderHistory}

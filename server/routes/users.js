@@ -13,7 +13,7 @@ router.get('/whoami', (req, res) => {
 
 router.get('/get-user', (req, res, next) => {
     try {
-        console.log(req.user)
+        //console.log(req.user)
         res.send(req.user)
     }
     catch (err) {
@@ -46,16 +46,16 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-router.get('/:userId', async (req, res, next) => {
-    try {
-        res.send(await User.findByPk(req.params.userId, {
-            include: { all: true, nested: true }
-        }));
-    }
-    catch (err) {
-        next(err)
-    }
-})
+// router.get('/:userId', async (req, res, next) => {
+//     try {
+//         res.send(await User.findByPk(req.params.userId, {
+//             include: { all: true, nested: true }
+//         }));
+//     }
+//     catch (err) {
+//         next(err)
+//     }
+// })
 
 router.delete('/:userId', async (req, res, next) => {
     try {

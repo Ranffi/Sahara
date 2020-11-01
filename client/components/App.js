@@ -9,12 +9,9 @@ import SignUp from './SignUp'
 import LogIn from './LogIn'
 import Admin from './Admin'
 import Logout from './Logout'
-<<<<<<< HEAD
-import Account from './Account'
-=======
+import OrderHistory from './OrderHistory'
 import About from './AboutPage'
 import Checkout from './Checkout'
->>>>>>> d8a972a4536ad42881484d5811d8dccfa00a39ec
 
 const App = () => {
     return (
@@ -29,11 +26,8 @@ const App = () => {
           <Route path = "/login" exact component = { LogIn } />
           <Route path = "/admin" exact component = { Admin } />
           <Route path = "/logout" exact component = { Logout } />
-<<<<<<< HEAD
-          <Route path = "/account" exact component = { Account } />
-=======
+          <Route path = "/orderHistory" exact component = { OrderHistory } />
           <Route path = "/checkout" exact component = { Checkout } />
->>>>>>> d8a972a4536ad42881484d5811d8dccfa00a39ec
         </main>
       </Router>
   )
