@@ -13,6 +13,7 @@ router.get('/whoami', (req, res) => {
 
 router.get('/get-user', (req, res, next) => {
     try {
+        console.log(req.user)
         res.send(req.user)
     }
     catch (err) {

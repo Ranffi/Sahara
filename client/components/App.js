@@ -10,6 +10,7 @@ import LogIn from './LogIn'
 import Admin from './Admin'
 import Logout from './Logout'
 import About from './AboutPage'
+import Checkout from './Checkout'
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path = "/login" exact component = { LogIn } />
           <Route path = "/admin" exact component = { Admin } />
           <Route path = "/logout" exact component = { Logout } />
+          <Route path = "/checkout" exact component = { Checkout } />
         </main>
       </Router>
   )

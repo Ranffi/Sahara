@@ -20,7 +20,7 @@ class HomePage extends React.Component {
         <div className="picDiv home">
           <img className="pic" src="b7b36c8a-57d4-4463-80f4-93d66a362a38_200x200.png" />
         </div>
-        <h2 className="bestSellerH2">Best Sellers</h2>
+        <h1 className="bestSellerH2">Best Sellers</h1>
         <p className="bestSeller">From New York Times to International Best Sellers</p>
         <div className = "borderTop">
         <div className="homePageCon">
@@ -44,7 +44,7 @@ class HomePage extends React.Component {
           }
         </div>
         </div>
-        <h2 className="bestSellerH2">On Sale</h2>
+        <h1 className="bestSellerH2">On Sale</h1>
         <p className="bestSeller">Amazing reads at even better prices</p>
           <div className = "borderTop">
         <div className="homePageCon">
