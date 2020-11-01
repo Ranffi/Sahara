@@ -53,7 +53,6 @@ export default connect(
     },
     (dispatch) => {
         return {
-
         }
     }
 )(Sanduich)
