@@ -1,0 +1,50 @@
+import {connect} from 'react-redux';
+import React, {Component} from 'react';
+import AddBooks from './AddBooks';
+
+class Admin extends Component {
+  constructor() {
+    super()
+    this.state = {
+        selectedForm: ''
+    }
+    this.toggleForm = this.toggleForm.bind(this);
+  }
+
+  toggleForm(className) {
+      this.setState({selectedForm: className})
+  }
+
+  render(){
+    const {user} = this.props;
+    const {selectedForm} = this.state;
+
+    return user.isAdmin ?
+    (<div><p>Check out another page!</p></div>) :
+    (
+        <div>
+            <hr />
+            <div id="signUpForm">
+                <div className="adminNavBar">
+                    <div onClick={() => this.toggleForm('addBooks')} className={selectedForm === 'addBooks' ? 'selectedAdmin adminNavElement' : 'adminNavElement'}>Add Books</div>
+                    <div onClick={() => this.toggleForm('editBooks')} className={selectedForm === 'editBooks' ? 'selectedAdmin adminNavElement' : 'adminNavElement'}>Edit Books</div>
+                </div>
+                <div>
+                    {
+                        (selectedForm === 'addBooks' ? (<AddBooks />) :
+                        (selectedForm === 'editBooks' ? (<p>Check in later...</p>) : null))
+                    }
+                </div>
+            </div>
+        </div>
+    )
+  }
+
+}
+
+export default connect(
+  ({user}) => ({
+    user
+  }),
+  null
+)(Admin);
