@@ -2,8 +2,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {} from '../redux/store'
-// import ProfileSettings from './ProfileSettings'
 import { Link } from 'react-router-dom';
+import Logout from './Logout'
+
 
 class Sanduich extends Component{
     constructor(){
@@ -34,10 +35,10 @@ class Sanduich extends Component{
                     <div className="bar3" />
                 </div>
                 <div className={`user_menu ${this.state.showList}`}>
-                    <ul>test</ul>
-                    {/* <Link to="/settings">Settings</Link> */}
-                    <ul>test</ul>
-                    <ul>test</ul>
+                    <ul>{this.props.user.firstName} {this.props.user.lastName}</ul>
+                    <ul onClick={() => this.addClass()}><Link to="/settings">Settings</Link></ul>
+                    <ul onClick={() => this.addClass()}>Order History</ul>
+                    <Logout addClass={this.addClass} />
                 </div>
             </div>
         )
@@ -45,8 +46,9 @@ class Sanduich extends Component{
 }
 
 export default connect(
-    () => {
+    ({user}) => {
         return {
+            user
         }
     },
     (dispatch) => {

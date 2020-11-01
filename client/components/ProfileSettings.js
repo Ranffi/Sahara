@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {Component} from 'react';
-import validate from 'validate.js'
+import validate, { async } from 'validate.js'
 import {getUser} from '../redux/store'
 import { connect } from 'react-redux'
 
@@ -14,14 +14,27 @@ class ProfileSettings extends Component{
           streetAddress: '',
           city: '',
           state: '',
-          zipCode: ''
+          zipCode: '',
+          firstName: '',
+          lastName: '',
+          isGuest: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
       }
       componentDidMount(){
-        this.props.getUser();
+       this.props.getUser();
       }
+      componentDidUpdate(){
+        if(this.state.userName === ''){
+          this.setState({
+            userName: this.props.user.userName,
+            email: this.props.user.email,
+            firstName: this.props.user.firstName,
+            lastName: this.props.user.lastName
+        })
+      }
+    }
       handleChange(ev) {
         this.setState({
           [ev.target.name]: ev.target.value
@@ -38,21 +51,25 @@ class ProfileSettings extends Component{
         const validation = validate({from: this.state.email}, constraints)
         if (validation !== undefined){alert('You did not enter a valid email')}
         else {
-        //   const {data} = await axios.post('/api/address', this.state)
-        //   await axios.put(`/api/users/${this.props.id}`, {...this.state, shippingAddressId: data.id})
-          this.setState({
-            userName: '',
-            password: '',
-            email: '',
-            streetAddress: '',
-            city: '',
-            state: '',
-            zipCode: '',
-            firstName: '',
-            lastName: ''
-          })
-        //   this.props.getUser();
-        //   this.props.history.push('/books')
+          if(this.state.password === ''){
+            this.setState({password: this.props.user.password})
+          }
+          if(this.state.userName === ''){
+            this.setState({userName: this.props.user.userName})
+          }
+          if(this.state.firstName === ''){
+            this.setState({firstName: this.props.user.firstName})
+          }
+          if(this.state.lastName === ''){
+            this.setState({lastName: this.props.user.lastName})
+          }
+          if(this.state.email === ''){
+            this.setState({email: this.props.user.email})
+          }
+          const {data} = await axios.post('/api/address', this.state)
+          await axios.put(`/api/users/${this.props.user.id}`, {...this.state, shippingAddressId: data.id})
+          this.props.getUser();
+          this.props.history.push('/books')
         }
       }
 
@@ -70,7 +87,7 @@ class ProfileSettings extends Component{
             <input name = "firstName" className = "signUpInput" onChange = {handleChange} value = {this.state.firstName} />
 
             <label htmlFor = "lastName" className = "signUpLabel">Last Name:</label>
-            <input name = "lastName" className = "signUpInput" onChange = {handleChange} value = {this.state.userName} />
+            <input name = "lastName" className = "signUpInput" onChange = {handleChange} value = {this.state.lastName} />
 
             <label htmlFor = "userName" className = "signUpLabel">User Name:</label>
             <input name = "userName" className = "signUpInput" onChange = {handleChange} value = {this.state.userName} />
@@ -114,7 +131,9 @@ class ProfileSettings extends Component{
 
 export default connect(
   ({user}) => {
-    return user
+    return {
+      user
+    }
   },
   (dispatch) => {
     return {

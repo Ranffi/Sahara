@@ -7,12 +7,12 @@ const User = db.define('user', {
         allowNull: false,
         unique: true
     },
-    // firstName: {
-    //     type: Sequelize.STRING
-    // },
-    // lastName: {
-    //     type: Sequelize.STRING
-    // },
+    firstName: {
+        type: Sequelize.STRING
+    },
+    lastName: {
+        type: Sequelize.STRING
+    },
     //this is for now, we need to hash it and make it more secure
     password: {
         type: Sequelize.STRING,

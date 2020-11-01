@@ -9,23 +9,17 @@ class Logout extends Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  async handleSubmit(ev){
-    ev.preventDefault()
+  async handleSubmit(){
     await axios.post('/api/logout')
     this.props.getUser()
     await this.props.getUser();
     await this.props.items(this.props.user.id)
+    this.props.addClass()
   }
 
   render(){
-    const {handleSubmit} = this;
     return (
-      <div>
-        <form onSubmit = {handleSubmit}>
-          <button type ="submit">Log out</button>
-        </form>
-      </div>
-
+          <ul onClick={() => this.handleSubmit()}> Log out</ul>
     )
   }
 

@@ -12,6 +12,7 @@ const GET_GENRE_BOOKS = 'GET_GENRE_BOOKS'
 const GET_GENRE = 'GET_GENRE'
 const GET_USER = 'GET_USER'
 
+
 const initialState = {
     books: [],
     book: {},

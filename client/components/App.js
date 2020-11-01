@@ -10,8 +10,8 @@ import LogIn from './LogIn'
 import Admin from './Admin'
 import Logout from './Logout'
 import About from './AboutPage'
-// import ProfileSettings from './ProfileSettings'
-
+import Checkout from './Checkout'
+import ProfileSettings from './ProfileSettings'
 
 const App = () => {
     return (
@@ -19,7 +19,7 @@ const App = () => {
         <main>
           <NavBar />
           <Route path = "/" exact component = { HomePage } />
-          {/* <Route path = "/settings" exact component = { ProfileSettings } /> */}
+          <Route path = "/settings" exact component = { ProfileSettings } />
           <Route path = "/about" exact component = { About } />
           <Route path = "/books" exact component = { Books } />
           <Route path = "/books/:id" exact component = { SingleBook } />
@@ -27,6 +27,7 @@ const App = () => {
           <Route path = "/login" exact component = { LogIn } />
           <Route path = "/admin" exact component = { Admin } />
           <Route path = "/logout" exact component = { Logout } />
+          <Route path = "/checkout" exact component = { Checkout } />
         </main>
       </Router>
   )

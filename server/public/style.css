@@ -455,7 +455,7 @@ nav {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
-#signUpUserInfo{
+#signUpr_rInfo{
   display: flex;
   flex-direction: column;
 }
@@ -697,16 +697,29 @@ a:hover {
  transform: rotate(45deg) translate(-3px, -4px);
 }
 .user_menu {
-  transition: all 2s ease;
   position: fixed;
   top: 60px;
   width: 30%;
-  overflow: scroll;
-  z-index: 3;
   background: rgb(231, 226, 221);
   overflow: hidden;
+  transition: all 1s ease;
 }
+
+.user_menu > ul {
+  margin: 0;
+  padding: 1rem;
+  cursor: pointer;
+  border-top: 1px solid black;
+  transition: all 1s ease;
+}
+.user_menu > ul:hover {
+  transition: all 1s ease;
+  padding-left: 1.5rem;
+  background: rgb(160, 159, 159);
+}
+
+
 .show_user_menu {
-  transition: all 5s ease;
   height: 0;
+  transition: all 1s ease;
 }

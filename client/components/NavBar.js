@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
-import Logout from './Logout'
 import Sanduich from './sanduich'
 import {getBooks, getCartItems, getAuthors, getAuthorBooks, getGenre, getGenreBooks, getUser} from '../redux/store'
 
@@ -91,7 +90,6 @@ handleSubmit(ev){
               <div className="logoutContainer">
                 <h4>Weclome {user.firstName} </h4>
                 {/* <Link className = "navLink" to = "/logout">logout</Link> */}
-                <Logout />
               </div>
             }
           </div>

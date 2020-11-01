@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt')
 const { User, Session} = require('../db');
 
 router.post('/', async (req, res, next) => {
+    try{
+
+   
     const { userName, password } = req.body;
     const user = await User.findOne({where: { userName }})
     if (user) {
@@ -10,8 +13,6 @@ router.post('/', async (req, res, next) => {
         if (correctPassword) {
             const usersSession = await Session.findByPk(req.sid)
             await usersSession.setUser(user)
-            console.log('====>>>', user);
-
             res.redirect('/').send(user)
         }
         else {
@@ -21,6 +22,10 @@ router.post('/', async (req, res, next) => {
     else {
         res.sendStatus(401);
     }
+}
+catch (err) {
+    next(err)
+}
 })
 
 module.exports = router;

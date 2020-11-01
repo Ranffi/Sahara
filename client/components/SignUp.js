@@ -16,7 +16,8 @@ class SignUp extends Component{
       state: '',
       zipCode: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      isGuest: false
 
     }
     this.handleChange = this.handleChange.bind(this);

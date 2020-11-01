@@ -3,14 +3,6 @@ const bcrypt = require('bcrypt')
 const { User, Cart } = require('../db');
 const Session = require('../db/models/Session');
 
-router.get('/whoami', (req, res) => {
-    if (req.user) {
-        res.send(`Welcome back ${req.user.userName}`)
-    } else {
-        res.send('you are not logged in')
-    }
-})
-
 router.get('/get-user', (req, res, next) => {
     try {
         res.send(req.user)

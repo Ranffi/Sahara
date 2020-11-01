@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import {deleteCartItem, updateCartItem} from '../redux/store'
 
 class Cart extends Component{
@@ -86,7 +87,7 @@ class Cart extends Component{
                     </div>
                     <div className="cart-footer">
                         <h3> your total: $ <samp className="cart-total">{this.state.totalPrice}</samp></h3>
-                        <button className="checkout">Checkout</button>
+                        <Link to = '/checkout'><button className="checkout">Checkout</button></Link>
                     </div>
                 </div>
             </div>
