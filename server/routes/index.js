@@ -20,9 +20,16 @@ router.use('/users', require('./users'))
 router.use('/login', require('./login'))
 router.use('/logout', require('./logout'))
 router.use('/cartItem', require('./cartItem'))
+router.use('/author', require('./author'))
 router.use('/address', require('./address'))
+<<<<<<< HEAD
 router.use('/orderHistory', require('./orderHistory'))
 router.use('/itemsPurchased', require('./itemsPurchased'))
+=======
+router.use('/genre', require('./genre'))
+router.use('/checkout', require('./checkout'))
+
+>>>>>>> d8a972a4536ad42881484d5811d8dccfa00a39ec
 
 //Questions
     //what do we want to do about multiple cases in cart? I.e. someone adds the same book to cart again, or buys multiple of the same book

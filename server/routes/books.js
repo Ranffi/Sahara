@@ -11,6 +11,24 @@ router.get('/', async (req, res, next) => {
         next(err)
     }
 })
+router.get('/author/:id', async (req, res, next) => {
+    try {
+        res.send(await Book.findAll({where: { authorId: req.params.id },
+            include: [Author, Genre]}));
+    }
+    catch (err) {
+        next(err)
+    }
+})
+router.get('/genre/:id', async (req, res, next) => {
+    try {
+        res.send(await Book.findAll({where: { genreId: req.params.id },
+            include: [Author, Genre]}));
+    }
+    catch (err) {
+        next(err)
+    }
+})
 
 router.get('/:id', async (req, res, next) => {
     try {
