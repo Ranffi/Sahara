@@ -9,6 +9,7 @@ import SignUp from './SignUp'
 import LogIn from './LogIn'
 import Admin from './Admin'
 import Logout from './Logout'
+import OrderHistory from './OrderHistory'
 import About from './AboutPage'
 import Checkout from './Checkout'
 import ProfileSettings from './ProfileSettings'
@@ -27,6 +28,7 @@ const App = () => {
           <Route path = "/login" exact component = { LogIn } />
           <Route path = "/admin" exact component = { Admin } />
           <Route path = "/logout" exact component = { Logout } />
+          <Route path = "/orderHistory" exact component = { OrderHistory } />
           <Route path = "/checkout" exact component = { Checkout } />
         </main>
       </Router>

@@ -533,7 +533,6 @@ nav {
   margin: 0 auto 100px;
   padding: 45px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-
 }
 /* ----------------End of Log In---------*/
 /* -------- Admin Page ------- */
@@ -639,7 +638,7 @@ footer {
     transition-delay: .2s;
     padding: 14px;
 }
-  
+
 .footer-button:after {
     position: absolute;
     top: 45px;
@@ -649,12 +648,12 @@ footer {
     width: 86px;
     transition: .6s;
 }
-  
+
 .footer-button:hover {
     color: black;
     background-color: white;
 }
-  
+
 .footer-button:hover:after {
     width: 112px;
     right: 0px;
@@ -668,7 +667,7 @@ footer {
     margin: 0;
     padding-bottom: 10px;
 }
-  
+
 .footer_h2 {
     font-weight: 300;
     line-height: 1.8;
@@ -677,12 +676,12 @@ footer {
     letter-spacing: 0.03em;
     padding: 15px 0 0 0;
 }
-  
+
 .color {
     color: white;
     font-weight: 400;
 }
-  
+
 .footer_h3 {
     font-weight: 400;
     font-size: 13px;
@@ -693,20 +692,20 @@ footer {
 }
 
 
-  
+
 .footer_ul {
     line-height: 1.8;
     list-style-type: none;
     padding: 0;
 }
-  
+
 .footer_li {
     font-weight: 300;
     font-size: 13px;
     color: #d1d1d1;
     letter-spacing: 0.03em;
 }
-  
+
 .footer_p {
     font-weight: 300;
     font-size: 13px;
@@ -714,16 +713,16 @@ footer {
     line-height: 1.8;
     letter-spacing: 0.03em;
 }
-  
+
 .footer_a {
 
     color: #d1d1d1;
 }
-  
+
 a:hover {
     color: white;
 }
-  
+
 
 .footer-inner:after {
     content: "© 2020 Sahara. All Rights Reserved.";
@@ -798,3 +797,27 @@ a:hover {
   height: 0;
   transition: all 1s ease;
 }
+/* ------------------End of Sanduich Btn----------------- */
+/* ------------------Order History----------------- */
+#orderHistoryContainer{
+  border-radius: 10px;
+  margin:  0 10% 0 10%;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#orderHistoryHeader {
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    justify-content: space-around;
+    background: #222831;
+    color: white;
+}
+#orderHistoryBody{
+  display: flex;
+
+}
+
+/* ------------------End of Order History----------------- */
+

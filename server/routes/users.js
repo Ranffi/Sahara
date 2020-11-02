@@ -47,16 +47,16 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-router.get('/:userId', async (req, res, next) => {
-    try {
-        res.send(await User.findByPk(req.params.userId, {
-            include: { all: true, nested: true }
-        }));
-    }
-    catch (err) {
-        next(err)
-    }
-})
+// router.get('/:userId', async (req, res, next) => {
+//     try {
+//         res.send(await User.findByPk(req.params.userId, {
+//             include: { all: true, nested: true }
+//         }));
+//     }
+//     catch (err) {
+//         next(err)
+//     }
+// })
 
 router.delete('/:userId', async (req, res, next) => {
     try {
