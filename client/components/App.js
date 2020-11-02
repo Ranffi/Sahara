@@ -12,6 +12,7 @@ import Logout from './Logout'
 import OrderHistory from './OrderHistory'
 import About from './AboutPage'
 import Checkout from './Checkout'
+import ProfileSettings from './ProfileSettings'
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
         <main>
           <NavBar />
           <Route path = "/" exact component = { HomePage } />
+          <Route path = "/settings" exact component = { ProfileSettings } />
           <Route path = "/about" exact component = { About } />
           <Route path = "/books" exact component = { Books } />
           <Route path = "/books/:id" exact component = { SingleBook } />
