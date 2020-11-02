@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {Component} from 'react';
-import validate, { async } from 'validate.js'
+import validate from 'validate.js'
 import {getUser} from '../redux/store'
 import { connect } from 'react-redux'
 
@@ -26,7 +26,7 @@ class ProfileSettings extends Component{
        this.props.getUser();
       }
       componentDidUpdate(){
-        if(this.state.userName === ''){
+        if (this.state.userName === ''){
           this.setState({
             userName: this.props.user.userName,
             email: this.props.user.email,
@@ -51,25 +51,24 @@ class ProfileSettings extends Component{
         const validation = validate({from: this.state.email}, constraints)
         if (validation !== undefined){alert('You did not enter a valid email')}
         else {
-          if(this.state.password === ''){
+          if (this.state.password === ''){
             this.setState({password: this.props.user.password})
           }
-          if(this.state.userName === ''){
+          if (this.state.userName === ''){
             this.setState({userName: this.props.user.userName})
           }
-          if(this.state.firstName === ''){
+          if (this.state.firstName === ''){
             this.setState({firstName: this.props.user.firstName})
           }
-          if(this.state.lastName === ''){
+          if (this.state.lastName === ''){
             this.setState({lastName: this.props.user.lastName})
           }
-          if(this.state.email === ''){
+          if (this.state.email === ''){
             this.setState({email: this.props.user.email})
           }
-          const {data} = await axios.post('/api/address', this.state)
+          let id = this.props.user.shippingAddressId
+          const {data} = await axios.put('/api/address', {...this.state, id})
           await axios.put(`/api/users/${this.props.user.id}`, {...this.state, shippingAddressId: data.id})
-          this.props.getUser();
-          this.props.history.push('/books')
         }
       }
 

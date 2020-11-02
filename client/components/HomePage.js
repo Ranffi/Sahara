@@ -9,8 +9,8 @@ class HomePage extends React.Component {
     super(props)
   }
 
-  componentDidMount() {
-    this.props.Books()
+ async componentDidMount() {
+    await this.props.Books()
     window.scrollTo(0, 0)
   }
   render() {
