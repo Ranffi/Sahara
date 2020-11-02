@@ -11,7 +11,7 @@ class AddBooks extends Component{
       authorLastName: '',
       price: '',
       description: '',
-      coverImageURL: '',
+      coverImageUrl: '',
       quantityInStock: 1,
       rating: 3,
       featured: false,
@@ -38,7 +38,7 @@ class AddBooks extends Component{
       authorLastName: '',
       price: '',
       description: '',
-      coverImageURL: '',
+      coverImageUrl: '',
       quantityInStock: 1,
       rating: 3,
       featured: false,
@@ -48,7 +48,7 @@ class AddBooks extends Component{
 
   render(){
     const {handleChange, handleSubmit} = this;
-    const { title, authorFirstName, authorLastName, price, description, coverImageURL, quantityInStock, rating, featured, onSale } = this.state
+    const { title, authorFirstName, authorLastName, price, description, coverImageUrl, quantityInStock, rating, featured, onSale } = this.state
 
     return (
       <div>
@@ -69,8 +69,8 @@ class AddBooks extends Component{
             <i>$</i>
           </div>
 
-          <label htmlFor = "coverImageURL" className = "signUpLabel">Image URL:</label>
-          <input name = "coverImageURL" className = "signUpInput" onChange = {handleChange} value = {coverImageURL} />
+          <label htmlFor = "coverImageUrl" className = "signUpLabel">Image URL:</label>
+          <input name = "coverImageUrl" className = "signUpInput" onChange = {handleChange} value = {coverImageUrl} />
 
           <div className="adminCloseEnded adminNums">
             <label htmlFor = "quantityInStock" className = "signUpLabel">In stock:</label>

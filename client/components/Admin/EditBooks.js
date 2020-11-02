@@ -2,6 +2,9 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import { singleBook } from '../../redux/store';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure()
 
 class EditBooks extends Component{
   constructor() {
@@ -12,7 +15,7 @@ class EditBooks extends Component{
       authorLastName: '',
       price: '',
       description: '',
-      coverImageURL: '',
+      coverImageUrl: '',
       quantityInStock: 1,
       rating: 3,
       featured: false,
@@ -33,31 +36,19 @@ class EditBooks extends Component{
   async handleSubmit(ev){
     ev.preventDefault()
     await axios.put(`/api/books/${this.props.book.id}`, {...this.state})
-
-    // this.setState({
-    //   title: '',
-    //   authorFirstName: '',
-    //   authorLastName: '',
-    //   price: '',
-    //   description: '',
-    //   coverImageURL: '',
-    //   quantityInStock: 1,
-    //   rating: 3,
-    //   featured: false,
-    //   onSale: false
-    // })
+    toast.success(`${this.state.title} updated!`)
   }
 
   async changeBook(ev) {
     await this.props.getBook(ev.target.value)
-    const {author, genre, title, price, description, coverImageURL, quantityInStock, rating, featured, onSale} = this.props.book
+    const {author, genre, title, price, description, coverImageUrl, quantityInStock, rating, featured, onSale} = this.props.book
     this.setState({
         title,
         authorFirstName: author.firstName,
         authorLastName: author.lastName,
         price,
         description,
-        coverImageURL,
+        coverImageUrl,
         quantityInStock,
         rating,
         featured,
@@ -67,7 +58,7 @@ class EditBooks extends Component{
 
   render(){
     const {handleChange, handleSubmit} = this;
-    const { title, authorFirstName, authorLastName, price, description, coverImageURL, quantityInStock, rating, featured, onSale } = this.state
+    const { title, authorFirstName, authorLastName, price, description, coverImageUrl, quantityInStock, rating, featured, onSale } = this.state
 
     return (
       <div>
@@ -96,7 +87,7 @@ class EditBooks extends Component{
           </div>
 
           <label htmlFor = "coverImageURL" className = "signUpLabel">Image URL:</label>
-          <input name = "coverImageURL" className = "signUpInput" onChange = {handleChange} value = {coverImageURL} />
+          <input name = "coverImageURL" className = "signUpInput" onChange = {handleChange} value = {coverImageUrl} />
 
           <div className="adminCloseEnded adminNums">
             <label htmlFor = "quantityInStock" className = "signUpLabel">In stock:</label>
@@ -117,7 +108,7 @@ class EditBooks extends Component{
           <label htmlFor = "description" className = "signUpLabel">Description:</label>
           <textarea name = "description" className = "signUpInput" onChange = {handleChange} value = {description} />
         </div>
-          <button type = "submit" id = "signUpSubmit">Add Book</button>
+          <button type = "submit" id = "editBook">Edit Book</button>
         </form>
       </div>
     )
