@@ -13,7 +13,6 @@ router.get('/whoami', (req, res) => {
 
 router.get('/get-user', (req, res, next) => {
     try {
-        console.log(req.user)
         res.send(req.user)
     }
     catch (err) {
@@ -23,13 +22,15 @@ router.get('/get-user', (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     try {
-        const {userName, password, email, shippingAddressId, isGuest } = req.body
+        const {userName, password, firstName, lastName,  email, shippingAddressId, isGuest } = req.body
         const hashedPw = await bcrypt.hash(password, 10)
         const user = await User.findByPk(req.params.id);
         await user.update({
             userName,
             password: hashedPw,
             email,
+            firstName,
+            lastName,
             shippingAddressId,
             isGuest
         })
@@ -46,16 +47,16 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-router.get('/:userId', async (req, res, next) => {
-    try {
-        res.send(await User.findByPk(req.params.userId, {
-            include: { all: true, nested: true }
-        }));
-    }
-    catch (err) {
-        next(err)
-    }
-})
+// router.get('/:userId', async (req, res, next) => {
+//     try {
+//         res.send(await User.findByPk(req.params.userId, {
+//             include: { all: true, nested: true }
+//         }));
+//     }
+//     catch (err) {
+//         next(err)
+//     }
+// })
 
 router.delete('/:userId', async (req, res, next) => {
     try {

@@ -14,7 +14,7 @@ const Footer = () => {
     <section className="footer-item">
       <h3 className = "footer_h3">Explore</h3>
         <ul className = "footer_ul">
-        <Link to="/books"><li className = "footer_li"><a  className = "footer_a"href="#">All Books</a></li></Link>
+        <Link to="/books"><li className = "footer_li"><ul  className = "footer_a"href="#">All Books</ul></li></Link>
         </ul>
     </section>
 
@@ -38,7 +38,7 @@ const Footer = () => {
 
 
     <section className="footer-item">
-        <Link to = "/about"><a className = "footer_a" href="#" className="footer-button">Next: About</a></Link>
+        <Link to = "/about"><ul className = "footer_a" href="#" className="footer-button">Next: About</ul></Link>
     </section>
   </div>
     </footer>
