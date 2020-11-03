@@ -19,7 +19,7 @@ class NavBar extends Component{
     this.emtyValue = this.emtyValue.bind(this)
 }
  async componentDidMount(){
-  this.props.getBook()
+  // this.props.getBook()
   this.props.getAuthors()
   this.props.getGenre()
   await this.props.getUser()
@@ -85,6 +85,7 @@ handleSubmit(ev){
               <div className="loginContainer">
                 <Link className = "navLink" to = "/login">Log In</Link>
                 <Link className = "navLink" to = "/signUp">Sign Up</Link>
+                <div>{user.userName}</div>
               </div>
               :
               <div className="logoutContainer">

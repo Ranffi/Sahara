@@ -27,7 +27,7 @@ class LogIn extends Component{
     userName: '',
     password: ''
     })
-    await this.props.getUser();
+    // await this.props.getUser();
   }
 
   render(){

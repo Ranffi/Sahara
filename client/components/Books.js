@@ -19,7 +19,7 @@ class Books extends Component{
       const arr = this.props.cartItems.map(item => {
         return item.book.id
       })
-      this.props.getUser()
+      // this.props.getUser()
       this.setState({itemsArr: arr})
     }
   }
