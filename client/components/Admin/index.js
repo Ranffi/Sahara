@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import AddBooks from './AddBooks';
+import EditBooks from './EditBooks';
 
 class Admin extends Component {
   constructor() {
@@ -32,7 +33,7 @@ class Admin extends Component {
                 <div>
                     {
                         (selectedForm === 'addBooks' ? (<AddBooks />) :
-                        (selectedForm === 'editBooks' ? (<p>Check in later...</p>) : null))
+                        (selectedForm === 'editBooks' ? (<EditBooks />) : null))
                     }
                 </div>
             </div>
