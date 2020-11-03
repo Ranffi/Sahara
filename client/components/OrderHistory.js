@@ -17,7 +17,6 @@ class OrderHistory extends Component{
 
   render(){
     const {orderHistory, user} = this.props
-    console.log(orderHistory)
     if (!orderHistory){return (
       <div>Loading</div>
     )}

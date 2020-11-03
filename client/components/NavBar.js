@@ -88,7 +88,7 @@ handleSubmit(ev){
               </div>
               :
               <div className="logoutContainer">
-                <h4>Weclome {user.firstName} </h4>
+                <h4>Welcome {user.firstName} </h4>
               </div>
             }
           </div>
