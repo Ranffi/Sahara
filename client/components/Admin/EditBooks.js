@@ -1,8 +1,12 @@
 import axios from 'axios';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
+import { singleBook } from '../../redux/store';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure()
 
-class AddBooks extends Component{
+class EditBooks extends Component{
   constructor() {
     super()
     this.state = {
@@ -18,7 +22,8 @@ class AddBooks extends Component{
       onSale: false
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.changeBook = this.changeBook.bind(this);
   }
 
   handleChange(ev) {
@@ -30,19 +35,24 @@ class AddBooks extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    await axios.post(`/api/books`, {...this.state})
+    await axios.put(`/api/books/${this.props.book.id}`, {...this.state})
+    toast.success(`${this.state.title} updated!`)
+  }
 
+  async changeBook(ev) {
+    await this.props.getBook(ev.target.value)
+    const {author, genre, title, price, description, coverImageUrl, quantityInStock, rating, featured, onSale} = this.props.book
     this.setState({
-      title: '',
-      authorFirstName: '',
-      authorLastName: '',
-      price: '',
-      description: '',
-      coverImageUrl: '',
-      quantityInStock: 1,
-      rating: 3,
-      featured: false,
-      onSale: false
+        title,
+        authorFirstName: author.firstName,
+        authorLastName: author.lastName,
+        price,
+        description,
+        coverImageUrl,
+        quantityInStock,
+        rating,
+        featured,
+        onSale
     })
   }
 
@@ -52,6 +62,13 @@ class AddBooks extends Component{
 
     return (
       <div>
+        <br />
+        <select name="bookList" id="bookList" onChange={this.changeBook}>
+            {this.props.books.map( book => {
+                return (<option value={book.id} key={book.id}>{`${book.title}`}</option>)
+            })}
+        </select>
+        <hr />
         <form onSubmit = {handleSubmit} >
         <div id = "signUpUserInfo">
           <label htmlFor = "title" className = "signUpLabel">Title:</label>
@@ -69,8 +86,8 @@ class AddBooks extends Component{
             <i>$</i>
           </div>
 
-          <label htmlFor = "coverImageUrl" className = "signUpLabel">Image URL:</label>
-          <input name = "coverImageUrl" className = "signUpInput" onChange = {handleChange} value = {coverImageUrl} />
+          <label htmlFor = "coverImageURL" className = "signUpLabel">Image URL:</label>
+          <input name = "coverImageURL" className = "signUpInput" onChange = {handleChange} value = {coverImageUrl} />
 
           <div className="adminCloseEnded adminNums">
             <label htmlFor = "quantityInStock" className = "signUpLabel">In stock:</label>
@@ -91,15 +108,19 @@ class AddBooks extends Component{
           <label htmlFor = "description" className = "signUpLabel">Description:</label>
           <textarea name = "description" className = "signUpInput" onChange = {handleChange} value = {description} />
         </div>
-          <button type = "submit" id = "signUpSubmit">Add Book</button>
+          <button type = "submit" id = "editBook">Edit Book</button>
         </form>
       </div>
     )
   }
-
 }
 
 export default connect(
-  null,
-  null
-)(AddBooks);
+    ({book, books}) => ({
+        book,
+        books
+      }),
+      (dispatch) => ({
+        getBook: (id) => dispatch(singleBook(id))
+      })
+)(EditBooks);
