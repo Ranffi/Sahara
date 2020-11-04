@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, {Component} from 'react';
 import {getUser} from '../redux/store'
 import { connect } from 'react-redux'
+import { toast } from 'react-toastify'
+
 
 class LogIn extends Component{
   constructor() {
@@ -22,12 +24,19 @@ class LogIn extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    await axios.post('/api/login', this.state)
+    let res = await axios.post('/api/login', this.state)
+    console.log('----->', res);
+
     this.setState({
     userName: '',
     password: ''
     })
-    await this.props.getUser();
+    if (res){
+      await this.props.getUser();
+      this.props.history.push('/')
+    } else {
+      toast.error('Username Or Password is incorrect');
+    }
   }
 
   render(){

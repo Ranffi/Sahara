@@ -30,7 +30,7 @@ class OrderHistory extends Component{
         <h2>
           My Order History
         </h2>
-        <div>
+        <div className='test'>
           {
             orderHistory.map( order => {
               return (<SingleOrder key = {order.id} order = {order} user = {user} />)

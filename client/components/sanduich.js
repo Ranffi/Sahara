@@ -37,7 +37,7 @@ class Sanduich extends Component{
                 <div className={`user_menu ${this.state.showList}`}>
                     <h4>{this.props.user.firstName} {this.props.user.lastName}</h4>
                     <Link to="/settings" onClick={() => this.addClass()}><ul>Settings</ul></Link>
-                    <ul onClick={() => this.addClass()}>Order History</ul>
+                    <Link to="/orderHistory" onClick={() => this.addClass()}><ul>Oreder History </ul></Link>
                     {
                         this.props.user.adminStatus ?
                         <Link to="/admin" onClick={() => this.addClass()}><ul>Admin </ul> </Link>: ''
