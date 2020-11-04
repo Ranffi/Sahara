@@ -600,7 +600,7 @@ nav {
 
 .adminNums > input {
   width: 40%;
-  
+
 }
 
 .adminNums > #inStock {
@@ -855,7 +855,12 @@ a:hover {
 }
 #orderHistoryBody{
   display: flex;
-
+  flex-wrap: wrap;
+}
+#allOrderContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
 }
 
 /* ------------------End of Order History----------------- */

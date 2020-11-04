@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import {deleteCartItem, updateCartItem, getUser} from '../redux/store'
 import StripeCheckout from 'react-stripe-checkout'
 toast.configure()
+
 class Checkout extends React.Component {
     constructor(props) {
         super(props)
@@ -29,7 +30,6 @@ class Checkout extends React.Component {
     async componentDidUpdate() {
         if (this.state.cart.length !== this.props.cartItems.length) {
             const cartItems = (await axios.get(`/api/cartItem/${this.props.user.id}`)).data
-            console.log(cartItems)
             const price = cartItems.reduce((total, item) => {
                 return total + item.book.price
             }, 0)
@@ -40,11 +40,7 @@ class Checkout extends React.Component {
        token.totalPrice = this.state.totalPrice
        token.cartItems = this.state.cart
         const res = await axios.post('api/checkout', {token})
-        console.log('we made it here!!!!!!!!!!!!!!!!!!!!!')
-        // const { status } = res.data;
-        console.log('Response:', res.data);
         if (res.data === 'success') {
-            console.log('we made it here!!!!!!!!!!!!!!!!!!!!!')
           toast.success('Success! Check email for details');
         } else {
           toast.error('Something went wrong');
@@ -60,7 +56,7 @@ class Checkout extends React.Component {
             {this.state.cart
             .map(item => {
                 return (
-                    <li>{item.book.title} cost ${item.book.price}</li>
+                    <li key = {item.id}>{item.book.title} cost ${item.book.price}</li>
                 )
             })
             }
