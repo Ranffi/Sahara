@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
-import Logout from './Logout'
 import Sanduich from './sanduich'
 import {getBooks, getCartItems, getAuthors, getAuthorBooks, getGenre, getGenreBooks, getUser} from '../redux/store'
 
@@ -76,22 +75,20 @@ handleSubmit(ev){
               <option value="Genre">Genre</option>
           </select>
             <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Search..." name="search" value={this.state.value} onChange={this.searchChenge} />
+            <input type="text" placeholder="Search..." name="search" value={this.state.value} onChange={this.searchChenge} autoComplete="off" />
             <button type="submit"><i className="fa fa-search" /></button>
             </form>
           </div>
           <div id ="navRightContainer">
             {
               user.isGuest ?
-              <div>
-                <Link className = "navLink" to = "/login">Log In </Link>
-                <Link className = "navLink" to = "/signUp"> Sign Up</Link>
+              <div className="loginContainer">
+                <Link className = "navLink" to = "/login">Log In</Link>
+                <Link className = "navLink" to = "/signUp">Sign Up</Link>
               </div>
               :
-              <div>
-                <h4>Weclome {user.userName} </h4>
-                {/* <Link className = "navLink" to = "/logout">logout</Link> */}
-                <Logout />
+              <div className="logoutContainer">
+                <h4>Welcome, {user.firstName} </h4>
               </div>
             }
           </div>
@@ -117,14 +114,14 @@ handleSubmit(ev){
               authors.map( author => {
                 if (author.firstName.toUpperCase().indexOf(filter) > -1 || author.lastName.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                     return (
-                      <a key ={author.id} onClick={() => this.emtyValue(author.id, choice)} >{author.firstName} {author.lastName}</a>
+                      <Link to ="/books" key ={author.id} onClick={() => this.emtyValue(author.id, choice)} >{author.firstName} {author.lastName}</Link>
                     )
                   }
                 }) :
                 genre.map( element => {
                   if (element.name.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                       return (
-                        <a key ={element.id} onClick={() => this.emtyValue(element.id, choice)} >{element.name}</a>
+                        <Link to="/books" key ={element.id} onClick={() => this.emtyValue(element.id, choice)} >{element.name}</Link>
                       )
                     }
                   })

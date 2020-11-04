@@ -8,10 +8,12 @@ router.post('/', async (req, res, next) => {
             id: req.sid
         }
     })
+
     res.clearCookie('sid', session.id, {
         path: '/'
     })
     await session.destroy()
+
     res.redirect('/')
 }
 catch (err) {

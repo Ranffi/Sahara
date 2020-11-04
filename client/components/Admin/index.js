@@ -1,6 +1,8 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import AddBooks from './AddBooks';
+import EditBooks from './EditBooks';
+import AddAdmin from './AddAdmin'
 
 class Admin extends Component {
   constructor() {
@@ -28,11 +30,14 @@ class Admin extends Component {
                 <div className="adminNavBar">
                     <div onClick={() => this.toggleForm('addBooks')} className={selectedForm === 'addBooks' ? 'selectedAdmin adminNavElement' : 'adminNavElement'}>Add Books</div>
                     <div onClick={() => this.toggleForm('editBooks')} className={selectedForm === 'editBooks' ? 'selectedAdmin adminNavElement' : 'adminNavElement'}>Edit Books</div>
+                    <div onClick={() => this.toggleForm('addAdmin')} className={selectedForm === 'addAdmin' ? 'selectedAdmin adminNavElement' : 'adminNavElement'}>Add Admin</div>
                 </div>
                 <div>
                     {
-                        (selectedForm === 'addBooks' ? (<AddBooks />) :
-                        (selectedForm === 'editBooks' ? (<p>Check in later...</p>) : null))
+                        (
+                            selectedForm === 'addBooks' ? <AddBooks /> :
+                            selectedForm === 'editBooks' ? <EditBooks /> : selectedForm === 'addAdmin' ?  <AddAdmin /> : null
+                        )
                     }
                 </div>
             </div>

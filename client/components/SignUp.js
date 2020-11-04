@@ -15,6 +15,8 @@ class SignUp extends Component{
       city: '',
       state: '',
       zipCode: '',
+      firstName: '',
+      lastName: '',
       isGuest: false
 
     }
@@ -41,7 +43,7 @@ class SignUp extends Component{
       }
     }
     const validation = validate({from: this.state.email}, constraints)
-    if (validation !== undefined){alert('You did not enter a valid email')}
+    if (validation !== undefined){ alert('You did not enter a valid email') }
     else {
       const {data} = await axios.post('/api/address', this.state)
       await axios.put(`/api/users/${this.props.id}`, {...this.state, shippingAddressId: data.id})
@@ -54,6 +56,9 @@ class SignUp extends Component{
         city: '',
         state: '',
         zipCode: '',
+        firstName: '',
+        lastName: '',
+        isGuest: false
       })
       this.props.getUser();
       this.props.history.push('/books')
@@ -70,11 +75,17 @@ class SignUp extends Component{
         </h2>
         <form onSubmit = {handleSubmit} id = "signUpForm">
           <div id = "signUpUserInfo">
+          <label htmlFor = "firstName" className = "signUpLabel">First Name:</label>
+            <input name = "firstName" className = "signUpInput" onChange = {handleChange} value = {this.state.firstName} />
+
+            <label htmlFor = "lastName" className = "signUpLabel">Last Name:</label>
+            <input name = "lastName" className = "signUpInput" onChange = {handleChange} value = {this.state.lastName} />
+
             <label htmlFor = "userName" className = "signUpLabel">User Name:</label>
             <input name = "userName" className = "signUpInput" onChange = {handleChange} value = {this.state.userName} />
 
             <label htmlFor = "password" className = "signUpLabel">Password:</label>
-            <input name = "password" className = "signUpInput" onChange = {handleChange} value = {this.state.password} />
+            <input name = "password" type="password"  className = "signUpInput" onChange = {handleChange} value = {this.state.password} />
 
             <label htmlFor = "email" className = "signUpLabel">Email:</label>
             <input name = "email" className = "signUpInput" onChange = {handleChange} value = {this.state.email} />

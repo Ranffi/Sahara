@@ -8,6 +8,8 @@ class SingleBook extends Component{
         super();
         this.state = {
           book: '',
+          firstName: '',
+          lastName: '',
           itemsArr: []
         }
     }
@@ -20,13 +22,18 @@ class SingleBook extends Component{
             const arr = this.props.cartItems.map(item => {
                 return item.book.id
               })
-            this.setState({book: this.props.book, itemsArr: arr })
+            this.setState({
+                book: this.props.book,
+                firstName: this.props.book.author.firstName,
+                lastName: this.props.book.author.lastName,
+                itemsArr: arr })
         }
     }
 
     render(){
         const {itemsArr} = this.state
         const {book, user} = this.props
+        const {firstName, lastName} = this.state;
         return (
             <div className="singleBookMain">
                 <div className="singleBookContainer">
@@ -35,7 +42,7 @@ class SingleBook extends Component{
                     </div>
                     <div>
                         <h3>{book.title}</h3>
-                        <h4>by: </h4>
+                        <h4>by: {firstName} {lastName}</h4>
                         <h3>${book.price}</h3>
                         {
                         itemsArr.indexOf(book.id) === -1 ?

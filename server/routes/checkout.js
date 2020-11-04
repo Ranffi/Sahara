@@ -48,10 +48,10 @@ router.post('/', async (req, res, next) => {
             })
             await CartItems.update({orderHistoryId: newOrder.id}, {
                 where: {
-                    userId: token.cartItems[0].userId
+                    orderHistoryId: null
                 }
             })
-        
+
         res.send('success')
     }
 

@@ -1,8 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-// import Toast from 'react-bootstrap/Toast'
-// import ToastHeader from 'react-bootstrap/ToastHeader'
-// import ToastBody from 'react-bootstrap/ToastBody'
 import { toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { connect } from 'react-redux'

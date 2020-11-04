@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {Component} from 'react';
-import {getUser, getCartItems} from '../redux/store'
+import {getUser} from '../redux/store'
 import { connect } from 'react-redux'
 
 class LogIn extends Component{
@@ -28,7 +28,6 @@ class LogIn extends Component{
     password: ''
     })
     await this.props.getUser();
-    await this.props.items(this.props.user.id)
   }
 
   render(){
@@ -62,8 +61,7 @@ export default connect(
   },
   (dispatch) => {
     return {
-    getUser: () => dispatch(getUser()),
-    items: (id) => dispatch(getCartItems(id))
+    getUser: () => dispatch(getUser())
   }
 }
 )(LogIn)

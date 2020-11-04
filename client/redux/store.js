@@ -11,7 +11,11 @@ const GET_AUTHOR_BOOKS = 'GET_AUTHOR_BOOKS'
 const GET_GENRE_BOOKS = 'GET_GENRE_BOOKS'
 const GET_GENRE = 'GET_GENRE'
 const GET_USER = 'GET_USER'
+const GET_ORDERS = 'GET_ORDERS'
+const GET_ADDRESS = 'GET_ADDRESS'
 
+const GET_ALL_USERS = 'GET_ALL_USERS'
+const GET_ALL_ADMINS = 'GET_ALL_ADMINS'
 
 const initialState = {
     books: [],
@@ -19,8 +23,24 @@ const initialState = {
     authors: [],
     cartItems: [],
     user: {},
-    genre: []
+    genre: [],
+    orderHistory: [],
+    address: {},
+    users: [],
+    admins: [],
 }
+
+
+
+ const manageAdmin = (id, adminStatus) => {
+    return async(dispatch) => {
+
+        await axios.put(`/api/users/admin/${id}`, { adminStatus });
+        const res = await axios.get('/api/users/admins');
+        dispatch(_getAllAdmins(res.data))
+    }
+}
+
 export const _getGenre = (genre) => {
     return {
     type: GET_GENRE,
@@ -33,6 +53,33 @@ export const _getGenre = (genre) => {
         dispatch(_getGenre(res.data))
     }
 }
+export const _getAllUsers = (users) => {
+    return {
+    type: GET_ALL_USERS,
+    users
+}}
+
+ const getAllUsers = () => {
+    return async(dispatch) => {
+        const res = await axios.get('/api/users');
+        dispatch(_getAllUsers(res.data))
+    }
+}
+
+
+export const _getAllAdmins = (admins) => {
+    return {
+    type: GET_ALL_ADMINS,
+    admins
+}}
+
+ const getAllAdmins = () => {
+    return async(dispatch) => {
+        const res = await axios.get('/api/users/admins');
+        dispatch(_getAllAdmins(res.data))
+    }
+}
+
 export const _getGenreBooks = (genreBooks) => {
     return {
     type: GET_GENRE_BOOKS,
@@ -146,6 +193,31 @@ const getUser = () => {
     }
 }
 
+export const _getOrders = (orderHistory) => {
+    return {
+    type: GET_ORDERS,
+    orderHistory
+}}
+
+const getOrderHistory = (userId) => {
+    return async(dispatch) => {
+        const res = await axios.get(`/api/orderHistory/${userId}`)
+        dispatch(_getOrders(res.data))
+    }
+}
+
+export const _getAddress = (address) => {
+    return {
+    type: GET_ADDRESS,
+    address
+}}
+
+const getAddress = (id) => {
+    return async(dispatch) => {
+        const res = await axios.get(`/api/address/${id}`)
+        dispatch(_getAddress(res.data[0]))
+    }
+}
 
 const reducer = ((state = initialState, action) => {
     switch (action.type) {
@@ -157,10 +229,14 @@ const reducer = ((state = initialState, action) => {
         case GET_AUTHOR_BOOKS: return { ...state, books: action.authorBooks}
         case GET_GENRE_BOOKS: return { ...state, books: action.genreBooks}
         case GET_GENRE: return {...state, genre: action.genre}
+        case GET_ORDERS: return {...state, orderHistory: action.orderHistory }
+        case GET_ADDRESS: return {...state, address: action.address}
+        case GET_ALL_USERS: return {...state, users: action.users }
+        case GET_ALL_ADMINS: return {...state, admins: action.admins }
         default: return state
     }
 })
-const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk))
+const store = createStore(reducer, applyMiddleware(thunk))
 export default  store
 export { getBooks, singleBook, addCartItem, getCartItems, deleteCartItem,
-    updateCartItem, getAuthors, getAuthorBooks, getGenreBooks, getGenre, getUser}
+    updateCartItem, getAuthors, getAuthorBooks, getGenreBooks, getGenre, getUser, getOrderHistory, getAddress, manageAdmin, getAllAdmins, getAllUsers}

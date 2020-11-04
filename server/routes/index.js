@@ -22,6 +22,7 @@ router.use('/logout', require('./logout'))
 router.use('/cartItem', require('./cartItem'))
 router.use('/author', require('./author'))
 router.use('/address', require('./address'))
+router.use('/orderHistory', require('./orderHistory'))
 router.use('/genre', require('./genre'))
 router.use('/checkout', require('./checkout'))
 
