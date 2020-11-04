@@ -28,6 +28,7 @@ class LogIn extends Component{
     password: ''
     })
     await this.props.getUser();
+    this.props.history.push('/books')
   }
 
   render(){
@@ -42,7 +43,7 @@ class LogIn extends Component{
           <input name ="userName" className = "logInInput" onChange = {handleChange} value = {this.state.userName} />
 
           <label>Password:</label>
-          <input name ="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
+          <input name ="password" type="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
 
           <button type ="submit" id = "logInButton" >Log In</button>
 
