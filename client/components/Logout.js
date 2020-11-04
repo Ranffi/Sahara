@@ -19,7 +19,7 @@ class Logout extends Component{
 
   render(){
     return (
-      <ul> <Link to="/" onClick={() => this.handleSubmit()}>Log out</Link> </ul>
+       <Link to="/" onClick={() => this.handleSubmit()}><ul>Log out </ul></Link>
     )
   }
 

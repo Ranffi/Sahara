@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 import validate from 'validate.js'
-import {getUser} from '../redux/user'
+import {getAddress} from '../redux/user'
 import { connect } from 'react-redux'
 
 class ProfileSettings extends Component{
@@ -22,13 +22,22 @@ class ProfileSettings extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
       }
-      componentDidUpdate(){
+      async componentDidMount(){
+       await this.props.getAddress(this.props.user.shippingAddressId);
+      }
+
+      async componentDidUpdate(){
         if (this.state.userName === ''){
+          await this.props.getAddress(this.props.user.shippingAddressId);
           this.setState({
             userName: this.props.user.userName,
             email: this.props.user.email,
             firstName: this.props.user.firstName,
-            lastName: this.props.user.lastName
+            lastName: this.props.user.lastName,
+            streetAddress: this.props.address.streetAddress,
+            city: this.props.address.city,
+            zipCode: this.props.address.zipCode,
+            state: this.props.address.state
         })
       }
     }
@@ -48,9 +57,9 @@ class ProfileSettings extends Component{
         const validation = validate({from: this.state.email}, constraints)
         if (validation !== undefined){alert('You did not enter a valid email')}
         else {
-          if (this.state.password === ''){
-            this.setState({password: this.props.user.password})
-          }
+          // if (this.state.password === ''){
+          //   this.setState({password: this.props.user.password})
+          // }
           if (this.state.userName === ''){
             this.setState({userName: this.props.user.userName})
           }
@@ -62,6 +71,18 @@ class ProfileSettings extends Component{
           }
           if (this.state.email === ''){
             this.setState({email: this.props.user.email})
+          }
+          if (this.state.streetAddress === ''){
+            this.setState({email: this.props.address.streetAddress})
+          }
+          if (this.state.zipCode === ''){
+            this.setState({email: this.props.address.zipCode})
+          }
+          if (this.state.state === ''){
+            this.setState({email: this.props.address.state})
+          }
+          if (this.state.city === ''){
+            this.setState({email: this.props.address.city})
           }
           let id = this.props.user.shippingAddressId
           const {data} = await axios.put('/api/address', {...this.state, id})
@@ -126,10 +147,15 @@ class ProfileSettings extends Component{
 }
 
 export default connect(
-  ({user}) => {
+  ({user, address}) => {
     return {
-      user: user.user
+      user: user.user,
+      address: user.address
     }
   },
-  null
+  (dispatch) => {
+    return {
+    getAddress: (id) => dispatch(getAddress(id))
+  }
+}
 )(ProfileSettings)

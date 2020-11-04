@@ -84,6 +84,31 @@ nav {
   margin: 0;
   align-self: center;
 }
+#admin_search {
+  z-index: 3;
+  /* top: 100px; */
+  left: 37%;
+  height: 7rem;
+  width: 25rem;
+  position: fixed;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  align-self: center;
+}
+#admin_search >a {
+  text-decoration: none;
+  margin-top: -1px;
+  border: solid black 1px;
+  padding: 12px;
+  background-color: rgb(236, 235, 235);
+  color: black;
+  display: block;
+}
+#admin_search >a:hover {
+  background-color: rgb(138, 136, 136);
+}
 
 #myUL >a {
   text-decoration: none;
@@ -777,9 +802,15 @@ a:hover {
   border-top: 1px solid black;
   transition: all 1s ease;
 }
-.user_menu > ul > a {
+.user_menu > a > ul {
+  margin: 0;
+  padding: 1rem;
+  cursor: pointer;
+  border-top: 1px solid black;
+  transition: all 1s ease;
   text-decoration: none;
   color: black;
+
 }
 .user_menu > h4 {
   padding-left: 1rem;
@@ -790,6 +821,14 @@ a:hover {
   transition: all 1s ease;
   padding-left: 1.5rem;
   background: rgb(160, 159, 159);
+}
+.user_menu > a > ul:hover {
+  transition: all 1s ease;
+  padding-left: 1.5rem;
+  background: rgb(160, 159, 159);
+}
+.user_menu > a:link {
+  text-decoration: none;
 }
 
 

@@ -12,7 +12,7 @@ const initialState = {
     books: [],
     book: {},
     authors: [],
-    genre: []
+    genre: [],
 }
 
 export const _getGenre = (genre) => {
@@ -27,6 +27,8 @@ export const _getGenre = (genre) => {
         dispatch(_getGenre(res.data))
     }
 }
+
+
 export const _getGenreBooks = (genreBooks) => {
     return {
     type: GET_GENRE_BOOKS,

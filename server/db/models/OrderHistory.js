@@ -5,7 +5,6 @@ const OrderHistory = db.define('orderHistory', {
     shippingAddress: {
         type: Sequelize.TEXT
     },
-
     subTotal: {
         type: Sequelize.FLOAT
     },

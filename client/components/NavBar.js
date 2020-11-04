@@ -51,7 +51,6 @@ handleSubmit(ev){
     const {books, cartItems, authors, genre, user} = this.props
     const {value, choice, name} = this.state
     if (!books) return (<div>Loading...</div>)
-    console.log('here!', books)
     return (
       <div>
         <nav>
@@ -84,7 +83,6 @@ handleSubmit(ev){
               <div className="loginContainer">
                 <Link className = "navLink" to = "/login">Log In</Link>
                 <Link className = "navLink" to = "/signUp">Sign Up</Link>
-                <div>{user.userName}</div>
               </div>
               :
               <div className="logoutContainer">

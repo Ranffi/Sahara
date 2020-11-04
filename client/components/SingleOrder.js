@@ -7,7 +7,7 @@ const SingleOrder = ({order, user}) => {
     <div id = "orderHistoryContainer">
       <div id = "orderHistoryHeader">
         <div>Order Placed: {purchaseDate}</div>
-        <div> Shipped To: {user.userName} </div>
+        <div> Shipped To: {order.user.shippingAddress.streetAddress} </div>
       </div>
       <div id = "orderHistoryBody">
         {

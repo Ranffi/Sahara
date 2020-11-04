@@ -12,7 +12,7 @@ class SignUp extends Component{
       email: '',
       streetAddress: '',
       city: '',
-      state: '',
+      state: 'AL',
       zipCode: '',
       firstName: '',
       lastName: '',
@@ -41,7 +41,7 @@ class SignUp extends Component{
     if (validation !== undefined){ alert('You did not enter a valid email') }
     else {
       const {data} = await axios.post('/api/address', this.state)
-      await axios.put(`/api/users/${this.props.id}`, {...this.state, shippingAddressId: data.id})
+      await axios.put(`/api/users/${this.props.user.id}`, {...this.state, shippingAddressId: data.id})
 
       this.setState({
         userName: '',
@@ -49,13 +49,12 @@ class SignUp extends Component{
         email: '',
         streetAddress: '',
         city: '',
-        state: '',
+        state: 'AL',
         zipCode: '',
         firstName: '',
         lastName: '',
         isGuest: false
       })
-      this.props.getUser();
       this.props.history.push('/books')
     }
   }
