@@ -3,9 +3,7 @@ const bcrypt = require('bcrypt')
 const { User, Session} = require('../db');
 
 router.post('/', async (req, res, next) => {
-    try{
-
-   
+    try {
     const { userName, password } = req.body;
     const user = await User.findOne({where: { userName }})
     if (user) {

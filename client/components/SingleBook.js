@@ -8,6 +8,8 @@ class SingleBook extends Component{
         super();
         this.state = {
           book: '',
+          firstName: '',
+          lastName: '',
           itemsArr: []
         }
     }
@@ -20,13 +22,18 @@ class SingleBook extends Component{
             const arr = this.props.cartItems.map(item => {
                 return item.book.id
               })
-            this.setState({book: this.props.book, itemsArr: arr })
+            this.setState({
+                book: this.props.book,
+                firstName: this.props.book.author.firstName,
+                lastName: this.props.book.author.lastName,
+                itemsArr: arr })
         }
     }
 
     render(){
         const {itemsArr} = this.state
         const {book, user} = this.props
+        const {firstName, lastName} = this.state;
         return (
             <div className="singleBookMain">
                 <div className="singleBookContainer">
@@ -35,7 +42,7 @@ class SingleBook extends Component{
                     </div>
                     <div>
                         <h3>{book.title}</h3>
-                        <h4>by: </h4>
+                        <h4>by: {firstName} {lastName}</h4>
                         <h3>${book.price}</h3>
                         {
                         itemsArr.indexOf(book.id) === -1 ?
@@ -44,7 +51,7 @@ class SingleBook extends Component{
                          {/* eslint-disable-next-line react/jsx-child-element-spacing */}
                         <i className="fas fa-shopping-cart" />
                         Add To Cart
-                        </button>:
+                        </button> :
                           // eslint-disable-next-line react/button-has-type
                         <button className="bag-btn-sigleBook"  data-id={book.id}>
                          {/* eslint-disable-next-line react/jsx-child-element-spacing */}
