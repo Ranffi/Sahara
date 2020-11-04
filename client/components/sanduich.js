@@ -36,11 +36,11 @@ class Sanduich extends Component{
                 </div>
                 <div className={`user_menu ${this.state.showList}`}>
                     <h4>{this.props.user.firstName} {this.props.user.lastName}</h4>
-                    <ul onClick={() => this.addClass()}><Link to="/settings">Settings</Link></ul>
+                    <Link to="/settings" onClick={() => this.addClass()}><ul>Settings</ul></Link>
                     <ul onClick={() => this.addClass()}>Order History</ul>
                     {
                         this.props.user.adminStatus ?
-                        <ul><Link to="/admin" onClick={() => this.addClass()}>Admin</Link></ul> : ''
+                        <Link to="/admin" onClick={() => this.addClass()}><ul>Admin </ul> </Link>: ''
                     }
                     <Logout addClass={this.addClass} />
                 </div>
