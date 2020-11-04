@@ -31,7 +31,6 @@ class SingleBook extends Component{
     }
 
     render(){
-        console.log(this.props)
         const {itemsArr} = this.state
         const {book, user} = this.props
         const {firstName, lastName} = this.state;
