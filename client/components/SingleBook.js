@@ -51,7 +51,7 @@ class SingleBook extends Component{
                          {/* eslint-disable-next-line react/jsx-child-element-spacing */}
                         <i className="fas fa-shopping-cart" />
                         Add To Cart
-                        </button>:
+                        </button> :
                           // eslint-disable-next-line react/button-has-type
                         <button className="bag-btn-sigleBook"  data-id={book.id}>
                          {/* eslint-disable-next-line react/jsx-child-element-spacing */}
