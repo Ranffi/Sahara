@@ -340,13 +340,6 @@ const seed = async () => {
     await Promise.all(seedBooks.map((book) => Book.create({...book, genreId: Math.ceil(Math.random() * genres.length), authorId: book.authorId})));
 
     //this will need to come out before production
-    await User.create({
-        userName: 'testAdmin',
-        password: 'adminPassword',
-        adminStatus: true,
-        email: 'admin@admin.com',
-        isGuest: false
-    })
 
   } catch (err) {
     console.log(red(err));

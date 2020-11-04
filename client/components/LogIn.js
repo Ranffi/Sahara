@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, {Component} from 'react';
 import {getUser} from '../redux/store'
 import { connect } from 'react-redux'
+import { toast } from 'react-toastify'
+
 
 class LogIn extends Component{
   constructor() {
@@ -22,7 +24,8 @@ class LogIn extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    await axios.post('/api/login', this.state)
+   await axios.post('/api/login', this.state)
+
     this.setState({
     userName: '',
     password: ''

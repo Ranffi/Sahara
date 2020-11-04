@@ -60,7 +60,7 @@ class Checkout extends React.Component {
             {this.state.cart
             .map(item => {
                 return (
-                    <li>{item.book.title} cost ${item.book.price}</li>
+                    <li key={item.id} >{item.book.title} cost ${item.book.price}</li>
                 )
             })
             }
