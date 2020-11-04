@@ -12,6 +12,8 @@ const GET_GENRE_BOOKS = 'GET_GENRE_BOOKS'
 const GET_GENRE = 'GET_GENRE'
 const GET_USER = 'GET_USER'
 const GET_ORDERS = 'GET_ORDERS'
+const GET_ADDRESS = 'GET_ADDRESS'
+
 const GET_ALL_USERS = 'GET_ALL_USERS'
 const GET_ALL_ADMINS = 'GET_ALL_ADMINS'
 
@@ -21,9 +23,11 @@ const initialState = {
     authors: [],
     cartItems: [],
     user: {},
+    genre: [],
+    orderHistory: [],
+    address: {},
     users: [],
     admins: [],
-    genre: []
 }
 
 
@@ -202,6 +206,19 @@ const getOrderHistory = (userId) => {
     }
 }
 
+export const _getAddress = (address) => {
+    return {
+    type: GET_ADDRESS,
+    address
+}}
+
+const getAddress = (id) => {
+    return async(dispatch) => {
+        const res = await axios.get(`/api/address/${id}`)
+        dispatch(_getAddress(res.data[0]))
+    }
+}
+
 const reducer = ((state = initialState, action) => {
     switch (action.type) {
         case GET_AUTHORS: return { ...state, authors: action.authors}
@@ -213,6 +230,7 @@ const reducer = ((state = initialState, action) => {
         case GET_GENRE_BOOKS: return { ...state, books: action.genreBooks}
         case GET_GENRE: return {...state, genre: action.genre}
         case GET_ORDERS: return {...state, orderHistory: action.orderHistory }
+        case GET_ADDRESS: return {...state, address: action.address}
         case GET_ALL_USERS: return {...state, users: action.users }
         case GET_ALL_ADMINS: return {...state, admins: action.admins }
         default: return state
@@ -221,5 +239,4 @@ const reducer = ((state = initialState, action) => {
 const store = createStore(reducer, applyMiddleware(thunk))
 export default  store
 export { getBooks, singleBook, addCartItem, getCartItems, deleteCartItem,
-    updateCartItem, getAuthors, getAuthorBooks, getGenreBooks, getGenre, getUser, 
-    getOrderHistory, getAllUsers, getAllAdmins, manageAdmin}
+    updateCartItem, getAuthors, getAuthorBooks, getGenreBooks, getGenre, getUser, getOrderHistory, getAddress, manageAdmin, getAllAdmins, getAllUsers}

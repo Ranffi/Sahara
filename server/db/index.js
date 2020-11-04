@@ -36,7 +36,7 @@ Session.belongsTo(User);
 User.hasMany(Session);
 
 //Address associations to User
-Address.hasOne(User, {as: 'shippingAddress'})
+User.belongsTo(Address, {as: 'shippingAddress'})
 
 module.exports = {
   db,
