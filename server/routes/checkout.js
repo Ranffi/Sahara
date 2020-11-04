@@ -4,11 +4,11 @@ const uuid = require('uuid')
 const Order = require('../db/models/OrderHistory')
 // const Address = require('../db/models/Address')
 const CartItems = require('../db/models/CartItem')
+const Book = require('../db/models/Book')
 
 router.post('/', async (req, res, next) => {
     try {
         const { token } = req.body
-        console.log(token)
         const customer = await
             stripe.customers.create({
                 email: token.email,
@@ -16,6 +16,7 @@ router.post('/', async (req, res, next) => {
             })
 
         const idempotencyKey = uuid.v4()
+        console.log('ohhhh', idempotencyKey)
         await stripe.charges.create(
             {
                 amount: token.totalPrice * 100,
@@ -48,11 +49,18 @@ router.post('/', async (req, res, next) => {
             })
             await CartItems.update({orderHistoryId: newOrder.id}, {
                 where: {
-                    userId: token.cartItems[0].userId
+                    userId: token.cartItems[0].userId,
+                    orderHistoryId: null
                 }
             })
-        
-        res.send('success')
+            const cartItemsToSend = await CartItems.findAll({
+                where: {
+                    orderHistoryId: null,
+                    userId: token.cartItems[0].userId
+                },
+                include: [ Book ]
+            })
+        res.send(cartItemsToSend)
     }
 
     catch (e) {

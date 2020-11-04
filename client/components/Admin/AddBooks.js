@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
+import { toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 class AddBooks extends Component{
   constructor() {
@@ -31,6 +33,7 @@ class AddBooks extends Component{
   async handleSubmit(ev){
     ev.preventDefault()
     await axios.post(`/api/books`, {...this.state})
+    toast.success('Book successfully added');
 
     this.setState({
       title: '',
@@ -44,6 +47,7 @@ class AddBooks extends Component{
       featured: false,
       onSale: false
     })
+
   }
 
   render(){

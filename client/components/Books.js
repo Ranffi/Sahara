@@ -17,9 +17,9 @@ class Books extends Component{
     window.scrollTo(0, 0)
   }
   componentDidUpdate(){
-    if (this.state.itemsArr.length !== this.props.cartItems.length){
+    if (this.props.cartItems && this.state.itemsArr.length !== this.props.cartItems.length && this.props.cartItems.length){
       const arr = this.props.cartItems.map(item => {
-        return item.book.id
+        return item.bookId
       })
       // this.props.getUser()
       this.setState({itemsArr: arr})

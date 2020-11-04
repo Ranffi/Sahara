@@ -3,9 +3,11 @@ import axios from 'axios';
 const GET_USER = 'GET_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const LOGIN_USER = 'LOGIN_USER';
-const GET_ADDRESS = 'GET_ADDRESS'
-const GET_ALL_USERS = 'GET_ALL_USERS'
-const GET_ALL_ADMINS = 'GET_ALL_ADMINS'
+const GET_ADDRESS = 'GET_ADDRESS';
+const GET_ALL_USERS = 'GET_ALL_USERS';
+const GET_ALL_ADMINS = 'GET_ALL_ADMINS';
+const SIGN_UP = 'SIGN_UP';
+
 
 const initialState = {
     user: {},
@@ -87,9 +89,22 @@ export const _loginUser = (user) => {
 
 const loginUser = (loginCreds) => {
     return async(dispatch) => {
-        await axios.post('/api/login', loginCreds)
-        const res = await axios.get('/api/users/get-user')
+        const res = await axios.post('/api/login', loginCreds)
         dispatch(_loginUser(res.data))
+    }
+}
+
+export const _signUp = (user) => {
+    return {
+        type: SIGN_UP,
+        user
+    }
+}
+
+const signUp = (userId, infoObject) => {
+    return async(dispatch) => {
+        const res = await axios.put(`/api/users/${userId}`, infoObject)
+        dispatch(_signUp(res.data))
     }
 }
 
@@ -115,9 +130,10 @@ export default function userReducer(state = initialState, action) {
         case GET_ADDRESS: return {...state, address: action.address}
         case GET_ALL_USERS: return {...state, users: action.users }
         case GET_ALL_ADMINS: return {...state, admins: action.admins }
+        case SIGN_UP: return {...state, user: action.user}
         default: return state
 
     }
 }
 
-export { getUser, logoutUser, loginUser, getAllUsers, manageAdmin, getAllAdmins, getAddress }
+export { getUser, signUp, logoutUser, loginUser, getAllUsers, manageAdmin, getAllAdmins, getAddress }

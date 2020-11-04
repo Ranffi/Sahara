@@ -16,8 +16,9 @@ class Cart extends Component{
         this.decreasePrice = this.decreasePrice.bind(this)
     }
     componentDidUpdate(){
-        if (  this.state.cartItems.length !== this.props.cartItems.length){
+        if (this.state.cartItems.length !== this.props.cartItems.length){
             let sum = 0
+            console.log(this.props.cartItems, this.props.cartItems.length)
             this.props.cartItems.forEach(element => {
                 sum += element.book.price * element.quantity
             })
@@ -55,7 +56,8 @@ class Cart extends Component{
     }
 
     render(){
-            const {cartItems, user} = this.props
+        const {cartItems, user} = this.props
+        console.log('here in the render', cartItems)
         return (
             <div>
                 <div className="cart-overlay " />
@@ -66,7 +68,7 @@ class Cart extends Component{
                     <h2>your cart</h2>
                     <div className="cart-content">
                         {
-                            cartItems.sort((a, b) => a.id - b.id).map(item => {
+                            !!cartItems && cartItems.sort((a, b) => a.id - b.id).map(item => {
                                 return (
                                 <div className="cart-item" key={item.id}>
                                     <img src={item.book.coverImageUrl} alt="product" />

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {loginUser} from '../redux/user'
 import { connect } from 'react-redux'
+import { toast } from 'react-toastify'
+
 
 class LogIn extends Component{
   constructor() {
@@ -26,6 +28,7 @@ class LogIn extends Component{
     userName: '',
     password: ''
     })
+    this.props.history.push('/books')
   }
 
   render(){
@@ -40,7 +43,7 @@ class LogIn extends Component{
           <input name ="userName" className = "logInInput" onChange = {handleChange} value = {this.state.userName} />
 
           <label>Password:</label>
-          <input name ="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
+          <input name ="password" type="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
 
           <button type ="submit" id = "logInButton" >Log In</button>
 
@@ -59,7 +62,7 @@ export default connect(
   },
   (dispatch) => {
     return {
-    loginUser: () => dispatch(loginUser())
+    loginUser: (credentials) => dispatch(loginUser(credentials))
   }
 }
 )(LogIn)

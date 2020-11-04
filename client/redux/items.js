@@ -2,6 +2,8 @@ import axios from 'axios'
 
 const GET_CARTITMS = 'GET_CARTITMS'
 const GET_ORDERS = 'GET_ORDERS'
+const UPDATE_CART_ITEMS = 'UPDATE_CART_ITEMS'
+const ADD_CART_ITEM = 'ADD_CART_ITEM'
 
 const initialState = {
     cartItems: [],
@@ -21,11 +23,33 @@ export const _getCartItems = (items) => {
     }
 }
 
+export const _updateCartItems = (items) => {
+    return {
+        type: UPDATE_CART_ITEMS,
+        items
+    }
+}
+
+const updateCartItems = (token) => {
+    return async(dispatch) => {
+        const res = await axios.post('api/checkout', token)
+        console.log('in update cart items', res.data)
+        dispatch(_updateCartItems(res.data))
+    }
+}
+
+export const _addCartItem = (item) => {
+    return {
+        type: ADD_CART_ITEM,
+        item
+    }
+}
+
  const addCartItem = (bookId, userId) => {
     return async(dispatch) => {
-        await axios.post('/api/cartItem', {bookId, userId});
-        const res = await axios.get(`/api/cartItem/${userId}`);
-        dispatch(_getCartItems(res.data))
+        const res = await axios.post('/api/cartItem', {bookId, userId});
+        console.log('in the addCartItem', res.data)
+        dispatch(_addCartItem(res.data))
     }
 }
  const deleteCartItem = (id, userId) => {
@@ -57,12 +81,16 @@ const getOrderHistory = (userId) => {
 }
 
 export default function itemReducer (state = initialState, action) {
+    console.log('in bottom', {...state, cartItems: action.items})
+
     switch (action.type) {
         case GET_CARTITMS: return { ...state, cartItems: action.items}
+        case UPDATE_CART_ITEMS: return {...state, cartItems: action.items}
         case GET_ORDERS: return {...state, orderHistory: action.orderHistory }
+        case ADD_CART_ITEM: return {...state, cartItems: [...state.cartItems, {...action.item}]}
         default: return state
     }
 }
 
-export { addCartItem, getCartItems, deleteCartItem,
+export { addCartItem, getCartItems, updateCartItems, deleteCartItem,
     updateCartItem, getOrderHistory}

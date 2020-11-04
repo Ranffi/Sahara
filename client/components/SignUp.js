@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {Component} from 'react';
 import validate from 'validate.js'
 import { connect } from 'react-redux'
+import { signUp } from '../redux/user'
 
 class SignUp extends Component{
   constructor() {
@@ -41,7 +42,7 @@ class SignUp extends Component{
     if (validation !== undefined){ alert('You did not enter a valid email') }
     else {
       const {data} = await axios.post('/api/address', this.state)
-      await axios.put(`/api/users/${this.props.user.id}`, {...this.state, shippingAddressId: data.id})
+      await this.props.signUp(this.props.user.id, {...this.state, shippingAddressId: data.id})
 
       this.setState({
         userName: '',
@@ -121,5 +122,9 @@ export default connect(
       user: user.user
     }
   },
-  null
+  (dispatch) => {
+    return {
+        signUp: (userId, infoObject) => dispatch(signUp(userId, infoObject))
+    }
+}
 )(SignUp)

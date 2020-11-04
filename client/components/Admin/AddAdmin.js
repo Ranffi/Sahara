@@ -40,7 +40,6 @@ class AddAdmin extends Component{
   }
 
   async handleSubmit(){
-    // ev.preventDefault()
     await this.props.manageAdmin(this.state.user.id, true)
     this.props.getAdmins()
     this.setState({
@@ -52,21 +51,26 @@ class AddAdmin extends Component{
   render(){
     const filter = this.state.value.toLocaleUpperCase()
     const { value } = this.state
-    const { users, admins } = this.props
+    const { users, admins, user } = this.props
     return (
-      <div>
-        <form>
-            <input type="text" placeholder="Search..." value={this.state.value} onChange={this.handleChange} autoComplete="off" />
-        </form>
-        <button type="submit" onClick={() => this.handleSubmit()}>Add</button>
+      <div className="admin_form">
+        <div className="search_user">
+          <form>
+              <input type="text" placeholder="Search..." value={this.state.value} onChange={this.handleChange} autoComplete="off" />
+          </form>
+          <button type="submit" onClick={() => this.handleSubmit()}>Add</button>
+        </div>
         <ul>
             {
                 admins.map( admin => {
-                        return (
-                        <li key ={admin.id}>{admin.firstName} {admin.lastName} <button onClick={() => this.removeAdmin(admin.id)}>Remove</button></li>
-                        )
-                    }
-                )
+                  if (admin.id !== user.id)
+                      {return (
+                        <div className="user_as_admin" key={admin.id}>
+                          <li>{admin.firstName} {admin.lastName}</li>
+                          <button onClick={() => this.removeAdmin(admin.id)}>Remove</button>
+                        </div>
+                      )}
+                })
             }
         </ul>
         <ul id="admin_search" className={value !== '' ? '' : 'hidden'}>
@@ -87,9 +91,10 @@ class AddAdmin extends Component{
 }
 
 export default connect(
-    ({ users, admins }) => {return {
+    ({ users, admins, user }) => {return {
         users,
-        admins
+        admins,
+        user
       }
       },
       (dispatch) => {return {
