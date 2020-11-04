@@ -6,7 +6,8 @@ import axios from 'axios'
 import { toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { connect } from 'react-redux'
-import {deleteCartItem, updateCartItem, getUser} from '../redux/store'
+import {getUser} from '../redux/user';
+import {deleteCartItem, updateCartItem} from '../redux/items'
 import StripeCheckout from 'react-stripe-checkout'
 toast.configure()
 class Checkout extends React.Component {
@@ -18,18 +19,9 @@ class Checkout extends React.Component {
         }
         this.handleToken = this.handleToken.bind(this)
     }
-      componentDidMount() {
-        this.props.getUser()
-        // const cartItems = (await axios.get(`/api/cartItem/${(this.props.user.id)}`)).data
-        // const price = cartItems.reduce((total, item) => {
-        //     return total + item.book.price
-        // }, 0)
-        // this.setState({cart: cartItems, totalPrice: price.toFixed(2)})
-    }
     async componentDidUpdate() {
         if (this.state.cart.length !== this.props.cartItems.length) {
             const cartItems = (await axios.get(`/api/cartItem/${this.props.user.id}`)).data
-            console.log(cartItems)
             const price = cartItems.reduce((total, item) => {
                 return total + item.book.price
             }, 0)
@@ -40,11 +32,8 @@ class Checkout extends React.Component {
        token.totalPrice = this.state.totalPrice
        token.cartItems = this.state.cart
         const res = await axios.post('api/checkout', {token})
-        console.log('we made it here!!!!!!!!!!!!!!!!!!!!!')
         // const { status } = res.data;
-        console.log('Response:', res.data);
         if (res.data === 'success') {
-            console.log('we made it here!!!!!!!!!!!!!!!!!!!!!')
           toast.success('Success! Check email for details');
         } else {
           toast.error('Something went wrong');
@@ -78,13 +67,11 @@ class Checkout extends React.Component {
     }
 }
 export default connect(
-    ({cartItems, user, books}) => {
-        return {
-            cartItems,
-            user,
-            books
-        }
-    },
+    ({books, items, user}) => ({
+        books: books.books,
+        cartItems: items.cartItems,
+        user: user.user
+      }),
     (dispatch) => {
         return {
             deleteItem: (id, userId) => dispatch(deleteCartItem(id, userId)),

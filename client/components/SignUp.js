@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 import validate from 'validate.js'
-import {getUser} from '../redux/store'
 import { connect } from 'react-redux'
 
 class SignUp extends Component{
@@ -22,10 +21,6 @@ class SignUp extends Component{
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentDidMount(){
-    this.props.getUser();
   }
 
   handleChange(ev) {
@@ -123,11 +118,9 @@ class SignUp extends Component{
 
 export default connect(
   ({user}) => {
-    return user
-  },
-  (dispatch) => {
     return {
-    getUser: () => dispatch(getUser())
-  }
-}
+      user: user.user
+    }
+  },
+  null
 )(SignUp)

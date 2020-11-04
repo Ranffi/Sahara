@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {getBooks, addCartItem, getCartItems, getUser} from '../redux/store'
+import {getBooks} from '../redux/books'
+import {getUser } from '../redux/user';
+import {getCartItems, addCartItem} from '../redux/items'
 import {Link} from 'react-router-dom'
 class Books extends Component{
   constructor(){
@@ -11,7 +13,7 @@ class Books extends Component{
   }
 
   componentDidMount(){
-    this.props.Books()
+    // this.props.Books()
     window.scrollTo(0, 0)
   }
   componentDidUpdate(){
@@ -65,10 +67,10 @@ class Books extends Component{
 }
 
 export default connect(
-  ({books, cartItems, user}) => ({
-    books,
-    cartItems,
-    user
+  ({books, items, user}) => ({
+    books: books.books,
+    cartItems: items.cartItems,
+    user: user.user
   }),
   (dispatch) => ({
     Books: () => dispatch(getBooks()),

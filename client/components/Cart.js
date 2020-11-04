@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import {deleteCartItem, updateCartItem} from '../redux/store'
+import {deleteCartItem, updateCartItem} from '../redux/items'
 
 class Cart extends Component{
     constructor(){
@@ -96,12 +96,10 @@ class Cart extends Component{
 }
 
 export default connect(
-    ({cartItems, user}) => {
-        return {
-            cartItems,
-            user
-        }
-    },
+    ({items, user}) => ({
+        cartItems: items.cartItems,
+        user: user.user
+      }),
     (dispatch) => {
         return {
             deleteItem: (id, userId) => dispatch(deleteCartItem(id, userId)),

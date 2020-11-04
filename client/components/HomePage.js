@@ -1,20 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { getBooks } from '../redux/store'
+import { getBooks } from '../redux/books'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
- async componentDidMount() {
-    await this.props.Books()
+ componentDidMount() {
     window.scrollTo(0, 0)
   }
   render() {
-
+    if (!this.props.books) return (<div>Loading...</div>)
     return (
       <div>
         <div className="picDiv home">
@@ -78,9 +74,7 @@ class HomePage extends React.Component {
 
 export default connect(
   ({ books }) => ({
-    books
+    books: books.books
   }),
-  (dispatch) => ({
-    Books: () => dispatch(getBooks()),
-  })
+  null
 )(HomePage);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 import validate from 'validate.js'
-import {getUser} from '../redux/store'
+import {getUser} from '../redux/user'
 import { connect } from 'react-redux'
 
 class ProfileSettings extends Component{
@@ -21,9 +21,6 @@ class ProfileSettings extends Component{
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
-      }
-      componentDidMount(){
-       this.props.getUser();
       }
       componentDidUpdate(){
         if (this.state.userName === ''){
@@ -131,12 +128,8 @@ class ProfileSettings extends Component{
 export default connect(
   ({user}) => {
     return {
-      user
+      user: user.user
     }
   },
-  (dispatch) => {
-    return {
-    getUser: () => dispatch(getUser())
-  }
-}
+  null
 )(ProfileSettings)

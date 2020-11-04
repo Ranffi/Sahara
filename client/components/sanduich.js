@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {} from '../redux/store'
 import { Link } from 'react-router-dom';
 import Logout from './Logout'
 
@@ -55,8 +54,5 @@ export default connect(
             user
         }
     },
-    (dispatch) => {
-        return {
-        }
-    }
+    null
 )(Sanduich)

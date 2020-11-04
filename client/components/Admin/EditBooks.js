@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import { singleBook } from '../../redux/store';
+import { singleBook, updateBook } from '../../redux/books';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 toast.configure()
@@ -35,7 +35,7 @@ class EditBooks extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    await axios.put(`/api/books/${this.props.book.id}`, {...this.state})
+    await this.props.updateBook(this.state)
     toast.success(`${this.state.title} updated!`)
   }
 
@@ -116,11 +116,12 @@ class EditBooks extends Component{
 }
 
 export default connect(
-    ({book, books}) => ({
-        book,
-        books
+    ({books}) => ({
+        book: books.book,
+        books: books.books
       }),
       (dispatch) => ({
-        getBook: (id) => dispatch(singleBook(id))
+        getBook: (id) => dispatch(singleBook(id)),
+        updateBook: (id) => dispatch(updateBook(id))
       })
 )(EditBooks);

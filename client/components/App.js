@@ -15,17 +15,20 @@ import Checkout from './Checkout'
 import ProfileSettings from './ProfileSettings'
 
 import { connect } from 'react-redux'
-import {getBooks, getCartItems, getAuthors, getAuthorBooks, getGenre, getGenreBooks, getUser} from '../redux/store'
+import {getBooks} from '../redux/books'
+import {getUser} from '../redux/user'
+import {getCartItems} from '../redux/items'
 
 class App extends Component {
 
   async componentDidMount() {
+    await this.props.getBooks()
     await this.props.getUser()
+    await this.props.getItems(this.props.user.id)
   }
 
   render() {
     return (
-      
       <Router>
         <main>
           <NavBar />
@@ -49,10 +52,12 @@ class App extends Component {
 export default connect(
   ({user}) => {
     return {
-      user
+      user: user.user
     }
   },
   (dispatch) => {return {
-    getUser: () => dispatch(getUser())
+    getUser: () => dispatch(getUser()),
+    getBooks: () => dispatch(getBooks()),
+    getItems: (id) => dispatch(getCartItems(id))
   }}
   )(App)
