@@ -24,19 +24,14 @@ class LogIn extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    let res = await axios.post('/api/login', this.state)
-    console.log('----->', res);
+   await axios.post('/api/login', this.state)
 
     this.setState({
     userName: '',
     password: ''
     })
-    if (res){
-      await this.props.getUser();
-      this.props.history.push('/')
-    } else {
-      toast.error('Username Or Password is incorrect');
-    }
+    await this.props.getUser();
+    this.props.history.push('/books')
   }
 
   render(){
@@ -51,7 +46,7 @@ class LogIn extends Component{
           <input name ="userName" className = "logInInput" onChange = {handleChange} value = {this.state.userName} />
 
           <label>Password:</label>
-          <input name ="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
+          <input name ="password" type="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
 
           <button type ="submit" id = "logInButton" >Log In</button>
 
