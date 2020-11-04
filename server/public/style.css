@@ -383,6 +383,8 @@ nav {
 }
 /* ---------------- End of Single Book------------------ */
 /* ---------------- Home Page ------------------ */
+
+/*'mark-eder-R9OS29xJb-8-unsplash.jpg'*/
 .home {
   background-image: url('gantaro-9eTP3GF4liQ-unsplash.jpg');
   background-repeat: no-repeat;
@@ -759,3 +761,9 @@ a:hover {
   transition: all 5s ease;
   height: 0;
 }
+
+.smallSize {
+  width: 250px;
+  height: 250px;
+}
+
