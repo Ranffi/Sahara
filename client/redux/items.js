@@ -33,7 +33,6 @@ export const _updateCartItems = (items) => {
 const updateCartItems = (token) => {
     return async(dispatch) => {
         const res = await axios.post('api/checkout', token)
-        console.log('in update cart items', res.data)
         dispatch(_updateCartItems(res.data))
     }
 }
@@ -48,7 +47,6 @@ export const _addCartItem = (item) => {
  const addCartItem = (bookId, userId) => {
     return async(dispatch) => {
         const res = await axios.post('/api/cartItem', {bookId, userId});
-        console.log('in the addCartItem', res.data)
         dispatch(_addCartItem(res.data))
     }
 }
@@ -81,7 +79,6 @@ const getOrderHistory = (userId) => {
 }
 
 export default function itemReducer (state = initialState, action) {
-    console.log('in bottom', {...state, cartItems: action.items})
 
     switch (action.type) {
         case GET_CARTITMS: return { ...state, cartItems: action.items}

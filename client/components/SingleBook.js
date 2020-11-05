@@ -73,7 +73,7 @@ class SingleBook extends Component{
 
 export default connect(
     ({books, items, user}) => ({
-        books: books.books,
+        book: books.book,
         cartItems: items.cartItems,
         user: user.user
       }),

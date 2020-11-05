@@ -18,7 +18,6 @@ class Cart extends Component{
     componentDidUpdate(){
         if (this.state.cartItems.length !== this.props.cartItems.length){
             let sum = 0
-            console.log(this.props.cartItems, this.props.cartItems.length)
             this.props.cartItems.forEach(element => {
                 sum += element.book.price * element.quantity
             })
@@ -57,7 +56,6 @@ class Cart extends Component{
 
     render(){
         const {cartItems, user} = this.props
-        console.log('here in the render', cartItems)
         return (
             <div>
                 <div className="cart-overlay " />

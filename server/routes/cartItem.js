@@ -9,7 +9,6 @@ router.post('/', async (req, res, next) => {
         const itemToSend = await CartItem.findByPk(data.id, {
             include: [Book]
         })
-        console.log('in the post', itemToSend)
         res.status(200).send(itemToSend)
     } catch (err){
         next(err)

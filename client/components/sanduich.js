@@ -51,7 +51,7 @@ class Sanduich extends Component{
 export default connect(
     ({user}) => {
         return {
-            user
+            user: user.user
         }
     },
     null
