@@ -36,7 +36,7 @@ router.put('/:id', async (req, res, next) => {
             res.send(user)
         }
         else {
-            console.log('nice yup try', req.params.id, req.user.id)
+            console.log('nice try')
         }
     }
     catch (err) {
