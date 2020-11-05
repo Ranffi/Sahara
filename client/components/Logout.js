@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, {Component} from 'react';
-import {getUser, getCartItems} from '../redux/store'
+import {logoutUser } from '../redux/user';
+import {getCartItems} from '../redux/items'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 
@@ -11,10 +12,9 @@ class Logout extends Component{
   }
 
   async handleSubmit(){
-    await axios.post('/api/logout')
-    await this.props.getUser();
+    await this.props.logoutUser()
     await this.props.items(this.props.user.id)
-    this.props.addClass()
+    // this.props.addClass()
   }
 
   render(){
@@ -27,12 +27,12 @@ class Logout extends Component{
 
 export default connect(
   ({user}) => {return {
-    user
+    user: user.user
     }
   },
   (dispatch) => {
     return {
-    getUser: () => dispatch(getUser()),
+    logoutUser: () => dispatch(logoutUser()),
     items: (id) => dispatch(getCartItems(id))
   }
 }

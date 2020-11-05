@@ -1,7 +1,8 @@
-import axios from 'axios';
 import React, {Component} from 'react';
-import {getUser} from '../redux/store'
+import {loginUser} from '../redux/user'
 import { connect } from 'react-redux'
+import { toast } from 'react-toastify'
+
 
 class LogIn extends Component{
   constructor() {
@@ -22,12 +23,12 @@ class LogIn extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    await axios.post('/api/login', this.state)
-    this.setState({
+    await this.props.loginUser(this.state)
+    await this.setState({
     userName: '',
     password: ''
     })
-    await this.props.getUser();
+    this.props.history.push('/books')
   }
 
   render(){
@@ -42,7 +43,7 @@ class LogIn extends Component{
           <input name ="userName" className = "logInInput" onChange = {handleChange} value = {this.state.userName} />
 
           <label>Password:</label>
-          <input name ="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
+          <input name ="password" type="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
 
           <button type ="submit" id = "logInButton" >Log In</button>
 
@@ -56,12 +57,12 @@ class LogIn extends Component{
 
 export default connect(
   ({user}) => {return {
-      user
+      user: user.user
     }
   },
   (dispatch) => {
     return {
-    getUser: () => dispatch(getUser())
+    loginUser: (credentials) => dispatch(loginUser(credentials))
   }
 }
 )(LogIn)

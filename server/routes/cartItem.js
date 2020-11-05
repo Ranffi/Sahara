@@ -6,7 +6,10 @@ router.post('/', async (req, res, next) => {
     try {
         const { bookId, userId } = req.body;
         const data = await CartItem.create({userId, bookId})
-        res.status(200).send(data)
+        const itemToSend = await CartItem.findByPk(data.id, {
+            include: [Book]
+        })
+        res.status(200).send(itemToSend)
     } catch (err){
         next(err)
     }
@@ -32,7 +35,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        res.send(await CartItem.findAll({where: {userId: req.params.id}, include: [ Book, User]}))
+        res.send(await CartItem.findAll({where: {userId: req.params.id, orderHistoryId: null}, include: [ Book, User]}))
     } catch (err){
         next(err)
     }

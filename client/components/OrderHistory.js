@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getUser, getOrderHistory } from '../redux/store'
+import {getOrderHistory} from '../redux/items'
 import { connect } from 'react-redux'
 import SingleOrder from './SingleOrder'
 
@@ -11,8 +11,7 @@ class OrderHistory extends Component{
   }
 
   async componentDidMount(){
-    await this.props.getUser();
-    this.props.getOrderHistory(this.props.user.id);
+    await this.props.getOrderHistory(this.props.user.id);
   }
 
   render(){
@@ -30,7 +29,7 @@ class OrderHistory extends Component{
         <h2>
           My Order History
         </h2>
-        <div>
+        <div className='test'>
           {
             orderHistory.map( order => {
               return (<SingleOrder key = {order.id} order = {order} user = {user} />)
@@ -44,13 +43,12 @@ class OrderHistory extends Component{
 }
 
 export default connect(
-  ({user, orderHistory }) => ({
-    user,
-    orderHistory
+  ({user, items }) => ({
+    user: user.user,
+    orderHistory: items.orderHistory
   }),
   (dispatch) => {
     return {
-    getUser: () => dispatch(getUser()),
     getOrderHistory: (userId) => dispatch(getOrderHistory(userId))
   }
 }

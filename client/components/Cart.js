@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import {deleteCartItem, updateCartItem} from '../redux/store'
+import {deleteCartItem, updateCartItem} from '../redux/items'
 
 class Cart extends Component{
     constructor(){
@@ -16,7 +16,7 @@ class Cart extends Component{
         this.decreasePrice = this.decreasePrice.bind(this)
     }
     componentDidUpdate(){
-        if (  this.state.cartItems.length !== this.props.cartItems.length){
+        if (this.state.cartItems.length !== this.props.cartItems.length){
             let sum = 0
             this.props.cartItems.forEach(element => {
                 sum += element.book.price * element.quantity
@@ -55,7 +55,7 @@ class Cart extends Component{
     }
 
     render(){
-            const {cartItems, user} = this.props
+        const {cartItems, user} = this.props
         return (
             <div>
                 <div className="cart-overlay " />
@@ -66,7 +66,7 @@ class Cart extends Component{
                     <h2>your cart</h2>
                     <div className="cart-content">
                         {
-                            cartItems.sort((a, b) => a.id - b.id).map(item => {
+                            !!cartItems && cartItems.sort((a, b) => a.id - b.id).map(item => {
                                 return (
                                 <div className="cart-item" key={item.id}>
                                     <img src={item.book.coverImageUrl} alt="product" />
@@ -96,12 +96,10 @@ class Cart extends Component{
 }
 
 export default connect(
-    ({cartItems, user}) => {
-        return {
-            cartItems,
-            user
-        }
-    },
+    ({items, user}) => ({
+        cartItems: items.cartItems,
+        user: user.user
+      }),
     (dispatch) => {
         return {
             deleteItem: (id, userId) => dispatch(deleteCartItem(id, userId)),

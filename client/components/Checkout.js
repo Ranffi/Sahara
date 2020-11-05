@@ -3,7 +3,7 @@ import axios from 'axios'
 import { toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { connect } from 'react-redux'
-import {deleteCartItem, updateCartItem, getUser} from '../redux/store'
+import {deleteCartItem, updateCartItem, updateCartItems } from '../redux/items'
 import StripeCheckout from 'react-stripe-checkout'
 toast.configure()
 class Checkout extends React.Component {
@@ -15,20 +15,18 @@ class Checkout extends React.Component {
         }
         this.handleToken = this.handleToken.bind(this)
     }
-      componentDidMount() {
-        this.props.getUser()
-        // const cartItems = (await axios.get(`/api/cartItem/${(this.props.user.id)}`)).data
-        // const price = cartItems.reduce((total, item) => {
-        //     return total + item.book.price
-        // }, 0)
-        // this.setState({cart: cartItems, totalPrice: price.toFixed(2)})
+    componentDidMount() {
+        const price = this.props.cartItems.reduce((total, item) => {
+            return total + (item.book.price * item.quantity)
+        }, 0)
+        this.setState({cart: this.props.cartItems, totalPrice: price.toFixed(2)})
     }
+
     async componentDidUpdate() {
-        if (this.state.cart.length !== this.props.cartItems.length) {
+        if (this.state.totalPrice !== this.props.cartItems.reduce( (accum, val) => accum + val.book.price * val.quantity, 0).toFixed(2)) {
             const cartItems = (await axios.get(`/api/cartItem/${this.props.user.id}`)).data
-            console.log(cartItems)
             const price = cartItems.reduce((total, item) => {
-                return total + item.book.price
+                return total + (item.book.price * item.quantity)
             }, 0)
             this.setState({cart: cartItems, totalPrice: price.toFixed(2)})
         }
@@ -36,15 +34,12 @@ class Checkout extends React.Component {
    async handleToken(token) {
        token.totalPrice = this.state.totalPrice
        token.cartItems = this.state.cart
-        const res = await axios.post('api/checkout', {token})
-        console.log('we made it here!!!!!!!!!!!!!!!!!!!!!')
-        // const { status } = res.data;
-        console.log('Response:', res.data);
-        if (res.data === 'success') {
-            console.log('we made it here!!!!!!!!!!!!!!!!!!!!!')
-          toast.success('Success! Check email for details');
-        } else {
-          toast.error('Something went wrong');
+        try {
+            await this.props.checkOut({token});
+            toast.success('Success! Check email for details');
+        }
+        catch {
+            toast.error('Something went wrong');
         }
     }
 
@@ -57,7 +52,7 @@ class Checkout extends React.Component {
             {this.state.cart
             .map(item => {
                 return (
-                    <li>{item.book.title} cost ${item.book.price}</li>
+                    <li key={item.id} >{item.book.title} cost ${item.book.price}</li>
                 )
             })
             }
@@ -75,17 +70,15 @@ class Checkout extends React.Component {
     }
 }
 export default connect(
-    ({cartItems, user, books}) => {
-        return {
-            cartItems,
-            user,
-            books
-        }
-    },
+    ({books, items, user}) => ({
+        books: books.books,
+        cartItems: items.cartItems,
+        user: user.user
+      }),
     (dispatch) => {
         return {
             deleteItem: (id, userId) => dispatch(deleteCartItem(id, userId)),
-            getUser: () => dispatch(getUser()),
+            checkOut: (token) => dispatch(updateCartItems(token)),
             update: (id, quantity, userId) => dispatch(updateCartItem(id, quantity, userId))
         }
     }

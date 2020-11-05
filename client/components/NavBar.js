@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
 import Sanduich from './sanduich'
-import {getBooks, getCartItems, getAuthors, getAuthorBooks, getGenre, getGenreBooks, getUser} from '../redux/store'
+import {getBooks, getAuthors, getAuthorBooks, getGenre, getGenreBooks} from '../redux/books'
 
 class NavBar extends Component{
   constructor(){
@@ -18,12 +18,9 @@ class NavBar extends Component{
     this.searchBy = this.searchBy.bind(this)
     this.emtyValue = this.emtyValue.bind(this)
 }
- async componentDidMount(){
-  this.props.getBook()
+componentDidMount(){
   this.props.getAuthors()
   this.props.getGenre()
-  await this.props.getUser()
-  await this.props.items(this.props.user.id)
 }
 
 searchChenge(ev){
@@ -53,6 +50,7 @@ handleSubmit(ev){
     const filter = this.state.value.toLocaleUpperCase()
     const {books, cartItems, authors, genre, user} = this.props
     const {value, choice, name} = this.state
+    if (!books) return (<div>Loading...</div>)
     return (
       <div>
         <nav>
@@ -96,7 +94,7 @@ handleSubmit(ev){
               <span className="nav-icon" >
                   <i className="fas fa-cart-plus" />
               </span>
-              <div className="cart-items">{cartItems.length}</div>
+              <div className="cart-items">{cartItems ? cartItems.length : 0}</div>
           </div>
         </nav>
         <Cart hideClass={name} addClass={this.addClass} />
@@ -133,21 +131,19 @@ handleSubmit(ev){
 }
 
 export default connect(
-({books, cartItems, authors, genre, user}) => {return {
-  books,
-  cartItems,
-  authors,
-  genre,
-  user
+({books, items, user}) => {return {
+  books: books.books,
+  cartItems: items.cartItems,
+  authors: books.authors,
+  genre: books.genre,
+  user: user.user
 }
 },
 (dispatch) => {return {
   getBook: () => dispatch(getBooks()),
-  items: (id) => dispatch(getCartItems(id)),
   getAuthors: () => dispatch(getAuthors()),
   authorBooks: (id) => dispatch(getAuthorBooks(id)),
   getGenre: () => dispatch(getGenre()),
-  genreBooks: (id) => dispatch(getGenreBooks(id)),
-  getUser: () => dispatch(getUser())
+  genreBooks: (id) => dispatch(getGenreBooks(id))
 }}
 )(NavBar)
