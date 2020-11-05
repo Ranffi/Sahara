@@ -21,7 +21,7 @@ class Admin extends Component {
     const {user} = this.props;
     const {selectedForm} = this.state;
 
-    return user.isAdmin ?
+    return !user.isAdmin ?
     (<div><p>Check out another page!</p></div>) :
     (
         <div>
