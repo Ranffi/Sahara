@@ -21,7 +21,7 @@ class Admin extends Component {
     const {user} = this.props;
     const {selectedForm} = this.state;
 
-    return !user.isAdmin ?
+    return !user.adminStatus ?
     (<div><p>Check out another page!</p></div>) :
     (
         <div>
@@ -49,7 +49,7 @@ class Admin extends Component {
 
 export default connect(
   ({user}) => ({
-    user
+    user: user.user
   }),
   null
 )(Admin);
