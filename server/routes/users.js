@@ -85,6 +85,9 @@ router.delete('/:userId', async (req, res, next) => {
             await user.destroy();
             res.sendStatus(204)
         }
+        else {
+            console.log('nice try')
+        }
     }
     catch (err) {
         next(err)
@@ -97,6 +100,9 @@ router.put('/admin/:userId', async (req, res, next) => {
             await User.update({adminStatus: req.body.adminStatus},
                 {where: {id: req.params.userId}})
             res.sendStatus(204)
+        }
+        else {
+            console.log('nice try')
         }
     }
     catch (err) {
