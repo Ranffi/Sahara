@@ -14,7 +14,7 @@ router.get('/get-user', (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
     try {
-        if (req.user.id === Number(req.params.id) || req.user.isAdmin) {
+        if (req.user.id === Number(req.params.id) || req.user.adminStatus) {
             const {userName, password, firstName, lastName,  email, shippingAddressId, isGuest } = req.body
             const hashedPw = await bcrypt.hash(password, 10)
             const user = await User.findByPk(req.params.id);
@@ -46,10 +46,10 @@ router.put('/:id', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
     try {
-        if (req.user.isAdmin) {
+        if (req.user.adminStatus) {
             const allUsers = await User.findAll( {where: { isGuest: false }});
             res.send(allUsers.map(user => {
-                return {id: user.id, userName: user.userName}
+                return {id: user.id, userName: user.userName, firstName: user.firstName, lastName: user.lastName}
             }))
         }
         else {
@@ -63,10 +63,10 @@ router.get('/', async (req, res, next) => {
 
 router.get('/admins', async (req, res, next) => {
     try {
-        if (req.user.isAdmin) {
+        if (req.user.adminStatus) {
             const allUsers = await User.findAll( {where: { adminStatus: true }});
             res.send(allUsers.map(user => {
-                return {id: user.id, userName: user.userName}
+                return {id: user.id, userName: user.userName, firstName: user.firstName, lastName: user.lastName}
             }))
         }
         else {
@@ -80,7 +80,7 @@ router.get('/admins', async (req, res, next) => {
 
 router.delete('/:userId', async (req, res, next) => {
     try {
-        if (req.user.id === Number(req.params.userId) || req.user.isAdmin) {
+        if (req.user.id === Number(req.params.userId) || req.user.adminStatus) {
             const user = await User.findByPk(req.params.userId)
             await user.destroy();
             res.sendStatus(204)
@@ -96,7 +96,7 @@ router.delete('/:userId', async (req, res, next) => {
 
 router.put('/admin/:userId', async (req, res, next) => {
     try {
-        if (req.user.isAdmin) {
+        if (req.user.adminStatus) {
             await User.update({adminStatus: req.body.adminStatus},
                 {where: {id: req.params.userId}})
             res.sendStatus(204)
