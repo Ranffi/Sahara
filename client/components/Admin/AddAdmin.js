@@ -52,6 +52,8 @@ class AddAdmin extends Component{
     const filter = this.state.value.toLocaleUpperCase()
     const { value } = this.state
     const { users, admins, user } = this.props
+    console.log(users)
+    if (!users || !admins) return(<div>Loading...</div>)
     return (
       <div className="admin_form">
         <div className="search_user">
@@ -91,10 +93,10 @@ class AddAdmin extends Component{
 }
 
 export default connect(
-    ({ users, admins, user }) => {return {
-        users,
-        admins,
-        user
+    ({ user }) => {return {
+        users: user.users,
+        admins: user.admins,
+        user: user.user
       }
       },
       (dispatch) => {return {
