@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {} from '../redux/store'
 import { Link } from 'react-router-dom';
 import Logout from './Logout'
 
@@ -37,7 +36,7 @@ class Sanduich extends Component{
                 <div className={`user_menu ${this.state.showList}`}>
                     <h4>{this.props.user.firstName} {this.props.user.lastName}</h4>
                     <Link to="/settings" onClick={() => this.addClass()}><ul>Settings</ul></Link>
-                    <Link to="/orderHistory" onClick={() => this.addClass()}><ul>Oreder History </ul></Link>
+                    <Link to="/orderHistory" onClick={() => this.addClass()}><ul>Order History </ul></Link>
                     {
                         this.props.user.adminStatus ?
                         <Link to="/admin" onClick={() => this.addClass()}><ul>Admin </ul> </Link>: ''
@@ -52,11 +51,8 @@ class Sanduich extends Component{
 export default connect(
     ({user}) => {
         return {
-            user
+            user: user.user
         }
     },
-    (dispatch) => {
-        return {
-        }
-    }
+    null
 )(Sanduich)

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import { getAllUsers, getAllAdmins, manageAdmin } from '../../redux/store';
+import { getAllUsers, getAllAdmins, manageAdmin } from '../../redux/user';
 
 class AddAdmin extends Component{
   constructor() {

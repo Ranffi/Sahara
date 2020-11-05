@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 import validate from 'validate.js'
-import {getUser, getAddress} from '../redux/store'
+import {getAddress} from '../redux/user'
 import { connect } from 'react-redux'
 import { toast} from 'react-toastify'
 
@@ -14,7 +14,7 @@ class ProfileSettings extends Component{
           email: '',
           streetAddress: '',
           city: '',
-          state: '',
+          state: 'AL',
           zipCode: '',
           firstName: '',
           lastName: '',
@@ -24,7 +24,6 @@ class ProfileSettings extends Component{
         this.handleSubmit = this.handleSubmit.bind(this)
       }
       async componentDidMount(){
-       await this.props.getUser()
        await this.props.getAddress(this.props.user.shippingAddressId);
       }
 
@@ -123,15 +122,14 @@ class ProfileSettings extends Component{
 }
 
 export default connect(
-  ({user, address}) => {
+  ({user}) => {
     return {
-      user,
-      address
+      user: user.user,
+      address: user.address
     }
   },
   (dispatch) => {
     return {
-    getUser: () => dispatch(getUser()),
     getAddress: (id) => dispatch(getAddress(id))
   }
 }

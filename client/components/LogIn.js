@@ -1,6 +1,5 @@
-import axios from 'axios';
 import React, {Component} from 'react';
-import {getUser} from '../redux/store'
+import {loginUser} from '../redux/user'
 import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
 
@@ -24,13 +23,11 @@ class LogIn extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-   await axios.post('/api/login', this.state)
-
-    this.setState({
+    await this.props.loginUser(this.state)
+    await this.setState({
     userName: '',
     password: ''
     })
-    await this.props.getUser();
     this.props.history.push('/books')
   }
 
@@ -60,12 +57,12 @@ class LogIn extends Component{
 
 export default connect(
   ({user}) => {return {
-      user
+      user: user.user
     }
   },
   (dispatch) => {
     return {
-    getUser: () => dispatch(getUser())
+    loginUser: (credentials) => dispatch(loginUser(credentials))
   }
 }
 )(LogIn)

@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { singleBook, addCartItem} from '../redux/store'
+import {singleBook} from '../redux/books'
+import {addCartItem} from '../redux/items'
 
 class SingleBook extends Component{
     constructor(){
@@ -71,10 +72,10 @@ class SingleBook extends Component{
 }
 
 export default connect(
-    ({book, cartItems, user}) => ({
-        book,
-        cartItems,
-        user
+    ({books, items, user}) => ({
+        book: books.book,
+        cartItems: items.cartItems,
+        user: user.user
       }),
       (dispatch) => ({
         getbook: (id) => dispatch(singleBook(id)),

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 import validate from 'validate.js'
-import {getUser} from '../redux/store'
 import { connect } from 'react-redux'
+import { signUp } from '../redux/user'
 
 class SignUp extends Component{
   constructor() {
@@ -13,7 +13,7 @@ class SignUp extends Component{
       email: '',
       streetAddress: '',
       city: '',
-      state: '',
+      state: 'AL',
       zipCode: '',
       firstName: '',
       lastName: '',
@@ -22,10 +22,6 @@ class SignUp extends Component{
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentDidMount(){
-    this.props.getUser();
   }
 
   handleChange(ev) {
@@ -46,7 +42,7 @@ class SignUp extends Component{
     if (validation !== undefined){ alert('You did not enter a valid email') }
     else {
       const {data} = await axios.post('/api/address', this.state)
-      await axios.put(`/api/users/${this.props.id}`, {...this.state, shippingAddressId: data.id})
+      await this.props.signUp(this.props.user.id, {...this.state, shippingAddressId: data.id})
 
       this.setState({
         userName: '',
@@ -54,13 +50,12 @@ class SignUp extends Component{
         email: '',
         streetAddress: '',
         city: '',
-        state: '',
+        state: 'AL',
         zipCode: '',
         firstName: '',
         lastName: '',
         isGuest: false
       })
-      this.props.getUser();
       this.props.history.push('/books')
     }
   }
@@ -123,11 +118,13 @@ class SignUp extends Component{
 
 export default connect(
   ({user}) => {
-    return user
+    return {
+      user: user.user
+    }
   },
   (dispatch) => {
     return {
-    getUser: () => dispatch(getUser())
-  }
+        signUp: (userId, infoObject) => dispatch(signUp(userId, infoObject))
+    }
 }
 )(SignUp)

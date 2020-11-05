@@ -6,7 +6,10 @@ router.post('/', async (req, res, next) => {
     try {
         const { bookId, userId } = req.body;
         const data = await CartItem.create({userId, bookId})
-        res.status(200).send(data)
+        const itemToSend = await CartItem.findByPk(data.id, {
+            include: [Book]
+        })
+        res.status(200).send(itemToSend)
     } catch (err){
         next(err)
     }

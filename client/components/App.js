@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { HashRouter as Router, Route } from 'react-router-dom';
 
 import NavBar from './NavBar';
@@ -14,7 +14,20 @@ import About from './AboutPage'
 import Checkout from './Checkout'
 import ProfileSettings from './ProfileSettings'
 
-const App = () => {
+import { connect } from 'react-redux'
+import {getBooks} from '../redux/books'
+import {getUser} from '../redux/user'
+import {getCartItems} from '../redux/items'
+
+class App extends Component {
+
+  async componentDidMount() {
+    await this.props.getBooks()
+    await this.props.getUser()
+    await this.props.getItems(this.props.user.id)
+  }
+
+  render() {
     return (
       <Router>
         <main>
@@ -32,7 +45,19 @@ const App = () => {
           <Route path = "/checkout" exact component = { Checkout } />
         </main>
       </Router>
-  )
+    )
+  }
 }
 
-export default App
+export default connect(
+  ({user}) => {
+    return {
+      user: user.user
+    }
+  },
+  (dispatch) => {return {
+    getUser: () => dispatch(getUser()),
+    getBooks: () => dispatch(getBooks()),
+    getItems: (id) => dispatch(getCartItems(id))
+  }}
+  )(App)
