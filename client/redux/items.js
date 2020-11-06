@@ -19,6 +19,7 @@ export const _getCartItems = (items) => {
  const getCartItems = (id) => {
     return async(dispatch) => {
         const res = await axios.get(`/api/cartItem/${id}`);
+        console.log('post the get', res.data)
         dispatch(_getCartItems(res.data))
     }
 }
