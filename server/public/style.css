@@ -899,6 +899,7 @@ a:hover {
 
 #orderHistoryBody{
   display: flex;
+  flex-wrap: wrap;
 }
 
 /* ------------------End of Order History----------------- */
