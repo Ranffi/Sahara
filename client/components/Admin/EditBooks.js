@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import { singleBook, updateBook } from '../../redux/books';
+import { singleBook, updateBook, deleteBook} from '../../redux/books';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 toast.configure()
@@ -10,6 +10,7 @@ class EditBooks extends Component{
   constructor() {
     super()
     this.state = {
+      id: 0,
       title: '',
       authorFirstName: '',
       authorLastName: '',
@@ -19,11 +20,14 @@ class EditBooks extends Component{
       quantityInStock: 1,
       rating: 3,
       featured: false,
-      onSale: false
+      onSale: false,
+      genreId: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeBook = this.changeBook.bind(this);
+    this.changeGenre = this.changeGenre.bind(this);
+    this.deleteBook = this.deleteBook.bind(this)
   }
 
   handleChange(ev) {
@@ -35,14 +39,15 @@ class EditBooks extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    await this.props.updateBook(this.state)
+    await this.props.updateBook({...this.state})
     toast.success(`${this.state.title} updated!`)
   }
 
   async changeBook(ev) {
     await this.props.getBook(ev.target.value)
-    const {author, genre, title, price, description, coverImageUrl, quantityInStock, rating, featured, onSale} = this.props.book
+    const {id, author, title, price, description, coverImageUrl, quantityInStock, rating, featured, onSale, genreId} = this.props.book
     this.setState({
+        id,
         title,
         authorFirstName: author.firstName,
         authorLastName: author.lastName,
@@ -52,14 +57,34 @@ class EditBooks extends Component{
         quantityInStock,
         rating,
         featured,
-        onSale
+        onSale,
+        genreId
     })
+  }
+  deleteBook(id){
+    this.props.deleteBook(id)
+    this.setState({
+      id: 0,
+      title: '',
+      authorFirstName: '',
+      authorLastName: '',
+      price: '',
+      description: '',
+      coverImageUrl: '',
+      quantityInStock: 1,
+      rating: 3,
+      featured: false,
+      onSale: false,
+      genreId: 0
+    })
+  }
+  changeGenre(ev){
+    this.setState({genreId: ev.target.value * 1})
   }
 
   render(){
     const {handleChange, handleSubmit} = this;
-    const { title, authorFirstName, authorLastName, price, description, coverImageUrl, quantityInStock, rating, featured, onSale } = this.state
-
+    const { title, authorFirstName, authorLastName, price, description, coverImageUrl, quantityInStock, rating, featured, onSale, genreId} = this.state
     return (
       <div>
         <br />
@@ -85,7 +110,16 @@ class EditBooks extends Component{
             <input name = "price" className = "signUpInput" onChange = {handleChange} value = {price} />
             <i>$</i>
           </div>
-
+          <label htmlFor = "title" className = "rating">Genre:</label>
+          <select name="ganreList" id="ganreList" onChange={this.changeGenre}>
+            { this.props.genre.map( genr => {
+              if (genr.id === genreId){
+                return (<option value={genr.id} key={genr.id} selected>{genr.name}</option>)
+              } else {
+                return (<option value={genr.id} key={genr.id}>{genr.name}</option>)
+                }
+            })}
+          </select>
           <label htmlFor = "coverImageURL" className = "signUpLabel">Image URL:</label>
           <input name = "coverImageURL" className = "signUpInput" onChange = {handleChange} value = {coverImageUrl} />
 
@@ -110,6 +144,7 @@ class EditBooks extends Component{
         </div>
           <button type = "submit" id = "editBook">Edit Book</button>
         </form>
+        <button className='deleteBookBtn' onClick={() => this.deleteBook(this.state.id)}>Delete</button>
       </div>
     )
   }
@@ -118,10 +153,12 @@ class EditBooks extends Component{
 export default connect(
     ({books}) => ({
         book: books.book,
-        books: books.books
+        books: books.books,
+        genre: books.genre
       }),
       (dispatch) => ({
         getBook: (id) => dispatch(singleBook(id)),
-        updateBook: (id) => dispatch(updateBook(id))
+        updateBook: (id) => dispatch(updateBook(id)),
+        deleteBook: (id) => dispatch(deleteBook(id))
       })
 )(EditBooks);

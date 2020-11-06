@@ -96,6 +96,13 @@ const singleBook = (id) => {
         dispatch(_singleBook(res.data))
     }
 }
+const deleteBook = (id) => {
+    return async(dispatch) => {
+        await axios.delete(`/api/books/${id}`)
+        const res = await axios.get(`/api/books/${id}`)
+        dispatch(_singleBook(res.data))
+    }
+}
 
 export const _updateBook = (book) => {
     return {
@@ -105,7 +112,7 @@ export const _updateBook = (book) => {
 
 const updateBook = (book) => {
     return async(dispatch) => {
-        const res = await axios.put(`/api/books/${book.id}`, book)
+        const res = await axios.put(`/api/books/update/${book.id}`, book)
         dispatch(_updateBook(res.data))
     }
 }
@@ -123,4 +130,4 @@ export default function bookReducer(state = initialState, action) {
     }
 }
 
-export { getBooks, singleBook, getAuthors, getAuthorBooks, getGenreBooks, getGenre, updateBook }
+export { getBooks, singleBook, getAuthors, getAuthorBooks, getGenreBooks, getGenre, updateBook, deleteBook }
