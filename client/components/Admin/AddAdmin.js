@@ -52,7 +52,9 @@ class AddAdmin extends Component{
     const filter = this.state.value.toLocaleUpperCase()
     const { value } = this.state
     const { users, admins, user } = this.props
+
      if (!users || !admins) return (<div>Loading...</div>)
+
     return (
       <div className="admin_form">
         <div className="search_user">
