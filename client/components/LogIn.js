@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {loginUser} from '../redux/user'
-// import {getCartItems}
 import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
 
@@ -63,7 +62,6 @@ export default connect(
   (dispatch) => {
     return {
     loginUser: (credentials) => dispatch(loginUser(credentials))
-    // getCartItems: (id) => dispatch(getCartItems(id))
   }
 }
 )(LogIn)
