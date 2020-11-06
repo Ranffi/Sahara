@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
-import { singleBook, updateBook, deleteBook} from '../../redux/books';
+import { singleBook, updateBook, deleteBook, getBooks} from '../../redux/books';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 toast.configure()
@@ -63,6 +63,8 @@ class EditBooks extends Component{
   }
   deleteBook(id){
     this.props.deleteBook(id)
+    this.props.getAllBooks()
+    toast.success(`${this.state.title} deleted!`)
     this.setState({
       id: 0,
       title: '',
@@ -157,6 +159,7 @@ export default connect(
         genre: books.genre
       }),
       (dispatch) => ({
+        getAllBooks: () => dispatch(getBooks()),
         getBook: (id) => dispatch(singleBook(id)),
         updateBook: (id) => dispatch(updateBook(id)),
         deleteBook: (id) => dispatch(deleteBook(id))

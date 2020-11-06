@@ -18,7 +18,7 @@ class AddBooks extends Component{
       rating: 3,
       featured: false,
       onSale: false,
-      genreId: 0
+      genreId: 1
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -49,7 +49,7 @@ class AddBooks extends Component{
       rating: 3,
       featured: false,
       onSale: false,
-      genreId: 0
+      genreId: 1
     })
 
   }

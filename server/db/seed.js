@@ -1,5 +1,6 @@
 const { green, red } = require('chalk');
 const { db, Book, Author, Genre, User } = require('./index.js')
+const bcrypt = require('bcrypt')
 
 const seedBooks = [
     {
@@ -340,6 +341,46 @@ const seed = async () => {
     await Promise.all(seedBooks.map((book) => Book.create({...book, genreId: Math.ceil(Math.random() * genres.length), authorId: book.authorId})));
 
     //this will need to come out before production
+    const ranffiPw = await bcrypt.hash('ranffi', 10)
+    await User.create({
+        userName: 'ranffi',
+        firstName: 'Ranffi',
+        lastName: 'Ramirez',
+        password: ranffiPw,
+        adminStatus: true,
+        email: 'ranffiramirez@gmail.com',
+        isGuest: false
+    })
+    const johnPw = await bcrypt.hash('john', 10)
+    await User.create({
+        userName: 'john',
+        firstName: 'John',
+        lastName: 'Cook',
+        password: johnPw,
+        adminStatus: true,
+        email: 'jpcook72@gmail.com',
+        isGuest: false
+    })
+    const antonPw = await bcrypt.hash('anton', 10)
+    await User.create({
+        userName: 'anton',
+        firstName: 'Anton',
+        lastName: 'Perku',
+        password: antonPw,
+        adminStatus: true,
+        email: 'antonpreku@hotmail.com',
+        isGuest: false
+    })
+    const jamesPw = await bcrypt.hash('james', 10)
+    await User.create({
+        userName: 'james',
+        firstName: 'James',
+        lastName: 'Amato',
+        password: jamesPw,
+        adminStatus: true,
+        email: 'jamato2514@gmail.com',
+        isGuest: false
+    })
 
   } catch (err) {
     console.log(red(err));

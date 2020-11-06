@@ -425,6 +425,8 @@ nav {
 }
 /* ---------------- End of Single Book------------------ */
 /* ---------------- Home Page ------------------ */
+
+/*'mark-eder-R9OS29xJb-8-unsplash.jpg'*/
 .home {
   background-image: url('gantaro-9eTP3GF4liQ-unsplash.jpg');
   background-repeat: no-repeat;
@@ -891,6 +893,8 @@ a:hover {
     background: #222831;
     color: white;
 }
+
+
 #orderHistoryBody{
   display: flex;
 }
@@ -924,4 +928,8 @@ a:hover {
 #editBook:hover{
   cursor: pointer;
   background: rgba(1, 140, 253, 0.746);
+}
+.smallSize {
+  width: 250px;
+  height: 250px;
 }
