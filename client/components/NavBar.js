@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import Cart from './Cart'
 import Sanduich from './sanduich'
-import {getBooks, getAuthors, getAuthorBooks, getGenre, getGenreBooks} from '../redux/books'
+import {getBooks, getAuthors, getAuthorBooks, getGenre, getGenreBooks, singleBook} from '../redux/books'
 
 class NavBar extends Component{
   constructor(){
@@ -40,6 +40,8 @@ handleSubmit(ev){
       this.props.authorBooks(id)
     } else if (value === 'Genre' ){
       this.props.genreBooks(id)
+    } else {
+      this.props.getSingelbook(id)
     }
   }
   addClass(){
@@ -104,7 +106,7 @@ handleSubmit(ev){
             books.map( book => {
               if (book.title.toUpperCase().indexOf(filter) > -1 && filter !== '') {
                   return (
-                    <Link to={`/books/${book.id}`} key ={book.id} onClick={() => this.emtyValue()} >{book.title}</Link>
+                    <Link to={`/books/${book.id}`} key ={book.id} onClick={() => this.emtyValue(book.id)} >{book.title}</Link>
                   )
                 }
               }) :
@@ -144,6 +146,7 @@ export default connect(
   getAuthors: () => dispatch(getAuthors()),
   authorBooks: (id) => dispatch(getAuthorBooks(id)),
   getGenre: () => dispatch(getGenre()),
-  genreBooks: (id) => dispatch(getGenreBooks(id))
+  genreBooks: (id) => dispatch(getGenreBooks(id)),
+  getSingelbook: (id) => dispatch(singleBook(id))
 }}
 )(NavBar)
