@@ -17,7 +17,8 @@ class AddBooks extends Component{
       quantityInStock: 1,
       rating: 3,
       featured: false,
-      onSale: false
+      onSale: false,
+      genreId: 1
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,6 +33,8 @@ class AddBooks extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
+ console.log(this.state.genreId);
+
     await axios.post(`/api/books`, {...this.state})
     toast.success('Book successfully added');
 
@@ -45,14 +48,15 @@ class AddBooks extends Component{
       quantityInStock: 1,
       rating: 3,
       featured: false,
-      onSale: false
+      onSale: false,
+      genreId: 1
     })
 
   }
 
   render(){
     const {handleChange, handleSubmit} = this;
-    const { title, authorFirstName, authorLastName, price, description, coverImageUrl, quantityInStock, rating, featured, onSale } = this.state
+    const { title, authorFirstName, authorLastName, price, description, coverImageUrl, quantityInStock, rating, featured, onSale, genreId } = this.state
 
     return (
       <div>
@@ -72,7 +76,14 @@ class AddBooks extends Component{
             <input name = "price" className = "signUpInput" onChange = {handleChange} value = {price} />
             <i>$</i>
           </div>
-
+          <label htmlFor = "title" className = "rating">Genre:</label>
+          <select name="genreId" id="ganreList" onChange={handleChange}>
+            {
+              this.props.genre.map( genr => {
+                  return (<option value={genr.id} key={genr.id}>{genr.name}</option>)
+              })
+            }
+          </select>
           <label htmlFor = "coverImageUrl" className = "signUpLabel">Image URL:</label>
           <input name = "coverImageUrl" className = "signUpInput" onChange = {handleChange} value = {coverImageUrl} />
 
@@ -104,6 +115,8 @@ class AddBooks extends Component{
 }
 
 export default connect(
-  null,
+  ({books}) => ({
+    genre: books.genre
+  }),
   null
 )(AddBooks);
