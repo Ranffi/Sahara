@@ -144,7 +144,7 @@ class EditBooks extends Component{
         </div>
           <button type = "submit" id = "editBook">Edit Book</button>
         </form>
-        <button className='deleteBookBtn' onClick={() => this.deleteBook(this.state.id)}>Delete</button>
+        <button className='deleteBookBtn' onClick={() => this.deleteBook(this.state.id)}>Delete Book</button>
       </div>
     )
   }
