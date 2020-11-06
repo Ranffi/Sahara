@@ -600,7 +600,7 @@ nav {
 
 .adminNums > input {
   width: 40%;
-  
+
 }
 
 .adminNums > #inStock {
@@ -835,7 +835,7 @@ a:hover {
   padding: 1rem;
 }
 .search_user > form  {
-  margin-left: 1rem; 
+  margin-left: 1rem;
   width: 70%;
   height: 2rem;
 
@@ -896,4 +896,4 @@ a:hover {
 }
 
 /* ------------------End of Order History----------------- */
-
+/* ------------------Form Validation----------------- */
