@@ -3,7 +3,6 @@ import {loginUser} from '../redux/user'
 import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
 
-
 class LogIn extends Component{
   constructor() {
     super()

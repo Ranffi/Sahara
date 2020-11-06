@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getCartItems} from './items.js'
 
 const GET_USER = 'GET_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
@@ -76,6 +77,7 @@ const logoutUser = () => {
     return async(dispatch) => {
         await axios.post('/api/logout')
         const res = await axios.get('/api/users/get-user')
+        await dispatch(getCartItems(res.data.id))
         dispatch(_logoutUser(res.data))
     }
 }
@@ -90,6 +92,7 @@ export const _loginUser = (user) => {
 const loginUser = (loginCreds) => {
     return async(dispatch) => {
         const res = await axios.post('/api/login', loginCreds)
+        await dispatch(getCartItems(res.data.id))
         dispatch(_loginUser(res.data))
     }
 }
