@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getBooks } from '../redux/books'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
+import {addCartItem} from '../redux/items'
 
 class HomePage extends React.Component {
 
@@ -10,6 +11,7 @@ class HomePage extends React.Component {
     window.scrollTo(0, 0)
   }
   render() {
+      const {user} = this.props
     if (!this.props.books) return (<div>Loading...</div>)
     return (
       <div>
@@ -26,7 +28,7 @@ class HomePage extends React.Component {
                 <div className="bookContainer" key={book.id}>
                   <div className="img-container">
                     <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img" /></Link>
-                    <button className="bag-btn" data-id={book.id} onClick={() => this.addToCart(book.id)}>
+                    <button className="bag-btn" data-id={book.id} onClick={ () => this.props.item( book.id, user.id)}>
                       <i className="fas fa-shopping-cart" />
                   add to cart
                     </button>
@@ -50,7 +52,7 @@ class HomePage extends React.Component {
                 <div className="bookContainer" key={book.id}>
                   <div className="img-container">
                     <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img" /></Link>
-                    <button className="bag-btn" data-id={book.id} onClick={() => this.addToCart(book.id)}>
+                    <button className="bag-btn" data-id={book.id} onClick={() => this.props.item( book.id, user.id)}>
                       <i className="fas fa-shopping-cart" />
                   add to cart
                     </button>
@@ -73,8 +75,11 @@ class HomePage extends React.Component {
 }
 
 export default connect(
-  ({ books }) => ({
-    books: books.books
+  ({ books, user }) => ({
+    books: books.books,
+    user: user.user
   }),
-  null
+  (dispatch) => ({
+    item: (bookId, userId) => dispatch(addCartItem(bookId, userId))
+  })
 )(HomePage);

@@ -60,10 +60,9 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:bookId', async (req, res, next) => {
+router.put('/update/:bookId', async (req, res, next) => {
     try {
         const book = await Book.findByPk(req.params.bookId);
-
         let keys = Object.keys(req.body)
 
         if (keys.includes('authorFirstName') || keys.includes('authorLastName')) {
