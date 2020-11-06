@@ -52,13 +52,14 @@ class AddAdmin extends Component{
     const filter = this.state.value.toLocaleUpperCase()
     const { value } = this.state
     const { users, admins, user } = this.props
+    if (!users || !admins) return(<div>Loading...</div>)
     return (
       <div className="admin_form">
         <div className="search_user">
-          <form>
-              <input type="text" placeholder="Search..." value={this.state.value} onChange={this.handleChange} autoComplete="off" />
+          <form id ="adminSearchForm">
+              <input type="text" placeholder="Search..." value={this.state.value} onChange={this.handleChange} autoComplete="off" required />
+              <button type="submit" onClick={() => this.handleSubmit()}>Add</button>
           </form>
-          <button type="submit" onClick={() => this.handleSubmit()}>Add</button>
         </div>
         <ul>
             {
@@ -91,10 +92,10 @@ class AddAdmin extends Component{
 }
 
 export default connect(
-    ({ users, admins, user }) => {return {
-        users,
-        admins,
-        user
+    ({ user }) => {return {
+        users: user.users,
+        admins: user.admins,
+        user: user.user
       }
       },
       (dispatch) => {return {

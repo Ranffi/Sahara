@@ -23,13 +23,20 @@ class LogIn extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    await this.props.loginUser(this.state)
-    await this.setState({
-    userName: '',
-    password: '',
-    inputClass: ''
-    })
-    this.props.history.push('/books')
+    try {
+      await this.props.loginUser(this.state)
+      await this.setState({
+        userName: '',
+        password: '',
+        inputClass: ''
+        })
+        this.props.history.push('/books')
+        toast.success('Login Successful');
+    }
+    catch (err) {
+      toast.error('Password Incorrect');
+
+    }
   }
 
   render(){
