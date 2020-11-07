@@ -602,7 +602,7 @@ nav {
 
 .adminNums > input {
   width: 40%;
-  
+
 }
 
 .adminNums > #inStock {
@@ -626,7 +626,9 @@ nav {
 .adminNavElement {
   cursor: pointer;
 }
-
+#adminSearchForm{
+  display:flex;
+}
 /* ----------------End of Admin Page---------*/
 /* -------- Footer ------- */
 
@@ -837,7 +839,7 @@ a:hover {
   padding: 1rem;
 }
 .search_user > form  {
-  margin-left: 1rem; 
+  margin-left: 1rem;
   width: 70%;
   height: 2rem;
 
@@ -897,6 +899,7 @@ a:hover {
 
 #orderHistoryBody{
   display: flex;
+  flex-wrap: wrap;
 }
 
 /* ------------------End of Order History----------------- */

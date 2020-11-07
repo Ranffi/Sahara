@@ -58,10 +58,10 @@ class AddAdmin extends Component{
     return (
       <div className="admin_form">
         <div className="search_user">
-          <form>
-              <input type="text" placeholder="Search..." value={this.state.value} onChange={this.handleChange} autoComplete="off" />
+          <form id ="adminSearchForm">
+              <input type="text" placeholder="Search..." value={this.state.value} onChange={this.handleChange} autoComplete="off" required />
+              <button type="submit" onClick={() => this.handleSubmit()}>Add</button>
           </form>
-          <button type="submit" onClick={() => this.handleSubmit()}>Add</button>
         </div>
         <ul>
             {

@@ -22,16 +22,25 @@ class LogIn extends Component{
 
   async handleSubmit(ev){
     ev.preventDefault()
-    await this.props.loginUser(this.state)
-    await this.setState({
-    userName: '',
-    password: ''
-    })
-    this.props.history.push('/books')
+    try {
+      await this.props.loginUser(this.state)
+      await this.setState({
+        userName: '',
+        password: '',
+        inputClass: ''
+        })
+        this.props.history.push('/books')
+        toast.success('Login Successful');
+    }
+    catch (err) {
+      toast.error('Password Incorrect');
+
+    }
   }
 
   render(){
     const {handleChange, handleSubmit} = this;
+    const {inputClass} = this.state;
     return (
       <>
         <h2>
@@ -39,10 +48,10 @@ class LogIn extends Component{
         </h2>
         <form onSubmit = {handleSubmit} id = "logInForm">
           <label>User Name:</label>
-          <input name ="userName" className = "logInInput" onChange = {handleChange} value = {this.state.userName} />
+          <input required name ="userName" className = {`logInInput ${inputClass}`} onChange = {handleChange} value = {this.state.userName} />
 
           <label>Password:</label>
-          <input name ="password" type="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
+          <input required name ="password" type="password" className = "logInInput" onChange = {handleChange} value = {this.state.password} />
 
           <button type ="submit" id = "logInButton" >Log In</button>
 

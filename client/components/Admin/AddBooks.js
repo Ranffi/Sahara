@@ -63,17 +63,17 @@ class AddBooks extends Component{
         <form onSubmit = {handleSubmit} >
         <div id = "signUpUserInfo">
           <label htmlFor = "title" className = "signUpLabel">Title:</label>
-          <input name = "title" className = "signUpInput" onChange = {handleChange} value = {title} />
+          <input name = "title" className = "signUpInput" onChange = {handleChange} value = {title} required />
 
           <label htmlFor = "authorFirstName" className = "signUpLabel">Author First Name:</label>
-          <input name = "authorFirstName" className = "signUpInput" onChange = {handleChange} value = {authorFirstName} />
+          <input name = "authorFirstName" className = "signUpInput" onChange = {handleChange} value = {authorFirstName} required />
 
           <label htmlFor = "authorLastName" className = "signUpLabel">Author Last Name:</label>
-          <input name = "authorLastName" className = "signUpInput" onChange = {handleChange} value = {authorLastName} />
+          <input name = "authorLastName" className = "signUpInput" onChange = {handleChange} value = {authorLastName} required />
 
           <div className="input-icon">
             <label htmlFor = "price" className = "signUpLabel">Price:</label>
-            <input name = "price" className = "signUpInput" onChange = {handleChange} value = {price} />
+            <input name = "price" className = "signUpInput" onChange = {handleChange} value = {price} required />
             <i>$</i>
           </div>
           <label htmlFor = "title" className = "rating">Genre:</label>
@@ -85,14 +85,14 @@ class AddBooks extends Component{
             }
           </select>
           <label htmlFor = "coverImageUrl" className = "signUpLabel">Image URL:</label>
-          <input name = "coverImageUrl" className = "signUpInput" onChange = {handleChange} value = {coverImageUrl} />
+          <input name = "coverImageUrl" className = "signUpInput" onChange = {handleChange} value = {coverImageUrl} required />
 
           <div className="adminCloseEnded adminNums">
             <label htmlFor = "quantityInStock" className = "signUpLabel">In stock:</label>
-            <input name = "quantityInStock" id="inStock" type="number" min="0" step="1" className = "signUpInput" onChange = {handleChange} value = {quantityInStock} />
+            <input name = "quantityInStock" id="inStock" type="number" min="0" step="1" className = "signUpInput" onChange = {handleChange} value = {quantityInStock} required />
 
             <label htmlFor = "title" className = "rating">Rating (1-5):</label>
-            <input name = "rating" type="number" min="1" max="5" step="1" className = "signUpInput" onChange = {handleChange} value = {rating} />
+            <input name = "rating" type="number" min="1" max="5" step="1" className = "signUpInput" onChange = {handleChange} value = {rating} required />
           </div>
           <div className="adminCloseEnded adminChecks">
             <input name = "featured" type="checkbox" className = "signUpInput" onChange = {handleChange} checked={featured} />
