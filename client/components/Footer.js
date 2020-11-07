@@ -14,7 +14,7 @@ const Footer = () => {
     <section className="footer-item">
       <h3 className = "footer_h3">Explore</h3>
         <ul className = "footer_ul">
-        <Link to="/books"><li className = "footer_li"><ul  className = "footer_a"href="#">All Books</ul></li></Link>
+        <Link to="/books"><li className = "footer_li"><ul className = "footer_a"href="#">All Books</ul></li></Link>
         </ul>
     </section>
 

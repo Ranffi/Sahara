@@ -89,7 +89,7 @@ class Cart extends Component{
                                     <img src={item.book.coverImageUrl} alt="product" />
                                     <div>
                                         <h4>{item.book.title}</h4>
-                                        <h5>{(item.book.price * item.quantity).toFixed(2)}</h5>
+                                        <h5>${(item.book.price * item.quantity).toFixed(2)}</h5>
                                         <span className="remove-item" data-id={item.id} onClick={() => this.props.deleteItem(item.id, user.id)}>remove</span>
                                     </div>
                                     <div>
