@@ -59,7 +59,7 @@ class HomePage extends React.Component {
                   </div>
                   <h3>{book.title}</h3>
                   <h4>by: {book.author.firstName} {book.author.lastName}</h4>
-                  <h3><span>${(book.price * 0.5).toFixed(2)}</span> <span className = "onSale">${book.price}</span></h3>
+                  <h3><span>${(book.price * 0.5).toFixed(2)}</span> <span className = "onSale">${book.price.toFixed(2)}</span></h3>
                 </div>
               )
             })
