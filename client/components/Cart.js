@@ -51,7 +51,7 @@ class Cart extends Component{
     }
 
     async handleToken(token) {
-        token.totalPrice = this.state.totalPrice
+        token.totalPrice = this.state.totalPrice.toFixed(2)
         token.cartItems = this.state.cartItems
          try {
              await this.props.checkOut({token});

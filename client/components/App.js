@@ -11,7 +11,6 @@ import Admin from './Admin'
 import Logout from './Logout'
 import OrderHistory from './OrderHistory'
 import About from './AboutPage'
-import Checkout from './Checkout'
 import ProfileSettings from './ProfileSettings'
 
 import { connect } from 'react-redux'
@@ -42,7 +41,6 @@ class App extends Component {
           <Route path = "/admin" exact component = { Admin } />
           <Route path = "/logout" exact component = { Logout } />
           <Route path = "/orderHistory" exact component = { OrderHistory } />
-          <Route path = "/checkout" exact component = { Checkout } />
         </main>
       </Router>
     )
