@@ -61,7 +61,7 @@ class ProfileSettings extends Component{
           let id = this.props.user.shippingAddressId
           const {data} = await axios.put('/api/address', {...this.state, id})
           await axios.put(`/api/users/${this.props.user.id}`, {...this.state, shippingAddressId: data.id})
-          toast.success('Success! Changes Successfylly Saved');
+          toast.success('Success! Changes Successfully Saved');
         }
       }
 
