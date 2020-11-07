@@ -33,7 +33,7 @@ class LogIn extends Component{
         toast.success('Login Successful');
     }
     catch (err) {
-      toast.error('Password Incorrect');
+      toast.error('Incorrect Username or Password');
 
     }
   }
