@@ -35,6 +35,7 @@ class SingleBook extends Component{
         const {itemsArr} = this.state
         const {book, user} = this.props
         const {firstName, lastName} = this.state;
+        if (!book) return (<div>Loading...</div>)
         return (
             <div className="singleBookMain">
                 <div className="singleBookContainer">
@@ -44,7 +45,7 @@ class SingleBook extends Component{
                     <div>
                         <h3>{book.title}</h3>
                         <h4>by: {firstName} {lastName}</h4>
-                        <h3>${book.price}</h3>
+                        <h3>${book.price && book.price.toFixed(2)}</h3>
                         {
                         itemsArr.indexOf(book.id) === -1 ?
                           // eslint-disable-next-line react/button-has-type
