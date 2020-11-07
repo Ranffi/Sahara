@@ -13,7 +13,6 @@ class Books extends Component{
 
   render(){
     const {books, user, cartItems} = this.props
-    console.log('here it is', cartItems)
     return (
     <div className="products-center">
       {
