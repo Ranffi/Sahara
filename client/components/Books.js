@@ -5,31 +5,14 @@ import {getUser } from '../redux/user';
 import {getCartItems, addCartItem} from '../redux/items'
 import {Link} from 'react-router-dom'
 class Books extends Component{
-  constructor(){
-    super();
-    this.state = {
-      itemsArr: []
-    }
-  }
 
   componentDidMount(){
     // this.props.Books()
     window.scrollTo(0, 0)
   }
-  componentDidUpdate(){
-    if (this.props.cartItems && this.state.itemsArr.length !== this.props.cartItems.length && this.props.cartItems.length){
-      const arr = this.props.cartItems.map(item => {
-        return item.bookId
-      })
-      // this.props.getUser()
-      this.setState({itemsArr: arr})
-    }
-  }
 
   render(){
-    const { itemsArr } = this.state
-    const {books, user} = this.props
-
+    const {books, user, cartItems} = this.props
     return (
     <div className="products-center">
       {
@@ -39,7 +22,7 @@ class Books extends Component{
               <div className="img-container">
               <Link to={`/books/${book.id}`}> <img src={book.coverImageUrl} alt="product" className="book-img" /></Link>
                   {
-                    itemsArr.indexOf(book.id) === -1 ?
+                    cartItems.map(item => item.bookId).indexOf(book.id) === -1 ?
                     // eslint-disable-next-line react/button-has-type
                     <button className="bag-btn"  data-id={book.id} onClick={() => this.props.item( book.id, user.id)}>
                     {/* eslint-disable-next-line react/jsx-child-element-spacing */}
@@ -56,7 +39,7 @@ class Books extends Component{
               </div>
                 <h3>{book.title}</h3>
                 <h4>by: {book.author.firstName} {book.author.lastName}</h4>
-                <h3>${book.price}</h3>
+                <h3>${book.price.toFixed(2)}</h3>
             </div>
           )
         })

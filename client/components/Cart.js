@@ -2,7 +2,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import {deleteCartItem, updateCartItem} from '../redux/items'
+import {deleteCartItem, updateCartItem, updateCartItems} from '../redux/items'
+import StripeCheckout from 'react-stripe-checkout'
+import { toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure()
+
 
 class Cart extends Component{
     constructor(){
@@ -14,6 +19,7 @@ class Cart extends Component{
         this.closeCart = this.closeCart.bind(this)
         this.increasePrice = this.increasePrice.bind(this)
         this.decreasePrice = this.decreasePrice.bind(this)
+        this.handleToken = this.handleToken.bind(this)
     }
     componentDidUpdate(){
         if (this.state.cartItems.length !== this.props.cartItems.length){
@@ -21,7 +27,6 @@ class Cart extends Component{
             this.props.cartItems.forEach(element => {
                 sum += element.book.price * element.quantity
             })
-            sum = sum.toFixed(2) * 1
         this.setState({totalPrice: sum, cartItems: this.props.cartItems})
         }
     }
@@ -44,6 +49,18 @@ class Cart extends Component{
             this.setState({totalPrice: sum})
         }
     }
+
+    async handleToken(token) {
+        token.totalPrice = this.state.totalPrice
+        token.cartItems = this.state.cartItems
+         try {
+             await this.props.checkOut({token});
+             toast.success('Success! Check email for details');
+         }
+         catch {
+             toast.error('Something went wrong');
+         }
+     }
 
 
     closeCart(){
@@ -72,7 +89,7 @@ class Cart extends Component{
                                     <img src={item.book.coverImageUrl} alt="product" />
                                     <div>
                                         <h4>{item.book.title}</h4>
-                                        <h5>{(item.book.price * item.quantity).toFixed(2) * 1}</h5>
+                                        <h5>{(item.book.price * item.quantity).toFixed(2)}</h5>
                                         <span className="remove-item" data-id={item.id} onClick={() => this.props.deleteItem(item.id, user.id)}>remove</span>
                                     </div>
                                     <div>
@@ -86,8 +103,15 @@ class Cart extends Component{
                         }
                     </div>
                     <div className="cart-footer">
-                        <h3> your total: $ <samp className="cart-total">{this.state.totalPrice}</samp></h3>
-                        <Link to = '/checkout'><button className="checkout">Checkout</button></Link>
+                        <h3>Your Total: $ <samp className="cart-total">{this.state.totalPrice.toFixed(2)}</samp></h3>
+                        {/* <Link to = '/checkout'><button className="checkout">Checkout</button></Link> */}
+                        <StripeCheckout
+                        stripeKey = "pk_test_51Hi510Gylr8S72ER7rkiS3xd0GEGxvRu1tVQwi9VqRu3IbCftd7oLoEJFnATk5QMKmeFyyKpyV9yswzBI5Ek5LPF00M9MRxTW4"
+                        token = {this.handleToken}
+                        billingAddress
+                        shippingAddress
+                        amount = {this.state.totalPrice * 100}
+                        />
                     </div>
                 </div>
             </div>
@@ -103,6 +127,7 @@ export default connect(
     (dispatch) => {
         return {
             deleteItem: (id, userId) => dispatch(deleteCartItem(id, userId)),
+            checkOut: (token) => dispatch(updateCartItems(token)),
             update: (id, quantity, userId) => dispatch(updateCartItem(id, quantity, userId))
         }
     }
