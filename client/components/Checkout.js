@@ -70,8 +70,7 @@ class Checkout extends React.Component {
     }
 }
 export default connect(
-    ({books, items, user}) => ({
-        books: books.books,
+    ({items, user}) => ({
         cartItems: items.cartItems,
         user: user.user
       }),
