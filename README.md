@@ -1,5 +1,7 @@
 # 2007-new-clear-reacto
 
+heroku link : https://sahara-books.herokuapp.com/#/
+
 To run app:
 1. Create postgres db called "Grace-Shopper"
 2. npm run start-dev (books get seeded automatically with this call)
