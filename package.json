@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/FullstackAcademy/2007-new-clear-reacto#readme",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "bcrypt": "^5.0.0",
     "bootstrap": "^4.5.3",
