@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize')
 const pg = require('pg')
-pg.defaults.ssl = true
 
 let db
 if (process.env.DATABASE_URL) {
+	pg.defaults.ssl = true
     db = new Sequelize(process.env.DATABASE_URL, {
         dialect: 'postgres',
         protocol: 'postgres',
