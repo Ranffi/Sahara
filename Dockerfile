@@ -1,6 +1,5 @@
 FROM node
 
-WORKDIR /app
 
 COPY package.json pack.json
 COPY package-lock.json package-lock.json
