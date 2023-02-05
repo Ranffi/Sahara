@@ -16,28 +16,28 @@ app.use('/api', require('./routes'))
 
 //404 handler
 app.use((req, res, next) => {
-    const error = Error(`Page not found(${req.url})`)
-    error.status = 404
-    next(error)
+  const error = Error(`Page not found(${req.url})`)
+  error.status = 404
+  next(error)
 })
 
 //500 handler
 app.use((err, req, res, next) => {
-    res.status(err.status || 500).send(`
+  res.status(err.status || 500).send(`
     <html>
       <body>
         <h1 style = color:crimson>${err}</h1>
         <p>${err.stack}</p>
       </body>
     </html>`)
-  })
+})
 
 //listen on port
 const port = process.env.PORT || 3035;
 
 const init = () => {
   try {
-    app.listen(port, () => console.log(`listening on port ${port}`));
+    app.listen(port, '0.0.0.0', () => console.log(`listening on port ${port}`));
   }
   catch (err) {
     console.log(err);
