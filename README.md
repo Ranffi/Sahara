@@ -1,6 +1,6 @@
 # 2007-new-clear-reacto
 
-heroku link : https://sahara-books.herokuapp.com/#/
+railway link : https://sahara-production.up.railway.app/#/
 
 To run app:
 1. Create postgres db called "Grace-Shopper"
